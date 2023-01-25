@@ -1,47 +1,33 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+@extends('layouts.auth-layout')
+@section('auth-body')
+    <body>
+    <div class="login-content">
+        <!-- Forgot Password -->
+        <div class="nk-block toggled" id="l-login">
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="nk-form">
+                    <div class="input-group">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                        <div class="nk-int-st">
+                            <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu risus. Curabitur
+                                commodo lorem fringilla enim feugiat commodo sed ac lacus.</p>
+                            <input type="text" name="email" class="form-control" placeholder="Email Address">
                         </div>
-                    @endif
+                    </div>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                    <a href="{{route('login')}}" data-ma-action="nk-login-switch" data-ma-block="#l-login"
+                       class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow"></i></a>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="nk-navigation nk-lg-ic rg-ic-stl">
+                        <a href="{{route('login')}}" data-ma-action="nk-login-switch" data-ma-block="#l-login"><i
+                                class="notika-icon notika-right-arrow"></i> <span>Sign in</span></a>
+                        <a href="{{route('register')}}" data-ma-action="nk-login-switch" data-ma-block="#l-register"><i
+                                class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</div>
+    </body>
 @endsection

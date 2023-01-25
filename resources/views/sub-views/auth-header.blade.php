@@ -48,7 +48,7 @@
     <link rel="stylesheet" href={{asset('dashboardPublic/assets/css/main.css')}}>
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href={{asset('dashboardPublic/assets/css/style.css')}}>
+    <link rel="stylesheet" href={{asset('style.css')}}>
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href={{asset('dashboardPublic/assets/css/responsive.css')}}>

@@ -1,77 +1,49 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+@extends('layouts.auth-layout')
+@section('auth-body')
+    <body>
+    <div class="login-content">
+        <!-- Register -->
+        <div class="nk-block toggled" id="l-login">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="nk-form">
+                    <div class="input-group">
+                            <span class="input-group-addon nk-ic-st-pro"><i
+                                    class="notika-icon notika-support"></i></span>
+                        <div class="nk-int-st">
+                            <input type="text" name="name" class="form-control" placeholder="Username">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-mail"></i></span>
+                        <div class="nk-int-st">
+                            <input type="text" name="email" class="form-control" placeholder="Email Address">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                        <div class="nk-int-st">
+                            <input type="password" class="form-control" placeholder="Password">
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <a href="{{route('login')}}" data-ma-action="nk-login-switch" data-ma-block="#l-login"
+                       class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow"></i></a>
                 </div>
-            </div>
+
+                <div class="nk-navigation nk-lg-ic">
+                    <a href="{{route('register')}}" data-ma-action="nk-login-switch" data-ma-block="#l-register"><i
+                            class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" data-ma-action="nk-login-switch"
+                           data-ma-block="#l-forget-password"><i>?</i> <span>Forgot Password</span></a>
+                @endif
+                </div>
+            </form>
         </div>
     </div>
-</div>
+    </body>
+
 @endsection
