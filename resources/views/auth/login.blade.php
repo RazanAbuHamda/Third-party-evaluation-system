@@ -34,6 +34,7 @@
                     <a href="{{ route('password.request') }}" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Forgot Password</span></a>
                 @endif
             </div>
+                <button>login</button>
             </form>
         </div>
     </div>

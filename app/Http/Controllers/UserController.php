@@ -12,6 +12,12 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:وضع أسئلة نماذج التقييم|إضافة مؤسسة|جمع التقييمات|استعراض نتائج التقييمات', ['only' => ['index','store','edit','update','destroy']]);
+        $this->middleware('permission:استعراض نتائج التقييمات', ['only' => ['index','show']]);
+        $this->middleware('permission:جمع التقييمات', ['only' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *
