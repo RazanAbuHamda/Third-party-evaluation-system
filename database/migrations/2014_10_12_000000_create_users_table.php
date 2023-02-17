@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->text('roles-name');
+            $table->text('roles_name');
             $table->string('status',10);
+            $table->String('enterprise_id')->nullable(true);
+            $table->foreign('enterprise_id')->references('id')->on('enterprises')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

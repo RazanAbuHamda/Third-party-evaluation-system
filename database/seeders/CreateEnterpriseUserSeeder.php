@@ -17,15 +17,16 @@ class CreateEnterpriseUserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'huda',
+            'name' => 'Huda',
             'email' => 'enterprise@gmail.com',
             'password' => bcrypt('12345678'),
-            'roles-name' => ['enterprise-user'],
-            'status' => 'مفعّل',
+            'roles_name' => ['enterprise-user'],
+            'enterprise_id' => '2',
+            'status' => 'enabled',
         ]);
 
         $role = Role::create(['name' => 'enterprise-user']);
-        $role->syncPermissions(['استعراض نتائج التقييمات']);
+        $role->syncPermissions(['Show users']);
         $user->assignRole([$role->id]);
 
 

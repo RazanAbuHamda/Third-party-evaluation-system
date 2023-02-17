@@ -15,11 +15,12 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            //مبدأيا أعطيت هاي الصلاحيات
-            'وضع أسئلة نماذج التقييم',
-            'إضافة مؤسسة',
-            'جمع التقييمات',
-            'استعراض نتائج التقييمات',
+            //admin permission
+            'Add user',
+            'Edit users',
+            'Show users',
+            'Delete user',
+            'Add Enterprise'
         ];
 
         foreach ($permissions as $permission) {

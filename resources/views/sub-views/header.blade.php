@@ -58,9 +58,6 @@
 </head>
 
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 <!-- Start Header Top Area -->
 <div class="header-top-area">
     <div class="container">
@@ -361,11 +358,12 @@
                                     <li><a href="widgets.html">Widgets</a></li>
                                 </ul>
                             </li>
-                            <li><a data-toggle="collapse" data-target="#demoevent" href="#">Email</a>
+                            <li><a data-toggle="collapse" data-target="#demoevent" href="#">Users</a>
                                 <ul id="demoevent" class="collapse dropdown-header-top">
-                                    <li><a href="inbox.html">Inbox</a></li>
-                                    <li><a href="view-email.html">View Email</a></li>
-                                    <li><a href="compose-email.html">Compose Email</a></li>
+                                    <li><a href="inbox.html">Show Users</a></li>
+                                    <li><a href="inbox.html">Add User</a></li>
+                                    <li><a href="view-email.html">Edit User</a></li>
+                                    <li><a href="compose-email.html">Delete user</a></li>
                                 </ul>
                             </li>
                             <li><a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>

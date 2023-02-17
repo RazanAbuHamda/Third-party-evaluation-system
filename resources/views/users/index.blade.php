@@ -25,18 +25,44 @@
             <th>Name</th>
             <th>Email</th>
             <th>Roles</th>
+            <th>Status</th>
+            <th>Enterprise id</th>
+            <th>Enterprise name</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($data as $key => $user)
+            {{--is a key of array from compact php function used in controller--}}
             <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                     @if(!empty($user->getRoleNames()))
-                        @foreach($user->getRoleNames() as $v)
+                        @foreach($user->roles_name as  $v)
                             <label class="badge badge-success">{{ $v }}</label>
                         @endforeach
+                    @endif
+                </td>
+                <td>{{$user->status}}</td>
+                <td>
+                    {{$user->enterprise_id}}
+                    @if(empty($user->enterprise_id))
+                        {{"..."}}
+                    @endif
+                </td>
+
+                <td>
+
+                    @if(!empty($user->enterprise_id))
+                        @foreach($enterprises as $key => $enterprise)
+                            @if($enterprise->id == (int)$user->enterprise_id)
+                                {{$enterprise->enterprise_name}}
+                            @endif
+
+                        @endforeach
+                    @endif
+                    @if(empty($user->enterprise_id))
+                        {{"..."}}
                     @endif
                 </td>
                 <td>

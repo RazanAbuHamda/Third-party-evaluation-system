@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enterprise;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -14,9 +15,9 @@ class UserController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:وضع أسئلة نماذج التقييم|إضافة مؤسسة|جمع التقييمات|استعراض نتائج التقييمات', ['only' => ['index','store','edit','update','destroy']]);
-        $this->middleware('permission:استعراض نتائج التقييمات', ['only' => ['index','show']]);
-        $this->middleware('permission:جمع التقييمات', ['only' => ['store']]);
+        $this->middleware('permission:Add user|Edit users|Show users|Delete user|Add Enterprise', ['only' => ['index','store','edit','update','destroy']]);
+        $this->middleware('permission:Edit users', ['only' => ['index','show']]);
+        $this->middleware('permission:Delete user', ['only' => ['store']]);
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +26,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $enterprises = Enterprise::select('*')->get();
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+        return view('users.index',compact('data','enterprises'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -37,8 +39,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $enterprises = Enterprise::select('*')->get();
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        return view('users.create',compact(['roles','enterprises']))->with('enterprises',$enterprises);
     }
 
     /**
@@ -53,7 +56,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles_name' => 'required',
+            'status' => 'required',
+            'enterprise-id' =>'nullable'
         ]);
 
         $input = $request->all();
@@ -61,6 +66,8 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+        $user->status= $request->input('status');
+
 
         return redirect()->route('users.index')
             ->with('success','User created successfully');
@@ -86,11 +93,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $enterprises = Enterprise::select('*')->get();
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('users.edit',compact('user','roles','userRole','enterprises'));
     }
 
     /**

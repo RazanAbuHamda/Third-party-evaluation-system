@@ -18,9 +18,9 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:وضع أسئلة نماذج التقييم|إضافة مؤسسة|جمع التقييمات|استعراض نتائج التقييمات', ['only' => ['index','store','edit','update','destroy']]);
-        $this->middleware('permission:استعراض نتائج التقييمات', ['only' => ['index','show']]);
-        $this->middleware('permission:جمع التقييمات', ['only' => ['store']]);
+        $this->middleware('permission:Add user|Edit users|Show users|Delete user|Add Enterprise', ['only' => ['index','store','edit','update','destroy']]);
+        $this->middleware('permission:Edit users', ['only' => ['index','show']]);
+        $this->middleware('permission:Delete user', ['only' => ['store']]);
     }
 
     /**

@@ -20,12 +20,12 @@ class CreateCoordinatorUserSeeder extends Seeder
             'name' => 'Shams',
             'email' => 'coordinator@gmail.com',
             'password' => bcrypt('12345678'),
-            'roles-name' => ['coordinator'],
-            'status' => 'مفعّل',
+            'roles_name' => ['coordinator'],
+            'status' => 'enabled',
         ]);
 
         $role = Role::create(['name' => 'coordinator']);
-        $role->syncPermissions(['جمع التقييمات']);
+        $role->syncPermissions(['']);
         $user->assignRole([$role->id]);
 
 
