@@ -39,9 +39,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $enterprises = Enterprise::select('*')->get();
+
+        $enterprises = Enterprise::pluck('enterprise_name','id')->all();
+//        dd($enterprises);
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact(['roles','enterprises']))->with('enterprises',$enterprises);
+        return view('users.create',compact(['roles','enterprises']));
     }
 
     /**
@@ -58,16 +60,16 @@ class UserController extends Controller
             'password' => 'required|same:confirm-password',
             'roles_name' => 'required',
             'status' => 'required',
-            'enterprise-id' =>'nullable'
+            'enterprise_id' =>'nullable'
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        $user->status= $request->input('status');
-
+        $user->status = $request->input('status');
+        $user->enterprise_id = $request->input("enterprise_id");
+        dd($request->input("enterprise_id"));
 
         return redirect()->route('users.index')
             ->with('success','User created successfully');
@@ -114,7 +116,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'roles_name' => 'required',
+            'status' => 'required',
+            'enterprise-id' =>'nullable'
         ]);
 
         $input = $request->all();

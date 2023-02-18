@@ -453,9 +453,9 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
                     </li>
-                    <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Email</a>
+                    <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Users</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Interface</a>
+                    <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Enterprises</a>
                     </li>
                     <li class="active"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a>
                     </li>
@@ -487,23 +487,25 @@
                     </div>
                     <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="inbox.html">Inbox</a>
+                            @can('Show users')
+                            <li><a href="{{Url('users')}}">Show users</a>
                             </li>
-                            <li><a href="view-email.html">View Email</a>
+                            @endcan
+                            @can('Add user')
+                            <li><a href="{{Url('users/create')}}">Add user</a>
                             </li>
-                            <li><a href="compose-email.html">Compose Email</a>
-                            </li>
+                                @endcan
                         </ul>
                     </div>
                     <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="animations.html">Animations</a>
+                            <li><a href="animations.html">Show Enterprises</a>
                             </li>
-                            <li><a href="google-map.html">Google Map</a>
+                            <li><a href="google-map.html">Add Enterprise</a>
                             </li>
-                            <li><a href="data-map.html">Data Maps</a>
+                            <li><a href="data-map.html">Edit Enterprise</a>
                             </li>
-                            <li><a href="code-editor.html">Code Editor</a>
+                            <li><a href="code-editor.html">Delete Enterprise</a>
                             </li>
                             <li><a href="image-cropper.html">Images Cropper</a>
                             </li>

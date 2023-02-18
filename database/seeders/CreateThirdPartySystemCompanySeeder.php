@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Enterprise;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class CreateCoordinatorUserSeeder extends Seeder
+class CreateThirdPartySystemCompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,21 +17,15 @@ class CreateCoordinatorUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'Shams',
-            'email' => 'coordinator@gmail.com',
+        $enterprise = Enterprise::create([
+            'enterprise_name' => 'Third party system',
+            'email' => 'third-party-system@gmail.com',
             'password' => bcrypt('12345678'),
-            'roles_name' => ['coordinator'],
-            'enterprise_id'=>1,
             'status' => 'enabled',
         ]);
-
-        $role = Role::create(['name' => 'coordinator']);
-        $role->syncPermissions(['']);
-        $user->assignRole([$role->id]);
-
 
 
 
     }
 }
+

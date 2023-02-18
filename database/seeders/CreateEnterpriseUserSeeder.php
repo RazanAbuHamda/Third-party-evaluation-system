@@ -21,7 +21,7 @@ class CreateEnterpriseUserSeeder extends Seeder
             'email' => 'enterprise@gmail.com',
             'password' => bcrypt('12345678'),
             'roles_name' => ['enterprise-user'],
-            'enterprise_id' => '2',
+            'enterprise_id' => '1',
             'status' => 'enabled',
         ]);
 

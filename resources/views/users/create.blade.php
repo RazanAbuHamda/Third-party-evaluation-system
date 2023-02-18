@@ -54,13 +54,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Enterprise Name:</strong>
-                {!! Form::select('enterprises[]', $enterprises,[], array('class' => 'form-control','multiple')) !!}
+                {!! Form::select('enterprise_id', $enterprises, [],['class' => 'form-control']) !!}
 
-{{--                <select>--}}
-{{--                    @foreach($enterprises as $enterprise)--}}
-{{--                    <option>{{$enterprise->name}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
