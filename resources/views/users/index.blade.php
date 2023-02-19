@@ -77,6 +77,7 @@
     </table>
 
 
+
     {!! $data->render() !!}
 
 @endsection
