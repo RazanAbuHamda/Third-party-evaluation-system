@@ -96,7 +96,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $enterprises = Enterprise::select('*')->get();
+        $enterprises = Enterprise::pluck('enterprise_name','id')->all();
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
