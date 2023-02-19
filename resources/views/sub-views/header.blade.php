@@ -64,23 +64,26 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="logo-area">
-                    <a href="#"><img src="dashboardPublic/assets/img/logo/logo.png" alt="" /></a>
+                    <a href="#"><img src="dashboardPublic/assets/img/logo/logo.png" alt=""/></a>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="header-top-menu">
                     <ul class="nav navbar-nav notika-top-nav">
                         <li class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search"></i></span></a>
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                               class="nav-link dropdown-toggle"><span><i
+                                        class="notika-icon notika-search"></i></span></a>
                             <div role="menu" class="dropdown-menu search-dd animated flipInX">
                                 <div class="search-input">
                                     <i class="notika-icon notika-left-arrow"></i>
-                                    <input type="text" />
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                               class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd animated zoomIn">
                                 <div class="hd-mg-tt">
                                     <h2>Messages</h2>
@@ -89,7 +92,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src="dashboardPublic/assets/img/post/1.jpg" alt="" />
+                                                <img src="dashboardPublic/assets/img/post/1.jpg" alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>David Belle</h3>
@@ -100,7 +103,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src="dashboardPublic/assets/img/post/2.jpg" alt="" />
+                                                <img src="dashboardPublic/assets/img/post/2.jpg" alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Jonathan Morris</h3>
@@ -111,7 +114,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset('dashboardPublic/assets/img/post/4.jpg')}} alt="" />
+                                                <img src={{asset('dashboardPublic/assets/img/post/4.jpg')}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Fredric Mitchell</h3>
@@ -122,7 +125,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>David Belle</h3>
@@ -133,7 +136,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Glenn Jecobs</h3>
@@ -147,7 +150,12 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>3</span></div></a>
+                        <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button"
+                                                      aria-expanded="false" class="nav-link dropdown-toggle"><span><i
+                                        class="notika-icon notika-alarm"></i></span>
+                                <div class="spinner4 spinner-4"></div>
+                                <div class="ntd-ctn"><span>3</span></div>
+                            </a>
                             <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
                                 <div class="hd-mg-tt">
                                     <h2>Notification</h2>
@@ -156,7 +164,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>David Belle</h3>
@@ -167,7 +175,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Jonathan Morris</h3>
@@ -178,7 +186,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/4.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/4.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Fredric Mitchell</h3>
@@ -189,7 +197,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>David Belle</h3>
@@ -200,7 +208,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Glenn Jecobs</h3>
@@ -214,7 +222,12 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
+                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                                                class="nav-link dropdown-toggle"><span><i
+                                        class="notika-icon notika-menus"></i></span>
+                                <div class="spinner4 spinner-4"></div>
+                                <div class="ntd-ctn"><span>2</span></div>
+                            </a>
                             <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
                                 <div class="hd-mg-tt">
                                     <h2>Tasks</h2>
@@ -225,32 +238,42 @@
                                             <div class="lead-content">
                                                 <p>HTML5 Validation Report</p>
                                             </div>
-                                            <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>95%</span>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="95%"
+                                                 style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>95%</span>
                                             </div>
                                         </div>
                                         <div class="progress">
                                             <div class="lead-content">
                                                 <p>Google Chrome Extension</p>
                                             </div>
-                                            <div class="progress-bar wow fadeInLeft" data-progress="85%" style="width: 85%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>85%</span> </div>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="85%"
+                                                 style="width: 85%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>85%</span></div>
                                         </div>
                                         <div class="progress">
                                             <div class="lead-content">
                                                 <p>Social Internet Projects</p>
                                             </div>
-                                            <div class="progress-bar wow fadeInLeft" data-progress="75%" style="width: 75%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>75%</span> </div>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="75%"
+                                                 style="width: 75%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>75%</span></div>
                                         </div>
                                         <div class="progress">
                                             <div class="lead-content">
                                                 <p>Bootstrap Admin</p>
                                             </div>
-                                            <div class="progress-bar wow fadeInLeft" data-progress="65%" style="width: 65%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>65%</span> </div>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="65%"
+                                                 style="width: 65%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>65%</span></div>
                                         </div>
                                         <div class="progress progress-bt">
                                             <div class="lead-content">
                                                 <p>Youtube App</p>
                                             </div>
-                                            <div class="progress-bar wow fadeInLeft" data-progress="55%" style="width: 55%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>55%</span> </div>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="55%"
+                                                 style="width: 55%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>55%</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -259,20 +282,22 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
+                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                                                class="nav-link dropdown-toggle"><span><i
+                                        class="notika-icon notika-chat"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                 <div class="hd-mg-tt">
                                     <h2>Chat</h2>
                                 </div>
                                 <div class="search-people">
                                     <i class="notika-icon notika-left-arrow"></i>
-                                    <input type="text" placeholder="Search People" />
+                                    <input type="text" placeholder="Search People"/>
                                 </div>
                                 <div class="hd-message-info">
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img chat-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt=""/>
                                                 <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
                                             </div>
                                             <div class="hd-mg-ctn">
@@ -284,7 +309,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img chat-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Jonathan Morris</h3>
@@ -295,7 +320,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img chat-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/4.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/4.jpg")}} alt=""/>
                                             </div>
                                             <div class="hd-mg-ctn">
                                                 <h3>Fredric Mitchell</h3>
@@ -306,7 +331,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img chat-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/1.jpg")}} alt=""/>
                                                 <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
                                             </div>
                                             <div class="hd-mg-ctn">
@@ -318,7 +343,7 @@
                                     <a href="#">
                                         <div class="hd-message-sn">
                                             <div class="hd-message-img chat-img">
-                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt="" />
+                                                <img src={{asset("dashboardPublic/assets/img/post/2.jpg")}} alt=""/>
                                                 <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
                                             </div>
                                             <div class="hd-mg-ctn">
@@ -457,7 +482,8 @@
                     </li>
                     <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Enterprises</a>
                     </li>
-                    <li class="active"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a>
+                    <li class="active"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i>
+                            Charts</a>
                     </li>
                     <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a>
                     </li>
@@ -488,22 +514,26 @@
                     <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             @can('Show users')
-                            <li><a href="{{Url('users')}}">Show users</a>
-                            </li>
+                                <li><a href="{{Url('users')}}">Show users</a>
+                                </li>
                             @endcan
                             @can('Add user')
-                            <li><a href="{{Url('users/create')}}">Add user</a>
-                            </li>
-                                @endcan
+                                <li><a href="{{Url('users/create')}}">Add user</a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                     <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
-                            </li>
-                            <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
-                            </li>
-                            </li>
+                            @can('show Enterprises')
+                                <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
+                                </li>
+                            @endcan
+                            @can('Add Enterprise')
+                                <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
+                                </li>
+                                @endcan
+                                </li>
                         </ul>
                     </div>
                     <div id="Charts" class="tab-pane active notika-tab-menu-bg animated flipInX">
