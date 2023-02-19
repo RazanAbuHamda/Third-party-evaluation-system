@@ -50,4 +50,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+//    Route::resource('enterprises', EnterpriseController::class);
 });
+Route::get('enterprises/index','App\Http\Controllers\EnterpriseController@index')->middleware('auth');
+Route::get('enterprises/create','App\Http\Controllers\EnterpriseController@create')->middleware('auth');
+Route::get('enterprises/edit/{id}','App\Http\Controllers\EnterpriseController@edit')->middleware('auth');
+Route::get('enterprises/show/{id}','App\Http\Controllers\EnterpriseController@show')->middleware('auth');
+Route::post('enterprises/store','App\Http\Controllers\EnterpriseController@store')->middleware('auth');
+Route::delete('enterprises/destroy/{id}','App\Http\Controllers\EnterpriseController@destroy')->middleware('auth');
+Route::post('enterprises/update/{id}','App\Http\Controllers\EnterpriseController@update')->middleware('auth');
+
+

@@ -499,17 +499,10 @@
                     </div>
                     <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="animations.html">Show Enterprises</a>
+                            <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
                             </li>
-                            <li><a href="google-map.html">Add Enterprise</a>
+                            <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
                             </li>
-                            <li><a href="data-map.html">Edit Enterprise</a>
-                            </li>
-                            <li><a href="code-editor.html">Delete Enterprise</a>
-                            </li>
-                            <li><a href="image-cropper.html">Images Cropper</a>
-                            </li>
-                            <li><a href="wizard.html">Wizard</a>
                             </li>
                         </ul>
                     </div>
