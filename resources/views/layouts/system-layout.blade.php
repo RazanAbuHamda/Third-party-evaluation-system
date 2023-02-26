@@ -26,6 +26,8 @@
 
             // add class to the one we clicked
             $('.enterprises').addClass("active");
+            $(' .tab-content custom-menu-content ').addClass("active");
+            $(' .tab-pane in active notika-tab-menu-bg animated flipInX ').addClass("active");
         }
         else if('{{$active}}' == 'userAct'){
 
@@ -33,6 +35,7 @@
             // add class to the one we clicked
             $('.users ').addClass("active");
         }
+
 
     });
 </script>
