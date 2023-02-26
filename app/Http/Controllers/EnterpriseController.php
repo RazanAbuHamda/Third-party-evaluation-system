@@ -118,9 +118,6 @@ class EnterpriseController extends Controller
 
         $enterprise = Enterprise::find($id);
         $enterprise->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-        $enterprise->assignRole($request->input('roles'));
 
         return redirect('enterprises/index')
             ->with('success','Enterprise updated successfully');

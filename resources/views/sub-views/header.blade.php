@@ -525,7 +525,7 @@
                     </div>
                     <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            @can('show Enterprises')
+                            @can('Show enterprises')
                                 <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
                                 </li>
                             @endcan

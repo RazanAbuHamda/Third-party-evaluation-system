@@ -24,12 +24,12 @@
     @endif
 
 
-    {!! Form::model($enterprise, ['method' => 'PATCH','url' => ['enterprises/update', $enterprise->id]]) !!}
+    {!! Form::model($enterprise, ['method' => 'POST','url' => ['enterprises/update', $enterprise->id]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                {!! Form::text('name', $enterprise->enterprise_name, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                {!! Form::text('enterprise_name', $enterprise->enterprise_name, array('placeholder' => 'Name','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
