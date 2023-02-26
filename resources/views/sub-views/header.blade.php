@@ -55,6 +55,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src={{asset('dashboardPublic/assets/js/vendor/modernizr-2.8.3.min.js')}}></script>
+
 </head>
 
 <body>
@@ -383,7 +384,7 @@
                                     <li><a href="widgets.html">Widgets</a></li>
                                 </ul>
                             </li>
-                            <li><a data-toggle="collapse" data-target="#demoevent" href="#">Users</a>
+                            <li class="users"><a data-toggle="collapse" data-target="#demoevent" href="#">Users</a>
                                 <ul id="demoevent" class="collapse dropdown-header-top">
                                     <li><a href="inbox.html">Show Users</a></li>
                                     <li><a href="inbox.html">Add User</a></li>
@@ -391,7 +392,7 @@
                                     <li><a href="compose-email.html">Delete user</a></li>
                                 </ul>
                             </li>
-                            <li><a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>
+                            <li class="enterprises"><a data-toggle="collapse" data-target="#democrou" href="#">Enterprise</a>
                                 <ul id="democrou" class="collapse dropdown-header-top">
                                     <li><a href="animations.html">Animations</a></li>
                                     <li><a href="google-map.html">Google Map</a></li>
@@ -478,11 +479,11 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
                     </li>
-                    <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Users</a>
+                    <li class="users"><a data-toggle="tab" href="#Users"><i class="user"></i> Users</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Enterprises</a>
+                    <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i class="enterprise"></i> Enterprises</a>
                     </li>
-                    <li class="active"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i>
+                    <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i>
                             Charts</a>
                     </li>
                     <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a>
@@ -511,7 +512,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Users" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             @can('Show users')
                                 <li><a href="{{Url('users')}}">Show users</a>
@@ -523,7 +524,7 @@
                             @endcan
                         </ul>
                     </div>
-                    <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Enterprises" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             @can('Show enterprises')
                                 <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
@@ -536,7 +537,7 @@
                                 </li>
                         </ul>
                     </div>
-                    <div id="Charts" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                    <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="flot-charts.html">Flot Charts</a>
                             </li>

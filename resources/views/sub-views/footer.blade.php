@@ -78,6 +78,7 @@
 <!-- tawk chat JS
     ============================================ -->
 <script src={{asset('dashboardPublic/assets/js/tawk-chat.js')}}></script>
+
 </body>
 
 </html>

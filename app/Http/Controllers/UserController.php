@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Enterprise;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -26,10 +25,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $active ='userAct';
         $enterprises = Enterprise::select('*')->get();
         $data = User::orderBy('id','DESC')->paginate(5);
         return view('users.index',compact('data','enterprises'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 5)->with('active',$active);
     }
 
     /**
@@ -39,11 +39,11 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        $active ='userAct';
         $enterprises = Enterprise::pluck('enterprise_name','id')->all();
 //        dd($enterprises);
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact(['roles','enterprises']));
+        return view('users.create',compact(['roles','enterprises']))->with('active',$active);
     }
 
     /**
@@ -54,6 +54,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $active ='userAct';
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -72,7 +73,7 @@ class UserController extends Controller
         dd($request->input("enterprise_id"));
 
         return redirect()->route('users.index')
-            ->with('success','User created successfully');
+            ->with('success','User created successfully')->with('active',$active);
 
     }
 
@@ -84,8 +85,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $active ='userAct';
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        return view('users.show',compact('user'))->with('active',$active);
     }
 
     /**
@@ -96,12 +98,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $active ='userAct';
         $enterprises = Enterprise::pluck('enterprise_name','id')->all();
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('users.edit',compact('user','roles','userRole','enterprises'));
+        return view('users.edit',compact('user','roles','userRole','enterprises'))->with('active',$active);
     }
 
     /**
@@ -113,6 +116,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $active ='userAct';
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -136,7 +140,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success','User updated successfully');
+            ->with('success','User updated successfully')->with('active',$active);
     }
 
     /**
@@ -147,8 +151,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $active ='userAct';
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+            ->with('success','User deleted successfully')->with('active',$active);
     }
 }

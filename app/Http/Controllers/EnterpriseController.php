@@ -25,9 +25,10 @@ class EnterpriseController extends Controller
      */
     public function index(Request $request)
     {
+        $active='enterAc';
         $data = Enterprise::orderBy('id','DESC')->paginate(5);
         return view('enterprises.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 5)->with('active',$active);
     }
 
     /**
@@ -37,11 +38,11 @@ class EnterpriseController extends Controller
      */
     public function create()
     {
-
+        $active='enterAc';
         $enterprises = Enterprise::pluck('enterprise_name','id')->all();
 //        dd($enterprises);
         $roles = Role::pluck('name','name')->all();
-        return view('enterprises.create',compact(['roles','enterprises']));
+        return view('enterprises.create',compact(['roles','enterprises']))->with('active',$active);
     }
 
     /**
@@ -52,6 +53,7 @@ class EnterpriseController extends Controller
      */
     public function store(Request $request)
     {
+        $active='enterAc';
         $this->validate($request, [
             'enterprise_name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -65,7 +67,7 @@ class EnterpriseController extends Controller
         $enterprise->status = $request->input('status');
 
         return redirect('enterprises/index')
-            ->with('success','Enterprise created successfully');
+            ->with('success','Enterprise created successfully')->with('active',$active);
 
     }
 
@@ -77,8 +79,9 @@ class EnterpriseController extends Controller
      */
     public function show($id)
     {
+        $active='enterAc';
         $enterprise = Enterprise::find($id);
-        return view('enterprises.show',compact('enterprise'));
+        return view('enterprises.show',compact('enterprise'))->with('active',$active);
     }
 
     /**
@@ -89,8 +92,9 @@ class EnterpriseController extends Controller
      */
     public function edit($id)
     {
+        $active='enterAc';
         $enterprise = Enterprise::find($id);
-        return view('enterprises.edit',compact('enterprise',));
+        return view('enterprises.edit',compact('enterprise',))->with('active',$active);
     }
 
     /**
@@ -102,6 +106,7 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $active='enterAc';
         $this->validate($request, [
             'enterprise_name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -120,7 +125,7 @@ class EnterpriseController extends Controller
         $enterprise->update($input);
 
         return redirect('enterprises/index')
-            ->with('success','Enterprise updated successfully');
+            ->with('success','Enterprise updated successfully')->with('active',$active);
     }
 
 
@@ -132,8 +137,9 @@ class EnterpriseController extends Controller
      */
     public function destroy($id)
     {
+        $active='enterAc';
         Enterprise::find($id)->delete();
         return redirect('enterprises/index')
-            ->with('success','Enterprise deleted successfully');
+            ->with('success','Enterprise deleted successfully')->with('active',$active);
     }
 }

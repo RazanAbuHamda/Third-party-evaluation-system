@@ -68,8 +68,8 @@
                 <td>
                     <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
+                    {!! Form::button('Delete', ['class' => 'btn btn-danger','id'=>'delete-user-btn']) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>
@@ -81,3 +81,4 @@
     {!! $data->render() !!}
 
 @endsection
+

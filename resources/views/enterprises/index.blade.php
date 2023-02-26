@@ -37,15 +37,13 @@
                 <td>
                     <a class="btn btn-info" href="{{ url('enterprises/show/'.$enterprise->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ url('enterprises/edit/'.$enterprise->id) }}">Edit</a>
-                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline','id'=>'delete-entr-form']) !!}
+                    {!! Form::button('Delete', ['class' => 'btn btn-danger','id'=>'delete-entr-btn']) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
     </table>
-
-
 
     {!! $data->render() !!}
 
