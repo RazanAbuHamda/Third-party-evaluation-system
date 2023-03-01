@@ -15,61 +15,104 @@
 <body>
 
 
-// الصفحة هاي فقط للتجارب عليها
-<div class="container">
-    <form action="{{ url('store-input-fields') }}" id="dynamic-form" method="POST">
-        @csrf
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (Session::has('success'))
-            <div class="alert alert-success text-center">
-                <p>{{ Session::get('success') }}</p>
-            </div>
-        @endif
-        <table class="table table-bordered" name="addMoreTopic[0][topic]" class="form-control" id="dynamic-topic"/>
-        <thead>
-        <button type="button" class="btn btn-outline-danger remove-input-field">Delete</button>
-        </thead><button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary">Add Topic</button></thead>
+    // الصفحة هاي فقط للتجارب عليها
+    <br>
+    <div class="container-fluid">
 
-        <tr>
-            <th>Topic</th>
-            <th>Action</th>
-        </tr>
-        <tfoot><td><button type="button" name="add" id="dynamic-question" class="btn btn-outline-primary">Add Question</button></td></tfoot>
-        <button type="submit" class="btn btn-outline-success btn-block">Save</button>
-    </form>
-</div>
+        <!-- status -->
+        <div class="row">
+            <div class="col-12">
+                @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if (Session::has('success'))
+                <div class="alert alert-success text-center">
+                    <p>{{ Session::get('success') }}</p>
+                </div>
+                @endif
+            </div>
+        </div>
+
+
+        <!-- form -->
+        <div class="row">
+            <div class="col-12">
+                <form action="{{ url('store-input-fields') }}" id="dynamic-form" method="POST">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary">Add Topic</button>
+
+                            <button type="submit" class="btn btn-outline-success btn-block">Save</button>
+                        </div>
+                    </div><br>
+
+                    <div class="row" id="topics-container">
+                        <div class="col-12">
+                           <table class="table table-bordered" data-topic=0 id="topic[0]" class="dynamic-topic">
+                              <thead>
+                                 <tr>
+                                    <th colspan="2" style="text-align: center;">topicName</th>
+                                 </tr>
+                                 <tr>
+                                    <th>Question</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                    <td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 <!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- JavaScript -->
 <script type="text/javascript">
-    var topic = 0;
-    var i = 0;
-    $("#dynamic-add-topic").on('click' , function () {
-        ++topic;
-        var t = prompt("Please enter your topic");
-        $("#dynamic-form").append('<table class="table table-bordered" name="addMoreTopic[' + topic + '][topic]" class="form-control" id="dynamic-topic"/><tr><th>Topic</th><th>Action</th></tr><tfoot><td><button type="button" name="add" id="dynamic-question" class="btn btn-outline-primary">Add Question</button></td></tfoot>' );
-    });
-    $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('tr').remove();
-    });
 
-    $("#dynamic-question").on('click',function () {
-        ++i;
-        $("#dynamic-topic").append('<tr><td><input type="text" name="addMoreInputFields[' + i + '][question]" placeholder="Enter question" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>');
-    });
-    $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('tr').remove();
 
+    $(document).ready(function () {
+        var topic = 0;
+
+        $('#dynamic-add-topic').on('click', function () {
+            var topicName = prompt("Please enter topic name");
+
+            if (topicName) {
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr><tr><th>Question</th><th>Action</th></tr></thead><tbody></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
+            }
+
+            ++topic;
+        });
+
+
+
+        $('#dynamic-form').on('click', '.dynamic-question', function () {
+            var questionTxt = prompt("Please enter quenstion text");
+            var question = new Date().getTime();
+            var topic = $(this).parent().parent().parent().parent().data('topic');
+
+            if (questionTxt) {
+                $(this).parent().parent().parent().parent().children('tbody').append('<tr data-question=' + question + ' id="question[' + topic + '][' + question + ']"><td>' + questionTxt + '</td><td><button type="button" class="btn btn-outline-danger">Delete Question</button></td></tr>');
+            }
+        });
     });
 
 

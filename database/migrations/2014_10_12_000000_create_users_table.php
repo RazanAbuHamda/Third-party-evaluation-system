@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('roles_name');
             $table->string('status',10);
             $table->unsignedBigInteger('enterprise_id')->nullable(true);
-            $table->foreign('enterprise_id')->references('id')->on('enterprises');
+            // $table->foreign('enterprise_id')->references('id')->on('enterprises');
             $table->rememberToken();
             $table->timestamps();
         });
