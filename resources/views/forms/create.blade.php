@@ -3,11 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="alternate" type="application/json+oembed"
-    href="https://www.jotform.com/oembed/?format=json&amp;url=https%3A%2F%2Fform.jotform.com%2F230561204561446"
-    title="oEmbed Form">
+          href="https://www.jotform.com/oembed/?format=json&amp;url=https%3A%2F%2Fform.jotform.com%2F230561204561446"
+          title="oEmbed Form">
     <link rel="alternate" type="text/xml+oembed"
-    href="https://www.jotform.com/oembed/?format=xml&amp;url=https%3A%2F%2Fform.jotform.com%2F230561204561446"
-    title="oEmbed Form">
+          href="https://www.jotform.com/oembed/?format=xml&amp;url=https%3A%2F%2Fform.jotform.com%2F230561204561446"
+          title="oEmbed Form">
     <meta property="og:title" content="Client Satisfaction Form">
     <meta property="og:url" content="https://form.jotform.com/230561204561446">
     <meta property="og:description" content="Please click the link to complete this form.">
@@ -27,28 +27,28 @@
     <meta name="HandheldFriendly" content="true"/>
     <title>Client Satisfaction Form</title>
     <style type="text/css">@media print {
-        .form-section {
-            display: inline !important
-        }
+            .form-section {
+                display: inline !important
+            }
 
-        .form-pagebreak {
-            display: none !important
-        }
+            .form-pagebreak {
+                display: none !important
+            }
 
-        .form-section-closed {
-            height: auto !important
-        }
+            .form-section-closed {
+                height: auto !important
+            }
 
-        .page-section {
-            position: initial !important
-        }
-    }</style>
+            .page-section {
+                position: initial !important
+            }
+        }</style>
     <link type="text/css" rel="stylesheet"
-    href="https://cdn01.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=3.3.39655&themeRevisionID=5f7ed99c2c2c7240ba580251"/>
+          href="https://cdn01.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=3.3.39655&themeRevisionID=5f7ed99c2c2c7240ba580251"/>
     <link type="text/css" rel="stylesheet"
-    href="https://cdn02.jotfor.ms/css/styles/payment/payment_styles.css?3.3.39655"/>
+          href="https://cdn02.jotfor.ms/css/styles/payment/payment_styles.css?3.3.39655"/>
     <link type="text/css" rel="stylesheet"
-    href="https://cdn03.jotfor.ms/css/styles/payment/payment_feature.css?3.3.39655"/>
+          href="https://cdn03.jotfor.ms/css/styles/payment/payment_feature.css?3.3.39655"/>
     <style type="text/css" id="form-designer-style">
         /* Injected CSS Code */
 
@@ -875,352 +875,371 @@
     <script src="https://cdn01.jotfor.ms/static/prototype.forms.js?3.3.39655" type="text/javascript"></script>
     <script src="https://cdn02.jotfor.ms/static/jotform.forms.js?3.3.39655" type="text/javascript"></script>
     <script type="text/javascript">    JotForm.newDefaultTheme = true;
-    JotForm.extendsNewTheme = false;
-    JotForm.singleProduct = false;
-    JotForm.newPaymentUIForNewCreatedForms = true;
-    JotForm.newPaymentUI = true;
-    JotForm.clearFieldOnHide = "disable";
-    JotForm.submitError = "jumpToFirstError";
+        JotForm.extendsNewTheme = false;
+        JotForm.singleProduct = false;
+        JotForm.newPaymentUIForNewCreatedForms = true;
+        JotForm.newPaymentUI = true;
+        JotForm.clearFieldOnHide = "disable";
+        JotForm.submitError = "jumpToFirstError";
 
-    JotForm.init(function () {
-        /*INIT-START*/
-        if (window.JotForm && JotForm.accessible) $('input_13').setAttribute('tabindex', 0);
-        JotForm.setCustomHint('input_13', 'Type here...');
+        JotForm.init(function () {
+            /*INIT-START*/
+            if (window.JotForm && JotForm.accessible) $('input_13').setAttribute('tabindex', 0);
+            JotForm.setCustomHint('input_13', 'Type here...');
 
-        $('input_5').rating({
-            stars: '5',
-            inputClassName: 'form-textbox',
-            imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
-            cleanFirst: true, value: ''
+            $('input_5').rating({
+                stars: '5',
+                inputClassName: 'form-textbox',
+                imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+                cleanFirst: true, value: ''
+            });
+            $('input_5').setAttribute('role', 'radiogroup');
+            $('input_5').setAttribute('aria-labelledby', 'label_5');
+
+            Array.from($('input_5').children).map(function (e, i) {
+                e.setAttribute('tabindex', 0);
+                if (i < 5) {
+                    e.setAttribute('aria-label', (i + 1) + ' out of 5');
+                }
+                e.setAttribute('role', 'radio');
+                e.setAttribute('aria-describedby', 'label_5');
+                e.classList.add('form-star-rating-star', 'Stars');
+                e.onkeypress = function (k) {
+                    if (k.keyCode == 13 || k.keyCode == 32) e.click()
+                }
+            });
+
+            $('input_7').rating({
+                stars: '5',
+                inputClassName: 'form-textbox',
+                imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+                cleanFirst: true, value: ''
+            });
+            $('input_7').setAttribute('role', 'radiogroup');
+            $('input_7').setAttribute('aria-labelledby', 'label_7');
+
+            Array.from($('input_7').children).map(function (e, i) {
+                e.setAttribute('tabindex', 0);
+                if (i < 5) {
+                    e.setAttribute('aria-label', (i + 1) + ' out of 5');
+                }
+                e.setAttribute('role', 'radio');
+                e.setAttribute('aria-describedby', 'label_7');
+                e.classList.add('form-star-rating-star', 'Stars');
+                e.onkeypress = function (k) {
+                    if (k.keyCode == 13 || k.keyCode == 32) e.click()
+                }
+            });
+
+            $('input_8').rating({
+                stars: '5',
+                inputClassName: 'form-textbox',
+                imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+                cleanFirst: true, value: ''
+            });
+            $('input_8').setAttribute('role', 'radiogroup');
+            $('input_8').setAttribute('aria-labelledby', 'label_8');
+
+            Array.from($('input_8').children).map(function (e, i) {
+                e.setAttribute('tabindex', 0);
+                if (i < 5) {
+                    e.setAttribute('aria-label', (i + 1) + ' out of 5');
+                }
+                e.setAttribute('role', 'radio');
+                e.setAttribute('aria-describedby', 'label_8');
+                e.classList.add('form-star-rating-star', 'Stars');
+                e.onkeypress = function (k) {
+                    if (k.keyCode == 13 || k.keyCode == 32) e.click()
+                }
+            });
+
+            $('input_9').rating({
+                stars: '5',
+                inputClassName: 'form-textbox',
+                imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+                cleanFirst: true, value: ''
+            });
+            $('input_9').setAttribute('role', 'radiogroup');
+            $('input_9').setAttribute('aria-labelledby', 'label_9');
+
+            Array.from($('input_9').children).map(function (e, i) {
+                e.setAttribute('tabindex', 0);
+                if (i < 5) {
+                    e.setAttribute('aria-label', (i + 1) + ' out of 5');
+                }
+                e.setAttribute('role', 'radio');
+                e.setAttribute('aria-describedby', 'label_9');
+                e.classList.add('form-star-rating-star', 'Stars');
+                e.onkeypress = function (k) {
+                    if (k.keyCode == 13 || k.keyCode == 32) e.click()
+                }
+            });
+
+            $('input_10').rating({
+                stars: '5',
+                inputClassName: 'form-textbox',
+                imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+                cleanFirst: true, value: ''
+            });
+            $('input_10').setAttribute('role', 'radiogroup');
+            $('input_10').setAttribute('aria-labelledby', 'label_10');
+
+            Array.from($('input_10').children).map(function (e, i) {
+                e.setAttribute('tabindex', 0);
+                if (i < 5) {
+                    e.setAttribute('aria-label', (i + 1) + ' out of 5');
+                }
+                e.setAttribute('role', 'radio');
+                e.setAttribute('aria-describedby', 'label_10');
+                e.classList.add('form-star-rating-star', 'Stars');
+                e.onkeypress = function (k) {
+                    if (k.keyCode == 13 || k.keyCode == 32) e.click()
+                }
+            });
+            setTimeout(function () {
+                $('input_17').hint('ex: 23');
+            }, 20);
+            JotForm.alterTexts(undefined);
+            /*INIT-END*/
         });
-        $('input_5').setAttribute('role', 'radiogroup');
-        $('input_5').setAttribute('aria-labelledby', 'label_5');
 
-        Array.from($('input_5').children).map(function (e, i) {
-            e.setAttribute('tabindex', 0);
-            if (i < 5) {
-                e.setAttribute('aria-label', (i + 1) + ' out of 5');
-            }
-            e.setAttribute('role', 'radio');
-            e.setAttribute('aria-describedby', 'label_5');
-            e.classList.add('form-star-rating-star', 'Stars');
-            e.onkeypress = function (k) {
-                if (k.keyCode == 13 || k.keyCode == 32) e.click()
-            }
-    });
-
-        $('input_7').rating({
-            stars: '5',
-            inputClassName: 'form-textbox',
-            imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
-            cleanFirst: true, value: ''
-        });
-        $('input_7').setAttribute('role', 'radiogroup');
-        $('input_7').setAttribute('aria-labelledby', 'label_7');
-
-        Array.from($('input_7').children).map(function (e, i) {
-            e.setAttribute('tabindex', 0);
-            if (i < 5) {
-                e.setAttribute('aria-label', (i + 1) + ' out of 5');
-            }
-            e.setAttribute('role', 'radio');
-            e.setAttribute('aria-describedby', 'label_7');
-            e.classList.add('form-star-rating-star', 'Stars');
-            e.onkeypress = function (k) {
-                if (k.keyCode == 13 || k.keyCode == 32) e.click()
-            }
-    });
-
-        $('input_8').rating({
-            stars: '5',
-            inputClassName: 'form-textbox',
-            imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
-            cleanFirst: true, value: ''
-        });
-        $('input_8').setAttribute('role', 'radiogroup');
-        $('input_8').setAttribute('aria-labelledby', 'label_8');
-
-        Array.from($('input_8').children).map(function (e, i) {
-            e.setAttribute('tabindex', 0);
-            if (i < 5) {
-                e.setAttribute('aria-label', (i + 1) + ' out of 5');
-            }
-            e.setAttribute('role', 'radio');
-            e.setAttribute('aria-describedby', 'label_8');
-            e.classList.add('form-star-rating-star', 'Stars');
-            e.onkeypress = function (k) {
-                if (k.keyCode == 13 || k.keyCode == 32) e.click()
-            }
-    });
-
-        $('input_9').rating({
-            stars: '5',
-            inputClassName: 'form-textbox',
-            imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
-            cleanFirst: true, value: ''
-        });
-        $('input_9').setAttribute('role', 'radiogroup');
-        $('input_9').setAttribute('aria-labelledby', 'label_9');
-
-        Array.from($('input_9').children).map(function (e, i) {
-            e.setAttribute('tabindex', 0);
-            if (i < 5) {
-                e.setAttribute('aria-label', (i + 1) + ' out of 5');
-            }
-            e.setAttribute('role', 'radio');
-            e.setAttribute('aria-describedby', 'label_9');
-            e.classList.add('form-star-rating-star', 'Stars');
-            e.onkeypress = function (k) {
-                if (k.keyCode == 13 || k.keyCode == 32) e.click()
-            }
-    });
-
-        $('input_10').rating({
-            stars: '5',
-            inputClassName: 'form-textbox',
-            imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
-            cleanFirst: true, value: ''
-        });
-        $('input_10').setAttribute('role', 'radiogroup');
-        $('input_10').setAttribute('aria-labelledby', 'label_10');
-
-        Array.from($('input_10').children).map(function (e, i) {
-            e.setAttribute('tabindex', 0);
-            if (i < 5) {
-                e.setAttribute('aria-label', (i + 1) + ' out of 5');
-            }
-            e.setAttribute('role', 'radio');
-            e.setAttribute('aria-describedby', 'label_10');
-            e.classList.add('form-star-rating-star', 'Stars');
-            e.onkeypress = function (k) {
-                if (k.keyCode == 13 || k.keyCode == 32) e.click()
-            }
-    });
+        JotForm.prepareCalculationsOnTheFly([null, {
+            "name": "clientSatisfaction",
+            "qid": "1",
+            "text": "Client Satisfaction Survey",
+            "type": "control_head"
+        }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
+            "name": "howOften",
+            "qid": "3",
+            "text": "How often do you use this service\u002Fproduct?",
+            "type": "control_radio"
+        }, {
+            "name": "pleaseRate4",
+            "qid": "4",
+            "text": "Please rate the product\u002Fservice in terms of the followings",
+            "type": "control_head"
+        }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
+            "name": "features",
+            "qid": "7",
+            "text": "Features",
+            "type": "control_rating"
+        }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
+            "name": "price",
+            "qid": "9",
+            "text": "Price",
+            "type": "control_rating"
+        }, {"name": "availability", "qid": "10", "text": "Availability", "type": "control_rating"}, {
+            "name": "inA11",
+            "qid": "11",
+            "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
+            "type": "control_scale"
+        }, {
+            "name": "doesThe",
+            "qid": "12",
+            "text": "Does the product\u002Fservice help you to achieve your goals?",
+            "type": "control_radio"
+        }, {
+            "name": "howWould",
+            "qid": "13",
+            "text": "How would you improve the product\u002Fservice?",
+            "type": "control_textarea"
+        }, null, {
+            "name": "personalInformation",
+            "qid": "15",
+            "text": "Personal Information",
+            "type": "control_head"
+        }, null, {
+            "name": "howOld",
+            "qid": "17",
+            "text": "How old are you?",
+            "type": "control_number"
+        }, {
+            "name": "whatIs",
+            "qid": "18",
+            "text": "What is the highest level of education you have completed?",
+            "type": "control_dropdown"
+        }, {
+            "name": "whatIs19",
+            "qid": "19",
+            "text": "What is your gender?",
+            "type": "control_dropdown"
+        }, null, {
+            "name": "whatIs21",
+            "qid": "21",
+            "text": "What is your employment status?",
+            "type": "control_dropdown"
+        }, {
+            "name": "whatIs22",
+            "qid": "22",
+            "text": "What is your marital status?",
+            "type": "control_radio"
+        }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
         setTimeout(function () {
-            $('input_17').hint('ex: 23');
+            JotForm.paymentExtrasOnTheFly([null, {
+                "name": "clientSatisfaction",
+                "qid": "1",
+                "text": "Client Satisfaction Survey",
+                "type": "control_head"
+            }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
+                "name": "howOften",
+                "qid": "3",
+                "text": "How often do you use this service\u002Fproduct?",
+                "type": "control_radio"
+            }, {
+                "name": "pleaseRate4",
+                "qid": "4",
+                "text": "Please rate the product\u002Fservice in terms of the followings",
+                "type": "control_head"
+            }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
+                "name": "features",
+                "qid": "7",
+                "text": "Features",
+                "type": "control_rating"
+            }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
+                "name": "price",
+                "qid": "9",
+                "text": "Price",
+                "type": "control_rating"
+            }, {
+                "name": "availability",
+                "qid": "10",
+                "text": "Availability",
+                "type": "control_rating"
+            }, {
+                "name": "inA11",
+                "qid": "11",
+                "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
+                "type": "control_scale"
+            }, {
+                "name": "doesThe",
+                "qid": "12",
+                "text": "Does the product\u002Fservice help you to achieve your goals?",
+                "type": "control_radio"
+            }, {
+                "name": "howWould",
+                "qid": "13",
+                "text": "How would you improve the product\u002Fservice?",
+                "type": "control_textarea"
+            }, null, {
+                "name": "personalInformation",
+                "qid": "15",
+                "text": "Personal Information",
+                "type": "control_head"
+            }, null, {
+                "name": "howOld",
+                "qid": "17",
+                "text": "How old are you?",
+                "type": "control_number"
+            }, {
+                "name": "whatIs",
+                "qid": "18",
+                "text": "What is the highest level of education you have completed?",
+                "type": "control_dropdown"
+            }, {
+                "name": "whatIs19",
+                "qid": "19",
+                "text": "What is your gender?",
+                "type": "control_dropdown"
+            }, null, {
+                "name": "whatIs21",
+                "qid": "21",
+                "text": "What is your employment status?",
+                "type": "control_dropdown"
+            }, {
+                "name": "whatIs22",
+                "qid": "22",
+                "text": "What is your marital status?",
+                "type": "control_radio"
+            }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
         }, 20);
-        JotForm.alterTexts(undefined);
-        /*INIT-END*/
-    });
-
-JotForm.prepareCalculationsOnTheFly([null, {
-    "name": "clientSatisfaction",
-    "qid": "1",
-    "text": "Client Satisfaction Survey",
-    "type": "control_head"
-}, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-    "name": "howOften",
-    "qid": "3",
-    "text": "How often do you use this service\u002Fproduct?",
-    "type": "control_radio"
-}, {
-    "name": "pleaseRate4",
-    "qid": "4",
-    "text": "Please rate the product\u002Fservice in terms of the followings",
-    "type": "control_head"
-}, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-    "name": "features",
-    "qid": "7",
-    "text": "Features",
-    "type": "control_rating"
-}, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-    "name": "price",
-    "qid": "9",
-    "text": "Price",
-    "type": "control_rating"
-}, {"name": "availability", "qid": "10", "text": "Availability", "type": "control_rating"}, {
-    "name": "inA11",
-    "qid": "11",
-    "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-    "type": "control_scale"
-}, {
-    "name": "doesThe",
-    "qid": "12",
-    "text": "Does the product\u002Fservice help you to achieve your goals?",
-    "type": "control_radio"
-}, {
-    "name": "howWould",
-    "qid": "13",
-    "text": "How would you improve the product\u002Fservice?",
-    "type": "control_textarea"
-}, null, {
-    "name": "personalInformation",
-    "qid": "15",
-    "text": "Personal Information",
-    "type": "control_head"
-}, null, {
-    "name": "howOld",
-    "qid": "17",
-    "text": "How old are you?",
-    "type": "control_number"
-}, {
-    "name": "whatIs",
-    "qid": "18",
-    "text": "What is the highest level of education you have completed?",
-    "type": "control_dropdown"
-}, {
-    "name": "whatIs19",
-    "qid": "19",
-    "text": "What is your gender?",
-    "type": "control_dropdown"
-}, null, {
-    "name": "whatIs21",
-    "qid": "21",
-    "text": "What is your employment status?",
-    "type": "control_dropdown"
-}, {
-    "name": "whatIs22",
-    "qid": "22",
-    "text": "What is your marital status?",
-    "type": "control_radio"
-}, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-setTimeout(function () {
-    JotForm.paymentExtrasOnTheFly([null, {
-        "name": "clientSatisfaction",
-        "qid": "1",
-        "text": "Client Satisfaction Survey",
-        "type": "control_head"
-    }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-        "name": "howOften",
-        "qid": "3",
-        "text": "How often do you use this service\u002Fproduct?",
-        "type": "control_radio"
-    }, {
-        "name": "pleaseRate4",
-        "qid": "4",
-        "text": "Please rate the product\u002Fservice in terms of the followings",
-        "type": "control_head"
-    }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-        "name": "features",
-        "qid": "7",
-        "text": "Features",
-        "type": "control_rating"
-    }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-        "name": "price",
-        "qid": "9",
-        "text": "Price",
-        "type": "control_rating"
-    }, {
-        "name": "availability",
-        "qid": "10",
-        "text": "Availability",
-        "type": "control_rating"
-    }, {
-        "name": "inA11",
-        "qid": "11",
-        "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-        "type": "control_scale"
-    }, {
-        "name": "doesThe",
-        "qid": "12",
-        "text": "Does the product\u002Fservice help you to achieve your goals?",
-        "type": "control_radio"
-    }, {
-        "name": "howWould",
-        "qid": "13",
-        "text": "How would you improve the product\u002Fservice?",
-        "type": "control_textarea"
-    }, null, {
-        "name": "personalInformation",
-        "qid": "15",
-        "text": "Personal Information",
-        "type": "control_head"
-    }, null, {
-        "name": "howOld",
-        "qid": "17",
-        "text": "How old are you?",
-        "type": "control_number"
-    }, {
-        "name": "whatIs",
-        "qid": "18",
-        "text": "What is the highest level of education you have completed?",
-        "type": "control_dropdown"
-    }, {
-        "name": "whatIs19",
-        "qid": "19",
-        "text": "What is your gender?",
-        "type": "control_dropdown"
-    }, null, {
-        "name": "whatIs21",
-        "qid": "21",
-        "text": "What is your employment status?",
-        "type": "control_dropdown"
-    }, {
-        "name": "whatIs22",
-        "qid": "22",
-        "text": "What is your marital status?",
-        "type": "control_radio"
-    }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-}, 20);
-</script>
+    </script>
 </head>
 <body>
-    <form class="jotform-form" action="" method="post"
-    name="form_230561204561446" id="dynamic-form" accept-charset="utf-8" autocomplete="on"><input
-    type="hidden" name="formID" value="230561204561446"/><input type="hidden" id="JWTContainer" value=""/><input
-    type="hidden" id="cardinalOrderNumber" value=""/>
+<form class="jotform-form" action="" method="post"
+      name="form_230561204561446" id="dynamic-form" accept-charset="utf-8" autocomplete="on"><input
+        type="hidden" name="formID" value="230561204561446"/><input type="hidden" id="JWTContainer" value=""/><input
+        type="hidden" id="cardinalOrderNumber" value=""/>
     <div role="main" class="form-all">
         <style>
             .form-all:before {
                 background: none;
             }
         </style>
-        <ul class="form-section page-section" name="formTopic[0][topic]" id="dynamic-topic">
-            <li id="cid_1" class="form-input-wide" data-type="control_head">
-                <div class="form-header-group  header-large">
-                    <div class="header-text httac htvam">
-                        <h1 id="header_1" class="form-header" data-component="header">Client Satisfaction Survey</h1>
-                        <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary">Add Topic</button>
-                    </div>
-                </div>
-            </li>
-            <li id="cid_1" class="form-input-wide" data-type="control_head">
-                <button type="button" class="btn btn-outline-danger remove-input-field">Delete</button>
+        <div class="form-header-group  header-large">
+            <div class="header-text httac htvam">
+                <h1 id="header_1" class="form-header" data-component="header">Client Satisfaction
+                    Survey</h1>
+                <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary">Add
+                    Topic
+                </button>
+            </div>
+        </div>
+        <div id="topics-container">
+            <div class="container">
+            <ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']"
+                class="dynamic-topic">
+                <li>
 
-            </li>
-            <li class="form-line" data-type="control_button" id="id_2">
-                <div id="cid_2" class="form-input-wide" data-layout="full">
-                    <div data-align="auto" class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField"><button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">Submit</button></div>
-                </div>
-            </li>
-        </ul>
+                </li>
+
+            <button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button>
+            <button type="button" class="btn btn-outline-danger">Delete Topic</button>
+            </ul>
+        </div>
+        </div>
     </div>
     <!-- JavaScript -->
 
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             var topic = 0;
-            var i = 0;
 
-            $("#dynamic-add-topic").on('click' , function () {
+            $('#dynamic-add-topic').on('click', function () {
+                var topicName = prompt("Please enter topic name");
+
+                if (topicName) {
+                    $('#topics-container').append('<div class="container"><h1>'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></ul></div>');
+
+                }
+
                 ++topic;
-                var t = prompt("Please enter your topic");
-                $("#dynamic-form").append('<ul class="form-section page-section" name="formTopic[' + topic + '][topic]" id="dynamic-topic"><button type="button" name="add" id="dynamic-question" class="btn btn-outline-primary">Add question</button></ul>'
-                    );
             });
             $(document).on('click', '.remove-input-field', function () {
                 $(this).parents('tr').remove();
             });
 
-            $("#dynamic-question").on('click',function () {
-                ++i;
-                $("#dynamic-topic").append('<li ><input type="text" name="addMoreInputFields[' + i + '][question]" placeholder="Enter Question" class="form-control" /> ><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></li>'
-                    );
+            $('#dynamic-form').on('click', '.dynamic-question', function () {
+                var questionTxt = prompt("Please enter question text");
+                var question = new Date().getTime();
+                var topic = $(this).parent().children('li').data('topic');
+                if (questionTxt) {
+                    $(this).parent().children('li').append('<div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button>');
+                }
             });
-            $(document).on('click', '.remove-input-field', function () {
-                $(this).parents('tr').remove();
+        });
+        $(document).on('click', '.remove-input-field', function () {
+            $(this).parents('tr').remove();
 
-            });
-        });  
 
+        });
 
     </script>
-    <script type="text/javascript">JotForm.ownerView=true;</script><script src="https://cdn.jotfor.ms//js/vendor/smoothscroll.min.js?v=3.3.39655"></script>
+    <script type="text/javascript">JotForm.ownerView = true;</script>
+    <script src="https://cdn.jotfor.ms//js/vendor/smoothscroll.min.js?v=3.3.39655"></script>
     <script src="https://cdn.jotfor.ms//js/errorNavigation.js?v=3.3.39655"></script>
-
+    <div id="cid_2" class="form-input-wide" data-layout="full">
+        <div data-align="auto"
+             class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField">
+            <button id="input_2" type="submit"
+                    class="form-submit-button submit-button jf-form-buttons jsTest-submitField"
+                    data-component="button" data-content="">Submit
+            </button>
+        </div>
+    </div>
 </form>
 </body>
 

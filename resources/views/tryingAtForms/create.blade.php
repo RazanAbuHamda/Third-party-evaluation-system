@@ -105,12 +105,16 @@
 
 
         $('#dynamic-form').on('click', '.dynamic-question', function () {
-            var questionTxt = prompt("Please enter quenstion text");
+            var questionTxt = prompt("Please enter question text");
             var question = new Date().getTime();
             var topic = $(this).parent().parent().parent().parent().data('topic');
-
+//form-div-div-div
+            //The .data() method allows us to attach data of any type to DOM elements
+            // in a way that is safe from circular references and therefore from memory leaks.
             if (questionTxt) {
                 $(this).parent().parent().parent().parent().children('tbody').append('<tr data-question=' + question + ' id="question[' + topic + '][' + question + ']"><td>' + questionTxt + '</td><td><button type="button" class="btn btn-outline-danger">Delete Question</button></td></tr>');
+                // children() method allows us to search through the children of these
+                // elements in the DOM tree and construct a new jQuery object from the matching elements
             }
         });
     });
