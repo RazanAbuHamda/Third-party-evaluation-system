@@ -1183,7 +1183,7 @@
                 </li>
 
             <button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button>
-            <button type="button" class="btn btn-outline-danger">Delete Topic</button>
+            <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button>
             </ul>
         </div>
         </div>
@@ -1202,14 +1202,14 @@
                 var topicName = prompt("Please enter topic name");
 
                 if (topicName) {
-                    $('#topics-container').append('<div class="container"><h1>'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></ul></div>');
+                    $('#topics-container').append('<div class="container"><h1>'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button></ul></div>');
 
                 }
 
                 ++topic;
             });
-            $(document).on('click', '.remove-input-field', function () {
-                $(this).parents('tr').remove();
+            $(document).on('click', '.remove-topic', function () {
+                $(this).parent().parent().remove();
             });
 
             $('#dynamic-form').on('click', '.dynamic-question', function () {
@@ -1217,12 +1217,12 @@
                 var question = new Date().getTime();
                 var topic = $(this).parent().children('li').data('topic');
                 if (questionTxt) {
-                    $(this).parent().children('li').append('<div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button>');
+                    $(this).parent().children('li').append('<li><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button><li>');
                 }
             });
         });
-        $(document).on('click', '.remove-input-field', function () {
-            $(this).parents('tr').remove();
+        $(document).on('click', '.remove-question', function () {
+            $(this).parent().remove();
 
 
         });
