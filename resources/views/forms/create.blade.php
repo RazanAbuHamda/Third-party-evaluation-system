@@ -1176,6 +1176,7 @@
         </div>
         <div id="topics-container">
             <div class="container">
+                <h1 class ="topic-name">Main Topic</h1>
             <ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']"
                 class="dynamic-topic">
                 <li>
@@ -1183,6 +1184,7 @@
                 </li>
 
             <button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button>
+                <button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button>
             <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button>
             </ul>
         </div>
@@ -1202,7 +1204,7 @@
                 var topicName = prompt("Please enter topic name");
 
                 if (topicName) {
-                    $('#topics-container').append('<div class="container"><h1>'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button></ul></div>');
+                    $('#topics-container').append('<div class="container"><h1 class ="topic-name">'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button></ul></div>');
 
                 }
 
@@ -1210,6 +1212,10 @@
             });
             $(document).on('click', '.remove-topic', function () {
                 $(this).parent().parent().remove();
+            });
+            $('#topics-container').on('click', '.edit-topic', function () {
+                var editedTopicName = prompt("Please enter topic name to change it");
+                $(this).parent().parent().children('h1').text(editedTopicName);
             });
 
             $('#dynamic-form').on('click', '.dynamic-question', function () {
