@@ -26,6 +26,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1"/>
     <meta name="HandheldFriendly" content="true"/>
     <title>Client Satisfaction Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <style type="text/css">@media print {
             .form-section {
                 display: inline !important
@@ -1176,18 +1183,52 @@
         </div>
         <div id="topics-container">
             <div class="container">
-                <h1 class ="topic-name">Main Topic</h1>
-            <ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']"
-                class="dynamic-topic">
-                <li>
+                <h1 class="topic-name">Main Topic</h1>
+                <ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']"
+                    class="dynamic-topic">
+                    <button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button>
+                    <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add
+                        Question
+                    </button>
 
-                </li>
-
-            <button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button>
-                <button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button>
-            <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button>
-            </ul>
-        </div>
+                    {{--                    <button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal">Add Question</button>--}}
+                </ul>
+                <!-- Modal -->
+                <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Enter question type, please...</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                        id="myselect">
+                                    <option selected value ="0">Open this select menu</option>
+                                    <option value="1">Closed question (yes/no)</option>
+                                    <option value="2">Open question</option>
+                                    <option value="3">Multiple choices question</option>
+                                    <option value="4">Single choice question</option>
+                                    <option value="5">Satisfaction choice question (smiles)</option>
+                                    <option value="6">Star choice question (stars)</option>
+                                </select>
+                                <button type="button" class="btn btn-secondary dynamic-question" id="addModal">To add question
+                                </button>
+                                <div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary save-question" data-dismiss="modal">Save Question</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- JavaScript -->
@@ -1199,12 +1240,14 @@
 
         $(document).ready(function () {
             var topic = 0;
+            var questionTxt = '';
+            var question_credit = ' ';
 
             $('#dynamic-add-topic').on('click', function () {
                 var topicName = prompt("Please enter topic name");
 
                 if (topicName) {
-                    $('#topics-container').append('<div class="container"><h1 class ="topic-name">'+topicName+'</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li>  </li><button type="button" class="btn btn-outline-primary dynamic-question">Add Question</button><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button></ul></div>');
+                    $('#topics-container').append('<div class="container"><h1 class ="topic-name">' + topicName + '</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li> </li><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button><button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal">Add Question</button></ul></div>');
 
                 }
 
@@ -1218,20 +1261,79 @@
                 $(this).parent().parent().children('h1').text(editedTopicName);
             });
 
-            $('#dynamic-form').on('click', '.dynamic-question', function () {
-                var questionTxt = prompt("Please enter question text");
-                var question = new Date().getTime();
-                var topic = $(this).parent().children('li').data('topic');
-                if (questionTxt) {
-                    $(this).parent().children('li').append('<li><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button><li>');
+            // $('#dynamic-form').on('click', '.dynamic-question', function () {
+            //     var questionTxt = prompt("Please enter question text");
+            //     var question = new Date().getTime();
+            //     var topic = $(this).parent().children('li').data('topic');
+            //     if (questionTxt) {
+            //         $(this).parent().children('li').append('<li><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button><li>');
+            //     }
+            // });
+
+
+            $('#exampleModal').on('click', '.dynamic-question', function () {
+                $("#addModal").attr("disabled", true);
+                $('#myModal').modal('show');
+                if ($("#myselect option:selected").val() == '1') {
+                    $(this).parent().children('div').append('<br><hr><div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
+                    var questionTxt = $('#question-text').val();
+                    var question_credit = $('#question-credit').val();
+
+                } else if ($("#myselect option:selected").val() == '2') {
+                    //open question
+
+                } else if ($("#myselect option:selected").val() == '3') {
+                    //multiple
+
+                } else if ($("#myselect option:selected").val() == '4') {
+                    //single
+
+                } else if ($("#myselect option:selected").val() == '5') {
+                    //smiles
+
+                } else if ($("#myselect option:selected").val() == '6') {
+                    //stars
+                    // $(this).parent().children('div').append('<br><hr><div><label>Enter question text, please : </label><input type="text" name="question-text"><br><label>Enter question credit, please :</label><input type="text" name="question-credit"></div>');
+
+
+                    // <li class="form-line" data-type="control_rating" id="id_10"><label class="form-label form-label-top form-label-auto" id="label_10" for="input_10"> Availability </label>
+                    //     <div id="cid_10" class="form-input-wide" data-layout="full">
+                    //         <div id="input_10" name="q10_availability" data-component="rating" data-version="v2"><select name="q10_availability">
+                    //             <option value="1">1</option>
+                    //             <option value="2">2</option>
+                    //             <option value="3">3</option>
+                    //             <option value="4">4</option>
+                    //             <option value="5">5</option>
+                    //         </select></div>
+                    //     </div>
+                    // </li>
+
                 }
             });
+            $('#exampleModal').on('click', '.save-question', function () {
+                var question = new Date().getTime();
+                var topic = $('#dynamic-form').parent().children('li').data('topic');
+                if ($('#question-text').val() && $('#question-credit').val()  ) {
+                    questionTxt = $('#question-text').val();
+                    question_credit = $('#question-credit').val();
+                    var to_append ='<div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><div>'+question_credit+'</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button>';
+                    $('ul').append('<li>'+to_append+'</li><br><hr>');
+                    $('#question-text').val('');
+                    $('#question-credit').val('');
+                    $("#myselect option[value='0']").prop('selected', true);
+                }
+
+
+            });
+
         });
+
+
         $(document).on('click', '.remove-question', function () {
             $(this).parent().remove();
 
-
         });
+
 
     </script>
     <script type="text/javascript">JotForm.ownerView = true;</script>
@@ -1247,6 +1349,12 @@
         </div>
     </div>
 </form>
+<!--Script Link  put befor end of </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 
 </html>
