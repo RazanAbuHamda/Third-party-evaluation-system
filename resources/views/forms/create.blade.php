@@ -1272,12 +1272,14 @@
 
 
             $('#exampleModal').on('click', '.dynamic-question', function () {
-                $("#addModal").attr("disabled", true);
+                // $("#addModal").attr("disabled", true);
                 $('#myModal').modal('show');
                 if ($("#myselect option:selected").val() == '1') {
                     $(this).parent().children('div').append('<br><hr><div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
                     var questionTxt = $('#question-text').val();
                     var question_credit = $('#question-credit').val();
+
+
 
                 } else if ($("#myselect option:selected").val() == '2') {
                     //open question
@@ -1309,6 +1311,7 @@
                     // </li>
 
                 }
+
             });
             $('#exampleModal').on('click', '.save-question', function () {
                 var question = new Date().getTime();
@@ -1316,21 +1319,18 @@
                 if ($('#question-text').val() && $('#question-credit').val()  ) {
                     questionTxt = $('#question-text').val();
                     question_credit = $('#question-credit').val();
-                    var to_append ='<div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><div>'+question_credit+'</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button>';
-                    $('ul').append('<li>'+to_append+'</li><br><hr>');
-                    $('#question-text').val('');
-                    $('#question-credit').val('');
+                    $('ul').append('<li class="form-line" data-type="control_radio" id="id_23"><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">' + questionTxt + '  '+question_credit+'</label><div class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_0" name="q23_doYou" value="Yes" /><label id="label_input_23_0" for="input_23_0">Yes</label></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="No" /><label id="label_input_23_1" for="input_23_1">No</label></span><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
+                    $('#question-text').parent().remove();
+                    $('#question-credit').parent().remove();
                     $("#myselect option[value='0']").prop('selected', true);
                 }
-
-
             });
 
         });
 
 
         $(document).on('click', '.remove-question', function () {
-            $(this).parent().remove();
+            $(this).parent().parent().parent().parent().remove();
 
         });
 
