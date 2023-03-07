@@ -1277,9 +1277,7 @@
 
                 <!-- JavaScript -->
 
-                <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-                        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-                        crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -1349,23 +1347,30 @@
                         } else if ($("#myselect option:selected").val() == '3') {
                             //multiple
                         } else if ($("#myselect option:selected").val() == '4') {
+                            var questionTxt;
+                            var question_credit;
+                            var appendHeader;
                             //single
                             $(this).parent().children('div').append('<div id="target"><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"><button type="button" class="btn btn-primary add-choices">Add Choices</button></div>');
-                            var appendHeader = '<br>' + $('#question-text').val() + '   ' + $('#credit-text').val();
+
                             $('#exampleModal').on('click', '.add-choices', function () {
+                                    if ($('#question-text').val() && $('#question-credit').val()) {
+                                        questionTxt = $('#question-text').val();
+                                        question_credit = $('#question-credit').val();
+                                        appendHeader = '<br>' + questionTxt + '   ' + question_credit;
+
+                                    }
                                     var choices_number = 0;
-                                    var radioBtn ="";
+                                    var radioBtn = "";
 
-                                        radioBtn = '<br><br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                        radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                        radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                        radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                        // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
-                                        // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
-                                        // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
+                                    radioBtn = '<br><br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
+                                    radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
+                                    radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
+                                    radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
+                                    // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
+                                    // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
+                                    // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
 
-                                        var choice_txt = $('#choice-text').val() + choices_number;
-                                        var choice_credit = $('#choice-credit').val() + choices_number;
 
                                     appendHeader += radioBtn;
                                     $(appendHeader).appendTo('#target');
@@ -1425,6 +1430,7 @@
                 </button>
             </div>
         </div>
+    </div>
 </form>
 <!--Script Link  put befor end of </body> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
