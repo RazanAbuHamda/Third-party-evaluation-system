@@ -1187,7 +1187,6 @@
                         var appendHeader = '';
                         var choices_number = 0;
                         var choices = [];
-                        var question_with_credit = {};
                         var text_choices;
                         $(this).parent().children('div').append('<div id="target"><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"><button type="button" class="btn btn-primary add-choice">Add Choices</button></div>');
                         $('#exampleModal').on('click', '.add-choice', function () {
@@ -1198,7 +1197,6 @@
                                 appendHeader = '<br>' + questionTxt + '   ' + question_credit;
 
                             }
-                            // text_choicesInUl = '<div id="choices"> <div class="form-check multiple-choice"> <input class="form-check-input" type="checkbox" name="choice1" id="choice1"> <label class="form-check-label" for="choice1">Choice 1</label> </div> </div>';
                             text_choices = '<br><br><label>-  Enter choice text, please : </label><input type="text" id="choice-text' + question_number + '"><br><label>-  Enter choice credit, please :</label><input type="text" id="choice-credit' + question_number + '"><hr>';
                             $(text_choices).appendTo('#target');
                             ++choices_number;
@@ -1211,15 +1209,19 @@
                                 question_credit = $('#question-credit').val();
                                 ++i;
                                 var $ul = $('#exampleModal').data('ul-reference');
-                                var $header = $('<br><li> <div class="form-input-wide" data-layout="full"> <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">*  ' + questionTxt + '  ' + question_credit + '</label>');
-                                var $tail = $('<button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>')
+                                var $header = $('<li class="form-line"> <div class="form-input-wide" data-layout="full"> <label class="form-label form-label-top form-label-auto" id="label_23'+question_number+'">*  ' + questionTxt + '  ' + question_credit + '</label><div id="choices"></div></div><div>');
+                                var $tail = $('</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
+                                var $choicesContainer = $('<div class="choices-container"></div>'); // create a new div container for each set of choices
                                 for (var j = 1; j <= choices_number; j++) {
                                     var choice_text = $('#choice-text' + j).val();
                                     var choice_credit = $('#choice-credit' + j).val();
                                     choices.push({text: choice_text, credit: choice_credit}); // add the choice to the choices array
-                                    var $li = $('<div id="choices"> <div class="form-check multiple-choice"> <input class="form-check-input" type="checkbox" name="choice' + j + '" id="choice' + j + '"> <label class="form-check-label" for="choice' + j + '">' + choice_text + '     ' + choice_credit + '</label> </div></div></li>');
-                                    $header.append($li);
+                                    var $li = $('<input class="form-check-input" type="checkbox" name="choice' + j + '" id="choice' + j + '"><label class="form-label form-label-top form-label-auto" for="choice' + j + '">' + choice_text + '     ' + choice_credit + '</label>');
+                                    var $choiceDiv = $('<div class="form-check multiple-choice"></div>'); // create a new div container for each choice
+                                    $choiceDiv.append($li); // append the checkbox and label to the div container
+                                    $choicesContainer.append($choiceDiv); // append the div container to the choices container
                                 }
+                                $header.find('#choices').append($choicesContainer); //
 
                                 // Append the li element to the ul element
                                 $ul.append($header).append($tail);
@@ -1229,10 +1231,8 @@
 
                                 // Close the modal
                                 $('#exampleModal').modal('hide');
-
                                 $('#question-text').parent().remove();
                                 $('#question-credit').parent().remove();
-                                ++num;
                             }
                         })
 
