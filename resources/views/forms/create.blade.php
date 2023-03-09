@@ -1210,7 +1210,7 @@
                                 ++i;
                                 var $ul = $('#exampleModal').data('ul-reference');
                                 var $header = $('<li class="form-line"> <div class="form-input-wide" data-layout="full"> <label class="form-label form-label-top form-label-auto" id="label_23'+question_number+'">*  ' + questionTxt + '  ' + question_credit + '</label><div id="choices"></div></div><div>');
-                                var $tail = $('</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
+                                var $tail = $('</div><button type="button" class="btn btn-outline-danger remove-multiple-question">Delete</button></div></li>');
                                 var $choicesContainer = $('<div class="choices-container"></div>'); // create a new div container for each set of choices
                                 for (var j = 1; j <= choices_number; j++) {
                                     var choice_text = $('#choice-text' + j).val();
@@ -1294,24 +1294,16 @@
                     } else if (selectedVal === '6') {
                         //stars
 
-                        // $(this).parent().children('div').append('<br><hr><div><label>Enter question text, please : </label><input type="text" name="question-text"><br><label>Enter question credit, please :</label><input type="text" name="question-credit"></div>');
-                        // <li class="form-line" data-type="control_rating" id="id_10"><label class="form-label form-label-top form-label-auto" id="label_10" for="input_10"> Availability </label>
-                        //     <div id="cid_10" class="form-input-wide" data-layout="full">
-                        //         <div id="input_10" name="q10_availability" data-component="rating" data-version="v2"><select name="q10_availability">
-                        //             <option value="1">1</option>
-                        //             <option value="2">2</option>
-                        //             <option value="3">3</option>
-                        //             <option value="4">4</option>
-                        //             <option value="5">5</option>
-                        //         </select></div>
-                        //     </div>
-                        // </li>
                         $("#myselect option[value='0']").prop('selected', true);
                     }
                     $('#myModal').modal('hide');
                 });
                 $(document).on('click', '.remove-question', function () {
                     $(this).parent().parent().remove();
+                });
+                $(document).on('click', '.remove-multiple-question', function () {
+                    $(this).parent().children('li').remove();
+                    $(this).remove();
                 });
             })
         </script>
