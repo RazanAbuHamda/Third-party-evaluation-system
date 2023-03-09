@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1"/>
     <meta name="HandheldFriendly" content="true"/>
     <title>Client Satisfaction Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
@@ -1010,155 +1011,6 @@
             /*INIT-END*/
         });
 
-        JotForm.prepareCalculationsOnTheFly([null, {
-            "name": "clientSatisfaction",
-            "qid": "1",
-            "text": "Client Satisfaction Survey",
-            "type": "control_head"
-        }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-            "name": "howOften",
-            "qid": "3",
-            "text": "How often do you use this service\u002Fproduct?",
-            "type": "control_radio"
-        }, {
-            "name": "pleaseRate4",
-            "qid": "4",
-            "text": "Please rate the product\u002Fservice in terms of the followings",
-            "type": "control_head"
-        }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-            "name": "features",
-            "qid": "7",
-            "text": "Features",
-            "type": "control_rating"
-        }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-            "name": "price",
-            "qid": "9",
-            "text": "Price",
-            "type": "control_rating"
-        }, {"name": "availability", "qid": "10", "text": "Availability", "type": "control_rating"}, {
-            "name": "inA11",
-            "qid": "11",
-            "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-            "type": "control_scale"
-        }, {
-            "name": "doesThe",
-            "qid": "12",
-            "text": "Does the product\u002Fservice help you to achieve your goals?",
-            "type": "control_radio"
-        }, {
-            "name": "howWould",
-            "qid": "13",
-            "text": "How would you improve the product\u002Fservice?",
-            "type": "control_textarea"
-        }, null, {
-            "name": "personalInformation",
-            "qid": "15",
-            "text": "Personal Information",
-            "type": "control_head"
-        }, null, {
-            "name": "howOld",
-            "qid": "17",
-            "text": "How old are you?",
-            "type": "control_number"
-        }, {
-            "name": "whatIs",
-            "qid": "18",
-            "text": "What is the highest level of education you have completed?",
-            "type": "control_dropdown"
-        }, {
-            "name": "whatIs19",
-            "qid": "19",
-            "text": "What is your gender?",
-            "type": "control_dropdown"
-        }, null, {
-            "name": "whatIs21",
-            "qid": "21",
-            "text": "What is your employment status?",
-            "type": "control_dropdown"
-        }, {
-            "name": "whatIs22",
-            "qid": "22",
-            "text": "What is your marital status?",
-            "type": "control_radio"
-        }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-        setTimeout(function () {
-            JotForm.paymentExtrasOnTheFly([null, {
-                "name": "clientSatisfaction",
-                "qid": "1",
-                "text": "Client Satisfaction Survey",
-                "type": "control_head"
-            }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-                "name": "howOften",
-                "qid": "3",
-                "text": "How often do you use this service\u002Fproduct?",
-                "type": "control_radio"
-            }, {
-                "name": "pleaseRate4",
-                "qid": "4",
-                "text": "Please rate the product\u002Fservice in terms of the followings",
-                "type": "control_head"
-            }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-                "name": "features",
-                "qid": "7",
-                "text": "Features",
-                "type": "control_rating"
-            }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-                "name": "price",
-                "qid": "9",
-                "text": "Price",
-                "type": "control_rating"
-            }, {
-                "name": "availability",
-                "qid": "10",
-                "text": "Availability",
-                "type": "control_rating"
-            }, {
-                "name": "inA11",
-                "qid": "11",
-                "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-                "type": "control_scale"
-            }, {
-                "name": "doesThe",
-                "qid": "12",
-                "text": "Does the product\u002Fservice help you to achieve your goals?",
-                "type": "control_radio"
-            }, {
-                "name": "howWould",
-                "qid": "13",
-                "text": "How would you improve the product\u002Fservice?",
-                "type": "control_textarea"
-            }, null, {
-                "name": "personalInformation",
-                "qid": "15",
-                "text": "Personal Information",
-                "type": "control_head"
-            }, null, {
-                "name": "howOld",
-                "qid": "17",
-                "text": "How old are you?",
-                "type": "control_number"
-            }, {
-                "name": "whatIs",
-                "qid": "18",
-                "text": "What is the highest level of education you have completed?",
-                "type": "control_dropdown"
-            }, {
-                "name": "whatIs19",
-                "qid": "19",
-                "text": "What is your gender?",
-                "type": "control_dropdown"
-            }, null, {
-                "name": "whatIs21",
-                "qid": "21",
-                "text": "What is your employment status?",
-                "type": "control_dropdown"
-            }, {
-                "name": "whatIs22",
-                "qid": "22",
-                "text": "What is your marital status?",
-                "type": "control_radio"
-            }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-        }, 20);
     </script>
 </head>
 <body>
@@ -1248,9 +1100,9 @@
                 var topic = 0;
                 var questionTxt = '';
                 var question_credit = ' ';
+                var question_number = 0;
                 var i = 0;
                 var choiceTxt = '';
-                var choices_number = 0;
 
                 $('#dynamic-add-topic').on('click', function () {
                     var topicName = prompt("Please enter topic name");
@@ -1289,22 +1141,16 @@
                     if (selectedVal === '1') {
                         $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
                         $('#exampleModal').on('click', '.save-question', function () {
-                            var question = new Date().getTime();
                             if ($('#question-text').val() && $('#question-credit').val()) {
                                 questionTxt = $('#question-text').val();
                                 question_credit = $('#question-credit').val();
-                                ++i;
+                                question_number++;
                                 var $ul = $('#exampleModal').data('ul-reference');
-
-                                // Create a new li element
-                                var $li = $('<li class="form-line" data-type="control_radio" id="radio[' + i + '] "><div data-question=' + question + ' id="radio[' + topic + '][' + question + ']"> <div class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"> <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">' + num + ') ' + questionTxt + '  ' + question_credit + '</label><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_0" name="q23_doYou" value="Yes" /><label id="label_input_23_0" for="input_23_0">Yes</label></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="No" /><label id="label_input_23_1" for="input_23_1">No</label></span></div></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
-
+                                var $li = $('<li class="form-line" data-type="control_radio" id="id_radio'+question_number+'"><label class="form-label form-label-top form-label-auto" id="label_23'+question_number+'" for="input_23'+question_number+'">' + num + ') ' + questionTxt + '  ' + question_credit + '</label> <div id="cid_23'+question_number+'" class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="radio1_' + question_number + '" name="q23_doYou'+question_number+'" value="Yes" /><label id="label_input_23_0'+question_number+'" for="radio1_' + question_number + '">Yes</label></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="radio2_' + question_number + '" name="q23_doYou'+question_number+'" value="No" /><label id="label_input_23_1'+question_number+'" for="radio2_' + question_number + '">No</label></span></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button> </div> </li>');
                                 // Append the li element to the ul element
                                 $ul.append($li);
-
                                 // Clear the stored reference to the ul element
                                 $('#exampleModal').removeData('ul-reference');
-
                                 // Close the modal
                                 $('#exampleModal').modal('hide');
                                 $('#question-credit').parent().remove();
