@@ -1144,7 +1144,7 @@
                     if (selectedVal === '1') {
                         $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
                         $('#exampleModal').on('click', '.save-question', function () {
-                            if ($('#question-text').val() && $('#question-credit').val()) {
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '1') {
                                 questionTxt = $('#question-text').val();
                                 question_credit = $('#question-credit').val();
                                 question_number++;
@@ -1158,13 +1158,13 @@
                                 $('#exampleModal').modal('hide');
                                 $('#question-credit').parent().remove();
                             }
+                            $("#myselect option[value='0']").prop('selected', true);
                         });
-                        $("#myselect option[value='0']").prop('selected', true);
                     } else if (selectedVal === '2') {
                         //open question
                         $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
                         $('#exampleModal').on('click', '.save-question', function () {
-                            if ($('#question-text').val() && $('#question-credit').val()) {
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '2') {
                                 questionTxt = $('#question-text').val();
                                 question_credit = $('#question-credit').val();
                                 ++question_number;
@@ -1180,8 +1180,8 @@
                                 $('#question-text').parent().remove();
                                 $('#question-credit').parent().remove();
                             }
+                            $("#myselect option[value='0']").prop('selected', true);
                         });
-                        $("#myselect option[value='0']").prop('selected', true);
                     } else if (selectedVal === '3') {
                         //multiple
                         var appendHeader = '';
@@ -1204,7 +1204,7 @@
                         $('#exampleModal').on('click', '.save-question', function () {
                             var question = new Date().getTime();
 
-                            if ($('#question-text').val() && $('#question-credit').val()) {
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '3') {
                                 questionTxt = $('#question-text').val();
                                 question_credit = $('#question-credit').val();
                                 ++i;
@@ -1234,9 +1234,9 @@
                                 $('#question-text').parent().remove();
                                 $('#question-credit').parent().remove();
                             }
+                            $("#myselect option[value='0']").prop('selected', true);
                         })
 
-                        $("#myselect option[value='0']").prop('selected', true);
                     } else if (selectedVal === '4') {
                         var appendHeader;
                         var choices = [];
@@ -1251,9 +1251,6 @@
                                 appendHeader = '<br>' + questionTxt + '   ' + question_credit;
 
                             }
-                            //راجعي قصة ظهور السؤال بالعرض لليوزر
-                            // $(appendHeader).appendTo('#target');
-
                             $(this).children('#target').append(appendHeader);
                             var radioBtn = "";
 
@@ -1289,8 +1286,8 @@
                                 ++num;
                                 ++choices_number;
                             }
+                            $("#myselect option[value='0']").prop('selected', true);
                         });
-                        $("#myselect option[value='0']").prop('selected', true);
                     } else if (selectedVal === '5') {
                         //smiles
                         $("#myselect option[value='0']").prop('selected', true);
