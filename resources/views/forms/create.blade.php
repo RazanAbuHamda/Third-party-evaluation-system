@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1"/>
     <meta name="HandheldFriendly" content="true"/>
     <title>Client Satisfaction Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
@@ -1010,155 +1011,6 @@
             /*INIT-END*/
         });
 
-        JotForm.prepareCalculationsOnTheFly([null, {
-            "name": "clientSatisfaction",
-            "qid": "1",
-            "text": "Client Satisfaction Survey",
-            "type": "control_head"
-        }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-            "name": "howOften",
-            "qid": "3",
-            "text": "How often do you use this service\u002Fproduct?",
-            "type": "control_radio"
-        }, {
-            "name": "pleaseRate4",
-            "qid": "4",
-            "text": "Please rate the product\u002Fservice in terms of the followings",
-            "type": "control_head"
-        }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-            "name": "features",
-            "qid": "7",
-            "text": "Features",
-            "type": "control_rating"
-        }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-            "name": "price",
-            "qid": "9",
-            "text": "Price",
-            "type": "control_rating"
-        }, {"name": "availability", "qid": "10", "text": "Availability", "type": "control_rating"}, {
-            "name": "inA11",
-            "qid": "11",
-            "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-            "type": "control_scale"
-        }, {
-            "name": "doesThe",
-            "qid": "12",
-            "text": "Does the product\u002Fservice help you to achieve your goals?",
-            "type": "control_radio"
-        }, {
-            "name": "howWould",
-            "qid": "13",
-            "text": "How would you improve the product\u002Fservice?",
-            "type": "control_textarea"
-        }, null, {
-            "name": "personalInformation",
-            "qid": "15",
-            "text": "Personal Information",
-            "type": "control_head"
-        }, null, {
-            "name": "howOld",
-            "qid": "17",
-            "text": "How old are you?",
-            "type": "control_number"
-        }, {
-            "name": "whatIs",
-            "qid": "18",
-            "text": "What is the highest level of education you have completed?",
-            "type": "control_dropdown"
-        }, {
-            "name": "whatIs19",
-            "qid": "19",
-            "text": "What is your gender?",
-            "type": "control_dropdown"
-        }, null, {
-            "name": "whatIs21",
-            "qid": "21",
-            "text": "What is your employment status?",
-            "type": "control_dropdown"
-        }, {
-            "name": "whatIs22",
-            "qid": "22",
-            "text": "What is your marital status?",
-            "type": "control_radio"
-        }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-        setTimeout(function () {
-            JotForm.paymentExtrasOnTheFly([null, {
-                "name": "clientSatisfaction",
-                "qid": "1",
-                "text": "Client Satisfaction Survey",
-                "type": "control_head"
-            }, {"name": "submit2", "qid": "2", "text": "Submit", "type": "control_button"}, {
-                "name": "howOften",
-                "qid": "3",
-                "text": "How often do you use this service\u002Fproduct?",
-                "type": "control_radio"
-            }, {
-                "name": "pleaseRate4",
-                "qid": "4",
-                "text": "Please rate the product\u002Fservice in terms of the followings",
-                "type": "control_head"
-            }, {"name": "design", "qid": "5", "text": "Design", "type": "control_rating"}, null, {
-                "name": "features",
-                "qid": "7",
-                "text": "Features",
-                "type": "control_rating"
-            }, {"name": "ease", "qid": "8", "text": "Ease", "type": "control_rating"}, {
-                "name": "price",
-                "qid": "9",
-                "text": "Price",
-                "type": "control_rating"
-            }, {
-                "name": "availability",
-                "qid": "10",
-                "text": "Availability",
-                "type": "control_rating"
-            }, {
-                "name": "inA11",
-                "qid": "11",
-                "text": "In a scale of 1 to 10, how satisfied are you with the product\u002Fservice? ",
-                "type": "control_scale"
-            }, {
-                "name": "doesThe",
-                "qid": "12",
-                "text": "Does the product\u002Fservice help you to achieve your goals?",
-                "type": "control_radio"
-            }, {
-                "name": "howWould",
-                "qid": "13",
-                "text": "How would you improve the product\u002Fservice?",
-                "type": "control_textarea"
-            }, null, {
-                "name": "personalInformation",
-                "qid": "15",
-                "text": "Personal Information",
-                "type": "control_head"
-            }, null, {
-                "name": "howOld",
-                "qid": "17",
-                "text": "How old are you?",
-                "type": "control_number"
-            }, {
-                "name": "whatIs",
-                "qid": "18",
-                "text": "What is the highest level of education you have completed?",
-                "type": "control_dropdown"
-            }, {
-                "name": "whatIs19",
-                "qid": "19",
-                "text": "What is your gender?",
-                "type": "control_dropdown"
-            }, null, {
-                "name": "whatIs21",
-                "qid": "21",
-                "text": "What is your employment status?",
-                "type": "control_dropdown"
-            }, {
-                "name": "whatIs22",
-                "qid": "22",
-                "text": "What is your marital status?",
-                "type": "control_radio"
-            }, {"name": "doYou", "qid": "23", "text": "Do you have children?", "type": "control_radio"}]);
-        }, 20);
     </script>
 </head>
 <body>
@@ -1184,12 +1036,12 @@
         <div id="topics-container">
             <div class="container">
                 <h1 class="topic-name">Main Topic</h1>
-                <ul class="form-section page-section" data-topic=' + topic + ' id="topic[1]"
+                <ul class="form-section page-section" data-topic='1' id="topic[0]"
                     class="dynamic-topic">
                     <button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button>
                     <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-primary dynamic-question" data-toggle="modal"
                             data-target="#exampleModal" id="ulQuestion[0]">Add
                         Question
                     </button>
@@ -1197,40 +1049,42 @@
                     {{--                    <button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal">Add Question</button>--}}
                 </ul>
 
-            </div>
-            <!-- Modal -->
-            <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Enter question type, please...</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                    id="myselect">
-                                <option selected value="0">Open this select menu</option>
-                                <option value="1">Closed question (yes/no)</option>
-                                <option value="2">Open question</option>
-                                <option value="3">Multiple choices question</option>
-                                <option value="4">Single choice question</option>
-                                <option value="5">Satisfaction choice question (smiles)</option>
-                                <option value="6">Star choice question (stars)</option>
-                            </select>
-                            <button type="button" class="btn btn-secondary dynamic-question" id="addModal">To add
-                                question
-                            </button>
-                            <hr>
-                            <div></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary save-question" data-dismiss="modal">Save
-                                Question
-                            </button>
+
+                <!-- Modal -->
+                <div class="modal" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Enter question type, please...</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                        id="myselect">
+                                    <option selected value="0">Open this select menu</option>
+                                    <option value="1">Closed question (yes/no)</option>
+                                    <option value="2">Open question</option>
+                                    <option value="3">Multiple choices question</option>
+                                    <option value="4">Single choice question</option>
+                                    <option value="5">Satisfaction choice question (smiles)</option>
+                                    <option value="6">Star choice question (stars)</option>
+                                </select>
+                                <button type="button" class="btn btn-secondary choose-question-type" id="addModal">To
+                                    add
+                                    question
+                                </button>
+                                <hr>
+                                <div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary save-question" data-dismiss="modal">Save
+                                    Question
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1242,20 +1096,24 @@
                 integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-
             $(document).ready(function () {
-                var topic = 1;
+                var topic = 0;
                 var questionTxt = '';
                 var question_credit = ' ';
+                var question_number = 0;
                 var i = 0;
+                var choiceTxt = '';
+                var question;
+                // var num ;
+
                 $('#dynamic-add-topic').on('click', function () {
                     var topicName = prompt("Please enter topic name");
                     if (topicName) {
-                        $('#topics-container').append('<div class="container"><h1 class ="topic-name">' + topicName + '</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li> </li><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button><button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal" id="ulQuestion[' + topic + ']">Add Question</button></ul></div>');
-
+                        ++topic;
+                        $('#topics-container').append('<div class="container"><h1 class ="topic-name">' + topicName + '</h1><ul class="form-section page-section" data-topic=' + topic + ' id=topic[' + topic + '] class="dynamic-topic"><li> </li><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button><button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal" id="ulQuestion[' + topic + ']">Add Question</button></ul></div>');
+                        // num = 1;
                     }
 
-                    ++topic;
                 });
                 $(document).on('click', '.remove-topic', function () {
                     $(this).parent().parent().remove();
@@ -1264,160 +1122,190 @@
                     var editedTopicName = prompt("Please enter topic name to change it");
                     $(this).parent().parent().children('h1').text(editedTopicName);
                 });
+                // Add click event handler to the "Add Question" button
+                $('#topics-container').on('click', '.dynamic-question', function () {
 
-                // $('#dynamic-form').on('click', '.dynamic-question', function () {
-                //     var questionTxt = prompt("Please enter question text");
-                //     var question = new Date().getTime();
-                //     var topic = $(this).parent().children('li').data('topic');
-                //     if (questionTxt) {
-                //         $(this).parent().children('li').append('<li><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button><li>');
-                //     }
-                // });
+                    // Store a reference to the ul element that this button belongs to
+                    var $ul = $(this).closest('ul');
 
+                    // Set the data attribute to store the reference to the ul element
+                    $('#exampleModal').data('ul-reference', $ul);
 
                 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+                var selectedVal;
+                $(document).on('click', '#exampleModal .choose-question-type', function () {
+                    $('#myModal').modal('show');
+                    selectedVal = $("#myselect option:selected").val();
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var topic = 1;
-                var questionTxt = '';
-                var question_credit = ' ';
-                var i = 0;
-                var uls = 0;
-                $('#dynamic-add-topic').on('click', function () {
-                    var topicName = prompt("Please enter topic name");
-                    if (topicName) {
-                        $('#topics-container').append('<div class="container"><h1 class ="topic-name">' + topicName + '</h1><ul class="form-section page-section" data-topic=' + topic + ' id="topic[' + topic + ']" class="dynamic-topic"><li> </li><button type="button" class="btn btn-outline-primary edit-topic">Edit Topic</button> <button type="button" class="btn btn-outline-danger remove-topic">Delete Topic</button><button type="button" class="btn btn-primary dynamic-question" data-toggle="modal" data-target="#exampleModal" id="ulQuestion[' + topic + ']">Add Question</button></ul></div>');
-                    }
-                    ++topic;
                 });
-                $(document).on('click', '.remove-topic', function () {
+
+                $(document).on('click', '#addModal', function () {
+                    $('#myModal').modal('show');
+                    if (selectedVal === '1') {
+                        $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
+                        $('#exampleModal').on('click', '.save-question', function () {
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '1') {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                question_number++;
+                                var $ul = $('#exampleModal').data('ul-reference');
+                                var $li = $('<li class="form-line" data-type="control_radio" id="id_radio' + question_number + '"><label class="form-label form-label-top form-label-auto" id="label_23' + question_number + '" for="input_23' + question_number + '">*  ' + questionTxt + '  ' + question_credit + '</label> <div id="cid_23' + question_number + '" class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="radio1_' + question_number + '" name="q23_doYou' + question_number + '" value="Yes" /><label id="label_input_23_0' + question_number + '" for="radio1_' + question_number + '">Yes</label></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="radio2_' + question_number + '" name="q23_doYou' + question_number + '" value="No" /><label id="label_input_23_1' + question_number + '" for="radio2_' + question_number + '">No</label></span></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button> </div> </li>');
+                                // Append the li element to the ul element
+                                $ul.append($li);
+                                // Clear the stored reference to the ul element
+                                $('#exampleModal').removeData('ul-reference');
+                                // Close the modal
+                                $('#exampleModal').modal('hide');
+                                $('#question-credit').parent().remove();
+                            }
+                            $("#myselect option[value='0']").prop('selected', true);
+                        });
+                    } else if (selectedVal === '2') {
+                        //open question
+                        $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
+                        $('#exampleModal').on('click', '.save-question', function () {
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '2') {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                ++question_number;
+                                question = new Date().getTime();
+                                var $ul = $('#exampleModal').data('ul-reference');
+                                var $li = $('<li class="form-line" data-type="control_textarea" id="' + question_number + '"><label class="form-label form-label-top form-label-auto" id="label' + question_number + '" for ="text_area' + question_number + '">*  ' + questionTxt + '  ' + question_credit + '</label> <div data-question=' + question + ' id="openning[' + topic + '][' + question + ']"  class="form-input-wide" data-layout="full"> <textarea id="text_area' + question_number + '"  class="form-textarea" name="q13_howWould" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_13"></textarea><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
+                                // Append the li element to the ul element
+                                $ul.append($li);
+                                // Clear the stored reference to the ul element
+                                $('#exampleModal').removeData('ul-reference');
+                                // Close the modal
+                                $('#exampleModal').modal('hide');
+                                $('#question-text').parent().remove();
+                                $('#question-credit').parent().remove();
+                            }
+                            $("#myselect option[value='0']").prop('selected', true);
+                        });
+                    } else if (selectedVal === '3') {
+                        //multiple
+                        var appendHeader = '';
+                        var choices_number = 0;
+                        var choices = [];
+                        var text_choices;
+                        $(this).parent().children('div').append('<div id="target"><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"><button type="button" class="btn btn-primary add-choice">Add Choices</button></div>');
+                        $('#exampleModal').on('click', '.add-choice', function () {
+                            if ($('#question-text').val() && $('#question-credit').val()) {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                ++question_number;
+                                appendHeader = '<br>' + questionTxt + '   ' + question_credit;
+
+                            }
+                            text_choices = '<br><br><label>-  Enter choice text, please : </label><input type="text" id="choice-text' + question_number + '"><br><label>-  Enter choice credit, please :</label><input type="text" id="choice-credit' + question_number + '"><hr>';
+                            $(text_choices).appendTo('#target');
+                            ++choices_number;
+                        })
+                        $('#exampleModal').on('click', '.save-question', function () {
+                            var question = new Date().getTime();
+
+                            if ($('#question-text').val() && $('#question-credit').val()&&selectedVal === '3') {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                ++i;
+                                var $ul = $('#exampleModal').data('ul-reference');
+                                var $header = $('<li class="form-line"> <div class="form-input-wide" data-layout="full"> <label class="form-label form-label-top form-label-auto" id="label_23'+question_number+'">*  ' + questionTxt + '  ' + question_credit + '</label><div id="choices"></div></div><div>');
+                                var $tail = $('</div><button type="button" class="btn btn-outline-danger remove-multiple-question">Delete</button></div></li>');
+                                var $choicesContainer = $('<div class="choices-container"></div>'); // create a new div container for each set of choices
+                                for (var j = 1; j <= choices_number; j++) {
+                                    var choice_text = $('#choice-text' + j).val();
+                                    var choice_credit = $('#choice-credit' + j).val();
+                                    choices.push({text: choice_text, credit: choice_credit}); // add the choice to the choices array
+                                    var $li = $('<input class="form-check-input" type="checkbox" name="choice' + j + '" id="choice' + j + '"><label class="form-label form-label-top form-label-auto" for="choice' + j + '">' + choice_text + '     ' + choice_credit + '</label>');
+                                    var $choiceDiv = $('<div class="form-check multiple-choice"></div>'); // create a new div container for each choice
+                                    $choiceDiv.append($li); // append the checkbox and label to the div container
+                                    $choicesContainer.append($choiceDiv); // append the div container to the choices container
+                                }
+                                $header.find('#choices').append($choicesContainer); //
+
+                                // Append the li element to the ul element
+                                $ul.append($header).append($tail);
+
+                                // Clear the stored reference to the ul element
+                                $('#exampleModal').removeData('ul-reference');
+
+                                // Close the modal
+                                $('#exampleModal').modal('hide');
+                                $('#question-text').parent().remove();
+                                $('#question-credit').parent().remove();
+                            }
+                            $("#myselect option[value='0']").prop('selected', true);
+                        })
+
+                    } else if (selectedVal === '4') {
+                        var appendHeader;
+                        var choices = [];
+                        choices_number = 0;
+                        //single
+                        $(this).parent().children('div').append('<div id="target"><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"><button type="button" class="btn btn-primary add-choices">Add Choices</button></div>');
+                        $('#exampleModal').on('click', '.add-choices', function () {
+                            ++choices_number;
+                            if ($('#question-text').val() && $('#question-credit').val()) {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                appendHeader = '<br>' + questionTxt + '   ' + question_credit;
+
+                            }
+                            $(this).children('#target').append(appendHeader);
+                            var radioBtn = "";
+
+                            radioBtn = '<br><br><label>' + choices_number + ')  Enter choice text, please : </label><input type="text" id="' + choices_number + 'choice-text"><br><hr>';
+                            if ($('#' + choices_number + 'choice-text').val()) {
+                                choiceTxt = $('#' + choices_number + 'choice-text').val();
+                                choices.push(choiceTxt);
+                            }
+                            // radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
+                            $(radioBtn).appendTo('#target');
+                        })
+
+                        $('#exampleModal').on('click', '.save-question', function () {
+                            var question = new Date().getTime();
+                            var localtopic = $('#dynamic-form').parent().children('li').data('topic');
+                            if ($('#question-text').val() && $('#question-credit').val()) {
+                                questionTxt = $('#question-text').val();
+                                question_credit = $('#question-credit').val();
+                                ++i;
+                                var $ul = $('#exampleModal').data('ul-reference');
+                                var $li = $('<li class="form-line" data-type="control_radio" id="radio[' + i + '] "><div data-question=' + question + ' id="radio[' + topic + '][' + question + ']"> <div class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"> <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">' + num + ') ' + questionTxt + '  ' + question_credit + choices + '</label><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_0" name="q23_doYou" value="1" /></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="2" /><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="3" /><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="4" /></span></span></span></div></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
+
+                                // Append the li element to the ul element
+                                $ul.append($li);
+
+                                // Clear the stored reference to the ul element
+                                $('#exampleModal').removeData('ul-reference');
+
+                                // Close the modal
+                                $('#exampleModal').modal('hide');
+                                $('#question-text').parent().remove();
+                                $('#question-credit').parent().remove();
+                                ++num;
+                                ++choices_number;
+                            }
+                            $("#myselect option[value='0']").prop('selected', true);
+                        });
+                    } else if (selectedVal === '5') {
+                        //smiles
+                        $("#myselect option[value='0']").prop('selected', true);
+                    } else if (selectedVal === '6') {
+                        //stars
+
+                        $("#myselect option[value='0']").prop('selected', true);
+                    }
+                    $('#myModal').modal('hide');
+                });
+                $(document).on('click', '.remove-question', function () {
                     $(this).parent().parent().remove();
                 });
-                $('#topics-container').on('click', '.edit-topic', function () {
-                    var editedTopicName = prompt("Please enter topic name to change it");
-                    $(this).parent().parent().children('h1').text(editedTopicName);
+                $(document).on('click', '.remove-multiple-question', function () {
+                    $(this).parent().children('li').remove();
+                    $(this).remove();
                 });
-                // $('#dynamic-form').on('click', '.dynamic-question', function () {
-                //     var questionTxt = prompt("Please enter question text");
-                //     var question = new Date().getTime();
-                //     var topic = $(this).parent().children('li').data('topic');
-                //     if (questionTxt) {
-                //         $(this).parent().children('li').append('<li><div data-question=' + question + ' id="question[' + topic + '][' + question + ']">  ' + questionTxt + '</div><button type="button" class="btn btn-outline-danger remove-question">Delete</button><li>');
-                //     }
-                // });
-                var id = $("#exampleModal").attr("id");
-                $('#exampleModal').on('click', '.dynamic-question', function () {
-                        var num = 1;
-                        $('#myModal').modal('show');
-                        if ($("#myselect option:selected").val() == '1') {
-                            $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
-                            $('#exampleModal').on('click', '.save-question', function () {
-                                var question = new Date().getTime();
-                                var localtopic = $('#dynamic-form').parent().children('li').data('topic');
-                                if ($('#question-text').val() && $('#question-credit').val()) {
-                                    questionTxt = $('#question-text').val();
-                                    question_credit = $('#question-credit').val();
-                                    ++i;
-                                    $('#' + id).parent().append('<li class="form-line" data-type="control_radio" id="radio[' + i + '] "><div data-question=' + question + ' id="radio[' + topic + '][' + question + ']"> <div class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"> <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">' + num + ') ' + questionTxt + '  ' + question_credit + '</label><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_0" name="q23_doYou" value="Yes" /><label id="label_input_23_0" for="input_23_0">Yes</label></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="No" /><label id="label_input_23_1" for="input_23_1">No</label></span></div></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
-                                    $('#question-text').parent().remove();
-                                    $('#question-credit').parent().remove();
-                                    $("#myselect option[value='0']").prop('selected', true);
-                                    ++num;
-                                }
-                            });
-                        } else if ($("#myselect option:selected").val() == '2') {
-                            //open question
-                            $(this).parent().children('div').append('<div><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"></div>');
-                            $('#exampleModal').on('click', '.save-question', function () {
-                                var question = new Date().getTime();
-                                var topic = $('#dynamic-form').parent().children('li').data('topic');
-                                if ($('#question-text').val() && $('#question-credit').val()) {
-                                    questionTxt = $('#question-text').val();
-                                    question_credit = $('#question-credit').val();
-                                    $('#' + id).parent().append('<li class="form-line" data-type="control_textarea" id="id_13"><label class="form-label form-label-top form-label-auto" id="label_13" for="input_13">' + num + ') ' + questionTxt + '  ' + question_credit + '</label> <div data-question=' + question + ' id="openning[' + topic + '][' + question + ']"  class="form-input-wide" data-layout="full"> <textarea id="input_13" class="form-textarea" name="q13_howWould" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_13"></textarea><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
-                                    $('#question-text').parent().remove();
-                                    $('#question-credit').parent().remove();
-                                    $("#myselect option[value='0']").prop('selected', true);
-                                    ++num;
-                                }
-                            });
-                        } else if ($("#myselect option:selected").val() == '3') {
-                            //multiple
-                        } else if ($("#myselect option:selected").val() == '4') {
-                            var questionTxt;
-                            var question_credit;
-                            var appendHeader;
-                            var choices_number = 0;
-                            //single
-                            $(this).parent().children('div').append('<div id="target"><label>Enter question text, please : </label><input type="text" id="question-text"><br><label>Enter question credit, please :</label><input type="text" id="question-credit"><button type="button" class="btn btn-primary add-choices">Add Choices</button></div>');
-                            $('#exampleModal').on('click', '.add-choices', function () {
-                                ++choices_number;
-                                if ($('#question-text').val() && $('#question-credit').val()) {
-                                    questionTxt = $('#question-text').val();
-                                    question_credit = $('#question-credit').val();
-                                    appendHeader = '<br>' + questionTxt + '   ' + question_credit;
-
-                                }
-                                //راجعي قصة ظهور السؤال بالعرض لليوزر
-                                // $(appendHeader).appendTo('#target');
-                                $(this).children('#target').append(appendHeader);
-                                var radioBtn = "";
-
-                                radioBtn = '<br><br><label>' + choices_number + ')  Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                // radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                // radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                // radioBtn += '<br><label>Enter choice text, please : </label><input type="text" id="choice-text"><br><label>Enter choice credit, please :</label><input type="text" id="choice-credit"><hr>';
-                                // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
-                                // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
-                                // radioBtn += '<div id="cid_3" class="form-input-wide" data-layout="full"> <div class="form-single-column" role="group" aria-labelledby="label_3" data-component="radio"><span class="form-radio-item" style="clear:left"><span class="dragger-item"></span><input type="radio" aria-describedby="label_3" class="form-radio" id="input_3_0" name="q3_howOften" value="Almost always" /></div>';
-
-
-                                appendHeader += radioBtn;
-                                $(radioBtn).appendTo('#target');
-
-
-
-                            } )
-
-                            $('#exampleModal').on('click', '.save-question', function () {
-                                var question = new Date().getTime();
-                                var localtopic = $('#dynamic-form').parent().children('li').data('topic');
-                                if ($('#question-text').val() && $('#question-credit').val()) {
-                                    questionTxt = $('#question-text').val();
-                                    question_credit = $('#question-credit').val();
-                                    ++i;
-                                    $('#' + id).parent().append('<li class="form-line" data-type="control_radio" id="radio[' + i + '] "><div data-question=' + question + ' id="radio[' + topic + '][' + question + ']"> <div class="form-input-wide" data-layout="full"> <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_23" data-component="radio"> <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23">' + num + ') ' + questionTxt + '  ' + question_credit + '</label><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_0" name="q23_doYou" value="1" /></span><span class="form-radio-item"><span class="dragger-item"></span><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="2" /><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="3" /><input type="radio" aria-describedby="label_23" class="form-radio" id="input_23_1" name="q23_doYou" value="4" /></span></span></span></div></div><button type="button" class="btn btn-outline-danger remove-question">Delete</button></div></li>');
-                                    $('#question-text').parent().remove();
-                                    $('#question-credit').parent().remove();
-                                    $("#myselect option[value='0']").prop('selected', true);
-                                    ++num;
-                                }
-                            });
-                        } else if ($("#myselect option:selected").val() == '5') {
-                            //smiles
-                        } else if ($("#myselect option:selected").val() == '6') {
-                            //stars
-                            // $(this).parent().children('div').append('<br><hr><div><label>Enter question text, please : </label><input type="text" name="question-text"><br><label>Enter question credit, please :</label><input type="text" name="question-credit"></div>');
-                            // <li class="form-line" data-type="control_rating" id="id_10"><label class="form-label form-label-top form-label-auto" id="label_10" for="input_10"> Availability </label>
-                            //     <div id="cid_10" class="form-input-wide" data-layout="full">
-                            //         <div id="input_10" name="q10_availability" data-component="rating" data-version="v2"><select name="q10_availability">
-                            //             <option value="1">1</option>
-                            //             <option value="2">2</option>
-                            //             <option value="3">3</option>
-                            //             <option value="4">4</option>
-                            //             <option value="5">5</option>
-                            //         </select></div>
-                            //     </div>
-                            // </li>
-                        }
-                    }
-                )
-
-            });
-            $(document).on('click', '.remove-question', function () {
-                $(this).parent().parent().remove();
-            });
+            })
         </script>
         <script type="text/javascript">JotForm.ownerView = true;</script>
         <script src="https://cdn.jotfor.ms//js/vendor/smoothscroll.min.js?v=3.3.39655"></script>
