@@ -64,6 +64,7 @@ Route::post('enterprises/update/{id}','App\Http\Controllers\EnterpriseController
 
 Route::get('forms/create','App\Http\Controllers\FormController@create');
 Route::get('forms/index','App\Http\Controllers\FormController@index');
+Route::get('forms/survey','App\Http\Controllers\FormController@survey');
 
 
 

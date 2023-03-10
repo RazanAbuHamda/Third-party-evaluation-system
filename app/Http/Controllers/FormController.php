@@ -19,4 +19,8 @@ class FormController extends Controller
     {
         return view('tryingAtForms.create');
     }
+
+    public function survey () {
+        return view('forms.survey');
+    }
 }
