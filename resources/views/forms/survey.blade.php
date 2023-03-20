@@ -16,9 +16,7 @@
 </head>
 <body>
 
-
-    // الصفحة هاي فقط للتجارب عليها
-    <br>
+ <br>
     <div class="container-fluid">
 
         <!-- status -->
@@ -72,7 +70,7 @@
                               <tfoot>
                                  <tr>
                                     <td colspan="2">
-                                        <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> 
+                                        <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button>
                                         <button type="button" class="btn btn-outline-danger">Delete Topic</button>
                                     </td>
                                  </tr>
@@ -120,7 +118,7 @@
                                 <input type="text" name="question" class="form-control">
                             </div>
 
-                            
+
                             <div id="radioGroup" style="display: none;">
                                 <hr><br>
                                 <div class="form-group">
@@ -133,7 +131,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div id="checkboxGroup" style="display: none;">
                                 <hr><br>
                                 <div class="form-group">
@@ -199,7 +197,7 @@
                     {
                         name: topicName,
                         elements: [
-                            
+
                         ]
                     }
                 ]
@@ -231,7 +229,7 @@
             var questionId = new Date().getTime();
             var topicId = $('#addQuestionModal').data('topic');
             var topicName = $('#addQuestionModal').data('topic-name');
-            
+
             var questionType = $('#addQuestionForm [name="type"]').val();
             var questionTitle = $('#addQuestionForm [name="title"]').val();
             var questionText = $('#addQuestionForm [name="question"]').val();

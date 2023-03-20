@@ -65,6 +65,11 @@ Route::post('enterprises/update/{id}','App\Http\Controllers\EnterpriseController
 Route::get('forms/create','App\Http\Controllers\FormController@create');
 Route::get('forms/index','App\Http\Controllers\FormController@index');
 Route::get('forms/survey','App\Http\Controllers\FormController@survey');
+Route::get('forms/store','App\Http\Controllers\FormController@store');
+Route::get('forms/edit/{id}','App\Http\Controllers\FormController@survey');
+Route::get('forms/update/{id}','App\Http\Controllers\FormController@update');
+Route::get('forms/destroy/{id}','App\Http\Controllers\FormController@destroy');
+
 
 
 

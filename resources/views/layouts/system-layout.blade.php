@@ -35,7 +35,12 @@
             // add class to the one we clicked
             $('.users ').addClass("active");
         }
+        else if('{{$active}}' == 'formAct'){
 
+            $("li").removeClass("active");
+            // add class to the one we clicked
+            $('.forms ').addClass("active");
+        }
 
     });
 </script>

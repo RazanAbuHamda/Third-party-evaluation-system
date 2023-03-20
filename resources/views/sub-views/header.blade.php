@@ -483,13 +483,16 @@
                     </li>
                     <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i class="enterprise"></i> Enterprises</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i>
-                            Charts</a>
+                    <li class="forms"><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Forms</a>
                     </li>
                     <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Forms</a>
+
+                    <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i>
+                            Charts</a>
                     </li>
+
+
                     <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> App views</a>
                     </li>
                     <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
@@ -537,6 +540,18 @@
                                 </li>
                         </ul>
                     </div>
+                    <div id="Forms" class="tab-pane notika-tab-menu-bg
+                    animated flipInX">
+                        <ul class="notika-main-menu-dropdown">
+                            <li><a href="forms/index">Show Forms</a>
+                            </li>
+                            <li><a href="forms/store">Add Form</a>
+                            </li>
+                            <li><a href="forms/edit">Edit Form</a>
+                            </li>
+
+                        </ul>
+                    </div>
                     <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="flot-charts.html">Flot Charts</a>
@@ -557,16 +572,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="form-elements.html">Form Elements</a>
-                            </li>
-                            <li><a href="form-components.html">Form Components</a>
-                            </li>
-                            <li><a href="form-examples.html">Form Examples</a>
-                            </li>
-                        </ul>
-                    </div>
+
                     <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="notification.html">Notifications</a>

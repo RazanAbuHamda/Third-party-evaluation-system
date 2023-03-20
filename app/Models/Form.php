@@ -9,7 +9,6 @@ class Form extends Model
 {
     protected $fillable = [
         'name',
-        'description'
     ];
     use HasFactory;
     public function topicQuestions(){
