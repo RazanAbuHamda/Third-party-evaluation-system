@@ -50,7 +50,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-//    Route::resource('enterprises', EnterpriseController::class);
+    Route::resource('forms', FormController::class);
+    Route::resource('enterprises', EnterpriseController::class);
 });
 Route::get('enterprises/index','App\Http\Controllers\EnterpriseController@index')->middleware('auth');
 Route::get('enterprises/create','App\Http\Controllers\EnterpriseController@create')->middleware('auth');
@@ -62,13 +63,13 @@ Route::delete('enterprises/destroy/{id}','App\Http\Controllers\EnterpriseControl
 Route::post('enterprises/update/{id}','App\Http\Controllers\EnterpriseController@update')->middleware('auth');
 
 
-Route::get('forms/create','App\Http\Controllers\FormController@create');
-Route::get('forms/index','App\Http\Controllers\FormController@index');
-Route::get('forms/survey','App\Http\Controllers\FormController@survey');
-Route::get('forms/store','App\Http\Controllers\FormController@store');
-Route::get('forms/edit/{id}','App\Http\Controllers\FormController@survey');
-Route::get('forms/update/{id}','App\Http\Controllers\FormController@update');
-Route::get('forms/destroy/{id}','App\Http\Controllers\FormController@destroy');
+Route::get('forms/create','App\Http\Controllers\FormController@create')->middleware('auth');;
+Route::post('forms/store','App\Http\Controllers\FormController@store')->middleware('auth');
+Route::get('forms/index','App\Http\Controllers\FormController@index')->name('forms.index')->middleware('auth');;
+Route::get('forms/survey','App\Http\Controllers\FormController@survey')->middleware('auth');;
+Route::get('forms/edit/{id}','App\Http\Controllers\FormController@survey')->middleware('auth');;
+Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->middleware('auth');;
+Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy')->middleware('auth');;
 
 
 

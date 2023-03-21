@@ -543,11 +543,11 @@
                     <div id="Forms" class="tab-pane notika-tab-menu-bg
                     animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="forms/index">Show Forms</a>
+                            <li><a href="{{ url('forms/index')}}">Show Forms</a>
                             </li>
-                            <li><a href="forms/store">Add Form</a>
+                            <li><a href="{{url('forms/create')}}">Add Form</a>
                             </li>
-                            <li><a href="forms/edit">Edit Form</a>
+                            <li><a href="{{url('forms/edit')}}">Edit Form</a>
                             </li>
 
                         </ul>

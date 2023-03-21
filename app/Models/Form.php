@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Form extends Model
+
+class Form extends Authenticatable
 {
     protected $fillable = [
         'name',
+        'user_id',
+        'form_data'
     ];
-    use HasFactory;
-    public function topicQuestions(){
-        return $this->hasMany(TopicQuestion::class);
-    }
+    use HasFactory, Notifiable;
+
+    protected $hidden = [
+        'remember_token',
+    ];
 }

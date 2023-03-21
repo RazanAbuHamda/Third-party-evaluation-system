@@ -23,6 +23,7 @@
         <tr>
             <th>No</th>
             <th>Name</th>
+            <th></th>
         </tr>
         @foreach ($forms as $key => $form)
             {{--is a key of array from compact php function used in controller--}}
