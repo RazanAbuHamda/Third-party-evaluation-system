@@ -67,11 +67,16 @@ Route::get('forms/create','App\Http\Controllers\FormController@create')->middlew
 Route::post('forms/store','App\Http\Controllers\FormController@store')->middleware('auth');
 Route::get('forms/index','App\Http\Controllers\FormController@index')->name('forms.index')->middleware('auth');;
 Route::get('forms/survey','App\Http\Controllers\FormController@survey')->middleware('auth');;
+Route::get('forms/update/{id}', 'App\Http\Controllers\FormController@update')
+    ->name('forms.update.{id}');
+
 Route::get('forms/edit/{id}', 'App\Http\Controllers\FormController@survey')
     ->name('forms.edit.{id}')
-    ->middleware('auth');Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->middleware('auth');;
+    ->middleware('auth');
+Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->middleware('auth');;
 Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy')->middleware('auth');;
 
+//Route::post('/ajax-request', 'App\Http\Controllers\FormController@update')->name('ajax-request');
 
 
 
