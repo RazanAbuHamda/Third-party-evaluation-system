@@ -23,19 +23,17 @@ class FormController extends Controller
     public function store(Request $request)
     {
         $active = 'formAct';
-        $this->validate($request, [
-            'name' => 'required',
-            'user_id' => 'required',
-            'form_data'=> 'nullable'
-        ]);
         $user = Auth::user();
-        $input = $request->all();
-        $form = Form::create($input);
-        $form->name = $request->input('form_name');
+        $this->validate($request, [
+//            'name'=> 'required'
+        ]);
+
+        $form = new Form;
+        $form->name = $request['form_name'];
         $form->user_id= $user->id;
         $form->save();
 
-        return view('forms.index')
+        return redirect()->route('forms.index')
             ->with('success', 'Form created successfully')
             ->with('active', $active);
     }

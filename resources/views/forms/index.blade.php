@@ -31,9 +31,9 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $form->name }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('forms.show',$form->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('forms.edit',$form->id) }}">Edit</a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['forms.destroy', $form->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
+                    <a class="btn btn-info" href="{{ url('forms/show',$form->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ url('forms/edit',$form->id) }}">Edit</a>
+                    {!! Form::open(['method' => 'DELETE','url' => ['forms/destroy', $form->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
                     {!! Form::button('Delete', ['class' => 'btn btn-danger','id'=>'delete-user-btn']) !!}
                     {!! Form::close() !!}
                 </td>
