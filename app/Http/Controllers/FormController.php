@@ -11,7 +11,8 @@ class FormController extends Controller
    public function index(Request $request)
    {
        $active ='formAct';
-       $forms = Form::orderBy('id','DESC')->paginate(5);
+       $user = Auth::user();
+       $forms = Form::orderBy('id','DESC')->where('user_id',$user->id)->paginate(5);
        return view('forms.index',compact('forms'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active',$active);
    }
     public function create(Request $request)
@@ -33,7 +34,7 @@ class FormController extends Controller
         $form->user_id= $user->id;
         $form->save();
 
-        return redirect()->route('forms.index')
+        return redirect()->route('forms.edit.{id}',['id' => $user->id])
             ->with('success', 'Form created successfully')
             ->with('active', $active);
     }
