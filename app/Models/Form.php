@@ -9,14 +9,19 @@ use Illuminate\Notifications\Notifiable;
 
 class Form extends Authenticatable
 {
+    use HasFactory, Notifiable;
+
     protected $fillable = [
         'name',
         'user_id',
         'form_data'
     ];
-    use HasFactory, Notifiable;
 
     protected $hidden = [
         'remember_token',
+    ];
+
+    protected $casts = [
+        'form_data' => 'array',
     ];
 }

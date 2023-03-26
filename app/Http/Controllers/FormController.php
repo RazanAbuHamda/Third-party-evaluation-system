@@ -34,7 +34,7 @@ class FormController extends Controller
         $form->user_id= $user->id;
         $form->save();
 
-        return redirect()->route('forms.edit.{id}',['id' => $form->id])
+        return redirect()->route('forms.edit',['id' => $form->id])
             ->with('success', 'Form created successfully')
             ->with('active', $active);
     }
@@ -44,16 +44,17 @@ class FormController extends Controller
         return view('forms.survey')->with('active',$active)->with('id',$id);
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
         // Retrieve the formJson data from the request
-        $formJson = $request['formJson'];
+        $formJson = request('formJson');
 
         // Decode the JSON string into a PHP array or object
-        $formData = json_decode($formJson);
+        $formData = json_decode($formJson, true);
         $form = Form::find($id);
-        $form->form_data = json_encode($formData);
+        $form->form_data = $formData;
         $form->save();
+
         return response()->json(['message' => 'Form received successfully!']);
     }
 

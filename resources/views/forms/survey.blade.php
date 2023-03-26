@@ -52,7 +52,7 @@
                             Topic
                         </button>
 
-                        <button type="submit" class="btn btn-outline-success btn-block" id="save-button">Save</button>
+                        <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
                     </div>
                 </div>
                 <br>
@@ -325,9 +325,9 @@
 
             // Send the AJAX request with the formJson data
             $.ajax({
-                url: 'forms/update/'+{{$id}},
+                url: '/forms/update/'+"{{$id}}",
                 type: 'POST',
-                data: {formJson: formJson},
+                data: {formJson: formJson, _token: "{{ csrf_token() }}"},
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
