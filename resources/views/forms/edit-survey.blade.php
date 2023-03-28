@@ -58,6 +58,37 @@
                 <br>
 
                 <div class="row" id="topics-container">
+                    <?php $editedTopicId = 0; ?>
+                    @foreach($formData as $value)
+                        @foreach($value['pages'] as $value2)
+                            <div class="col-12">
+                                <table class="table table-bordered" data-topic="{{$editedTopicId}}"
+                                       data-topic-name="{{$value2['name']}}" id="topic[{{$editedTopicId}}]"
+                                       class="dynamic-topic">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2" style="text-align: center;">{{$value2['name']}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="surveyContainer{{$editedTopicId}}"></tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="2">
+                                            <button type="button" class="btn btn-outline-primary dynamic-question"
+                                                    data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add
+                                                Question
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger">Delete Topic</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                                <?php $editedTopicId++; ?>
+                        @endforeach
+                    @endforeach
+
+
                     <!-- <div class="col-12">
                        <table class="table table-bordered" data-topic=0 data-topic-name="topicName" id="topic[0]" class="dynamic-topic">
                           <thead>
@@ -189,7 +220,6 @@
         /**
          * Action of add topic
          */
-
         var topicId = 0;
         var surveyModels = [];
 
@@ -325,7 +355,7 @@
 
             // Send the AJAX request with the formJson data
             $.ajax({
-                url: '/forms/update/'+"{{$id}}",
+                url: '/forms/update/' + "{{$id}}",
                 type: 'POST',
                 data: {formJson: formJson, _token: "{{ csrf_token() }}"},
                 dataType: 'json',

@@ -1,24 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Form;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FormController extends Controller
 {
-   public function index(Request $request)
-   {
-       $active ='formAct';
-       $user = Auth::user();
-       $forms = Form::orderBy('id','DESC')->where('user_id',$user->id)->paginate(5);
-       return view('forms.index',compact('forms'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active',$active);
-   }
+    public function index(Request $request)
+    {
+        $active = 'formAct';
+        $user = Auth::user();
+        $forms = Form::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(5);
+        return view('forms.index', compact('forms'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active', $active);
+    }
+
     public function create(Request $request)
     {
-        $active ='formAct';
-        return view('forms.create')->with('active',$active);;
+        $active = 'formAct';
+        return view('forms.create')->with('active', $active);;
     }
 
     public function store(Request $request)
@@ -31,18 +34,35 @@ class FormController extends Controller
 
         $form = new Form;
         $form->name = $request['form_name'];
-        $form->user_id= $user->id;
+        $form->user_id = $user->id;
         $form->save();
 
-        return redirect()->route('forms.edit',['id' => $form->id])
+        return redirect()->route('forms.edit', ['id' => $form->id])
             ->with('success', 'Form created successfully')
             ->with('active', $active);
     }
 
-    public function survey (Request $request,$id) {
-        $active ='formAct';
-        return view('forms.survey')->with('active',$active)->with('id',$id);
+    public function survey($id)
+    {
+        $formData = Form::find($id)->form_data;
+
+        if (!$formData) {
+            return view('forms.survey')->with('id', $id);
+
+        } else {
+//            dd($formData);
+
+//            return Response::JSON(['view' => View::make('forms.edit-survey', $formDataJson)->render(), 'id'=>$id]);
+
+//            return response()->JSON($formDataJson)->view('forms.edit-survey',compact('id'));
+//            return  response()->view('forms.edit-survey',compact(['id','formDataJson']));
+
+            return view('forms.edit-survey')->with('formData', $formData, true)->with('id', $id);
+
+        }
     }
+
+
 
     public function update($id)
     {
