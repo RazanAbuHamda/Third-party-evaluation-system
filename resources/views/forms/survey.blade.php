@@ -339,3 +339,22 @@
 
 
 </script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $( function() {
+
+        $( "#topics-container" ).sortable({
+            stop: function(event, ui) {
+
+
+                $("#topics-container .item").each(function(){
+                  // write code here
+                });
+
+            }
+        }).disableSelection();
+
+    } );
+</script>
