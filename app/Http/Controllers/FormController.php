@@ -51,12 +51,6 @@ class FormController extends Controller
 
         } else {
 //            dd($formData);
-
-//            return Response::JSON(['view' => View::make('forms.edit-survey', $formDataJson)->render(), 'id'=>$id]);
-
-//            return response()->JSON($formDataJson)->view('forms.edit-survey',compact('id'));
-//            return  response()->view('forms.edit-survey',compact(['id','formDataJson']));
-
             return view('forms.edit-survey')->with('formData', $formData, true)->with('id', $id);
 
         }

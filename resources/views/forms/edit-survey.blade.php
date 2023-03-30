@@ -70,7 +70,11 @@
                                         <th colspan="2" style="text-align: center;">{{$value2['name']}}</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="surveyContainer{{$editedTopicId}}"></tbody>
+
+                                    <tbody id="editedsurveyContainer{{$editedTopicId}}"
+                                           onload="showSurveyQustions('{{$editedTopicId}}')">
+                                    </tbody>
+
                                     <tfoot>
                                     <tr>
                                         <td colspan="2">
@@ -88,123 +92,101 @@
                         @endforeach
                     @endforeach
 
+                    <!-- Modal -->
+                    <div class="modal fade" tabindex="-1" role="dialog" id="addQuestionModal"
+                         aria-labelledby="addQuestionModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Question</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-                    <!-- <div class="col-12">
-                       <table class="table table-bordered" data-topic=0 data-topic-name="topicName" id="topic[0]" class="dynamic-topic">
-                          <thead>
-                             <tr>
-                                <th colspan="2" style="text-align: center;">topicName</th>
-                             </tr>
-                          </thead>
+                                <div class="modal-body">
+                                    <form id="addQuestionForm">
+                                        <div class="form-group">
+                                            <label>Type</label><br>
+                                            <select name="type" class="form-control">
+                                                <option value="text">Short Answer</option>
+                                                <option value="rating">Rating</option>
+                                                <option value="radiogroup">Choose One</option>
+                                                <option value="checkbox">Choose Many</option>
+                                            </select>
+                                        </div>
 
-                          <tbody id="surveyContainer0">
+                                        <br>
+                                        <div class="form-group">
+                                            <label>Question Title</label>
+                                            <input type="text" name="title" class="form-control">
+                                        </div>
 
-                          </tbody>
+                                        <br>
+                                        <div class="form-group">
+                                            <label>Question Text</label>
+                                            <input type="text" name="question" class="form-control">
+                                        </div>
 
-                          <tfoot>
-                             <tr>
-                                <td colspan="2">
-                                    <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button>
-                                    <button type="button" class="btn btn-outline-danger">Delete Topic</button>
-                                </td>
-                             </tr>
-                          </tfoot>
-                       </table>
-                    </div> -->
+
+                                        <div id="radioGroup" style="display: none;">
+                                            <hr>
+                                            <br>
+                                            <div class="form-group">
+                                                <label>Options (comma separated)</label>
+                                                <input type="text" name="radioOptions" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Correct Option</label>
+                                                <input type="text" name="correctOption" class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                        <div id="checkboxGroup" style="display: none;">
+                                            <hr>
+                                            <br>
+                                            <div class="form-group">
+                                                <label>Number of options</label>
+                                                <input type="number" name="checkboxOptionsNo" class="form-control"
+                                                       style="max-width: 90%; display: inline-block;">
+                                                <button type="button" id="addCheckboxOptions"><i>+</i></button>
+                                            </div>
+                                            <br>
+                                            <div id="checkboxOptions">
+                                                <!-- <div class="form-group">
+                                                    <input type="text" name="checkboxOption[]" class="form-control" style="display: inline-block; max-width: 70%;" placeholder="Option">
+                                                    <input type="number" name="checkboxWeight[]" class="form-control" style="display: inline-block; max-width: 25%;" placeholder="Weight">
+                                                </div> -->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <hr>
+                                            <br>
+                                            <label>Weight </label>
+                                            <input type="number" name="weight" class="form-control">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="saveQuestion">Save</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="addQuestionModal" aria-labelledby="addQuestionModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Question</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <form id="addQuestionForm">
-                        <div class="form-group">
-                            <label>Type</label><br>
-                            <select name="type" class="form-control">
-                                <option value="text">Short Answer</option>
-                                <option value="rating">Rating</option>
-                                <option value="radiogroup">Choose One</option>
-                                <option value="checkbox">Choose Many</option>
-                            </select>
-                        </div>
-
-                        <br>
-                        <div class="form-group">
-                            <label>Question Title</label>
-                            <input type="text" name="title" class="form-control">
-                        </div>
-
-                        <br>
-                        <div class="form-group">
-                            <label>Question Text</label>
-                            <input type="text" name="question" class="form-control">
-                        </div>
-
-
-                        <div id="radioGroup" style="display: none;">
-                            <hr>
-                            <br>
-                            <div class="form-group">
-                                <label>Options (comma separated)</label>
-                                <input type="text" name="radioOptions" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Correct Option</label>
-                                <input type="text" name="correctOption" class="form-control">
-                            </div>
-                        </div>
-
-
-                        <div id="checkboxGroup" style="display: none;">
-                            <hr>
-                            <br>
-                            <div class="form-group">
-                                <label>Number of options</label>
-                                <input type="number" name="checkboxOptionsNo" class="form-control"
-                                       style="max-width: 90%; display: inline-block;">
-                                <button type="button" id="addCheckboxOptions"><i>+</i></button>
-                            </div>
-                            <br>
-                            <div id="checkboxOptions">
-                                <!-- <div class="form-group">
-                                    <input type="text" name="checkboxOption[]" class="form-control" style="display: inline-block; max-width: 70%;" placeholder="Option">
-                                    <input type="number" name="checkboxWeight[]" class="form-control" style="display: inline-block; max-width: 25%;" placeholder="Weight">
-                                </div> -->
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <hr>
-                            <br>
-                            <label>Weight </label>
-                            <input type="number" name="weight" class="form-control">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="saveQuestion">Save</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 </body>
+
 <!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -213,15 +195,47 @@
 
 <!-- JavaScript -->
 <script type="text/javascript">
-
-
     $(document).ready(function () {
+
 
         /**
          * Action of add topic
          */
-        var topicId = 0;
-        var surveyModels = [];
+        var formData = $('#dynamic-form').serializeArray();
+        var topicId = formData.length - 1;
+        var surveyModels = formData;
+        window.onload = function showSurveyQustions( topicId) {
+            // elements = JSON.parse(elements);
+            // var surveyJsonElements = elements;
+            const survey = surveyModels[topicId];
+            $(function () {
+                $("#editedsurveyContainer" + topicId).Survey({model: survey});
+            });
+        }
+
+
+        {{--$.ajax({--}}
+        {{--    url: '/forms/edit/' + "{{$id}}",--}}
+        {{--    type: 'GET',--}}
+        {{--    data: {formDataJson: formDataJson, _token: "{{ csrf_token() }}"},--}}
+        {{--    success: function (data) {--}}
+        {{--        var formDataJson = JSON.parse(data.formDataJson);--}}
+        {{--        console.log(formDataJson);--}}
+        {{--        surveyModels = formDataJson;--}}
+        {{--        prompt(surveyModels);--}}
+        {{--    }--}}
+        {{--})--}}
+        {{--;--}}
+        // prompt('is' + surveyModels);
+        // ++topicId;
+        // var editedTopicId = 0;
+        // $.each(surveyModels, function (index, value) {
+        //     $.each(value.pages, function (index2, value2) {
+        //         $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + editedTopicId + ' data-topic-name="' + topicName + '" id="topic[' + editedTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + value2.name + '</th></tr</thead><tbody id="surveyContainer' + editedTopicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
+        //         ++editedTopicId;
+        //     });
+        //     topicId = editedTopicId;
+        // });
 
         $('#dynamic-add-topic').on('click', function () {
             var topicName = prompt("Please enter topic name");
