@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\SurveyQuestion;
 use App\Models\Form;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,7 @@ use Illuminate\Http\Response;
 
 class FormController extends Controller
 {
+//    use SurveyQuestionTrait;
     public function index(Request $request)
     {
         $active = 'formAct';
@@ -45,7 +47,8 @@ class FormController extends Controller
     public function survey($id)
     {
         $formData = Form::find($id)->form_data;
-
+//        $surveyQuestions = new SurveyQuestion();
+//        $surveyQuestions->getSurveyQuestions($id);
         if (!$formData) {
             return view('forms.survey')->with('id', $id);
 
@@ -56,6 +59,20 @@ class FormController extends Controller
         }
     }
 
+//    public function getSurveyQuestions($id)
+//    {
+//        // Retrieve survey questions for the specified topic ID from the database or wherever they are stored
+//        $formData = Form::find($id)->form_data;
+//        $dataArray = json_decode($formData, true);
+//
+//        // Get the elements array for all pages
+//        $surveyQuestions = array();
+//        foreach ($dataArray['pages'] as $page) {
+//            $surveyQuestions = array_merge($surveyQuestions, $page['elements']);
+//        }
+//
+//        return response()->json($surveyQuestions);
+//    }
 
 
     public function update($id)

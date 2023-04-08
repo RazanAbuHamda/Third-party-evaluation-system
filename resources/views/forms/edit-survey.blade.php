@@ -7,6 +7,8 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
 
     <style>
         .container {
@@ -71,8 +73,42 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody id="editedsurveyContainer{{$editedTopicId}}"
-                                           onload="showSurveyQustions('{{$editedTopicId}}')">
+                                    <tbody id="editedsurveyContainer{{$editedTopicId}}">
+                                    <script>
+                                        let elements = {!! htmlspecialchars(json_encode($value2['elements']), ENT_QUOTES, 'UTF-8', false) !!};
+                                        if (elements) {
+                                            var survey = {
+                                                pages: [{
+                                                    elements: elements
+                                                }]
+                                            };
+                                            $("#editedsurveyContainer{{$editedTopicId}}").Survey({
+                                                model: survey
+                                            });
+                                        } else {
+                                            console.log('Error retrieving survey questions.');
+                                        }
+
+                                    {{--$.ajax({--}}
+                                        {{--    url:  '/forms/edit/' + "{{$id}}",--}}
+                                        {{--    type: 'GET',--}}
+                                        {{--    data: { _token: "{{ csrf_token() }}"},--}}
+                                        {{--    dataType: 'json',--}}
+                                        {{--    success: function (response) {--}}
+                                        {{--        var survey = {--}}
+                                        {{--            pages: [{--}}
+                                        {{--                elements: response--}}
+                                        {{--            }]--}}
+                                        {{--        };--}}
+                                        {{--        $("#editedsurveyContainer{{$editedTopicId}}").Survey({--}}
+                                        {{--            model: survey--}}
+                                        {{--        });--}}
+                                        {{--    },--}}
+                                        {{--    error: function () {--}}
+                                        {{--        console.log('Error retrieving survey questions.');--}}
+                                        {{--    }--}}
+                                        {{--});--}}
+                                    </script>
                                     </tbody>
 
                                     <tfoot>
@@ -204,39 +240,6 @@
         var formData = $('#dynamic-form').serializeArray();
         var topicId = formData.length - 1;
         var surveyModels = formData;
-        window.onload = function showSurveyQustions( topicId) {
-            // elements = JSON.parse(elements);
-            // var surveyJsonElements = elements;
-            const survey = surveyModels[topicId];
-            $(function () {
-                $("#editedsurveyContainer" + topicId).Survey({model: survey});
-            });
-        }
-
-
-        {{--$.ajax({--}}
-        {{--    url: '/forms/edit/' + "{{$id}}",--}}
-        {{--    type: 'GET',--}}
-        {{--    data: {formDataJson: formDataJson, _token: "{{ csrf_token() }}"},--}}
-        {{--    success: function (data) {--}}
-        {{--        var formDataJson = JSON.parse(data.formDataJson);--}}
-        {{--        console.log(formDataJson);--}}
-        {{--        surveyModels = formDataJson;--}}
-        {{--        prompt(surveyModels);--}}
-        {{--    }--}}
-        {{--})--}}
-        {{--;--}}
-        // prompt('is' + surveyModels);
-        // ++topicId;
-        // var editedTopicId = 0;
-        // $.each(surveyModels, function (index, value) {
-        //     $.each(value.pages, function (index2, value2) {
-        //         $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + editedTopicId + ' data-topic-name="' + topicName + '" id="topic[' + editedTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + value2.name + '</th></tr</thead><tbody id="surveyContainer' + editedTopicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
-        //         ++editedTopicId;
-        //     });
-        //     topicId = editedTopicId;
-        // });
-
         $('#dynamic-add-topic').on('click', function () {
             var topicName = prompt("Please enter topic name");
 
