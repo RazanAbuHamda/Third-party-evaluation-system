@@ -7,8 +7,8 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
+{{--    <script src="{{ asset('js/jquery.js') }}"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         .container {
@@ -74,40 +74,32 @@
                                     </thead>
 
                                     <tbody id="editedsurveyContainer{{$editedTopicId}}">
+                                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                                    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
+
                                     <script>
-                                        let elements = {!! htmlspecialchars(json_encode($value2['elements']), ENT_QUOTES, 'UTF-8', false) !!};
-                                        if (elements) {
-                                            var survey = {
-                                                pages: [{
-                                                    elements: elements
-                                                }]
-                                            };
-                                            $("#editedsurveyContainer{{$editedTopicId}}").Survey({
-                                                model: survey
-                                            });
+                                        // Retrieve the JSON representation of the saved survey from the database
+                                        var elements_{{$editedTopicId}} = {!! json_encode($value2['elements']) !!};
+                                        var surveyElements = {
+                                            pages: [{
+                                                elements: elements_{{$editedTopicId}}
+                                            }]
+                                        };
+                                        // Create a new survey object with the saved data
+                                        var survey = new Survey.Model(surveyElements);
+
+                                        // Load the survey data into the survey container
+                                        $("#surveyContainer").Survey({
+                                            model: survey
+                                        });
+                                        if (elements_{{$editedTopicId}}) {
+
+                                            var $j = jQuery.noConflict();
+                                            $j("#editedsurveyContainer{{$editedTopicId}}").Survey({model: survey});
                                         } else {
                                             console.log('Error retrieving survey questions.');
                                         }
 
-                                    {{--$.ajax({--}}
-                                        {{--    url:  '/forms/edit/' + "{{$id}}",--}}
-                                        {{--    type: 'GET',--}}
-                                        {{--    data: { _token: "{{ csrf_token() }}"},--}}
-                                        {{--    dataType: 'json',--}}
-                                        {{--    success: function (response) {--}}
-                                        {{--        var survey = {--}}
-                                        {{--            pages: [{--}}
-                                        {{--                elements: response--}}
-                                        {{--            }]--}}
-                                        {{--        };--}}
-                                        {{--        $("#editedsurveyContainer{{$editedTopicId}}").Survey({--}}
-                                        {{--            model: survey--}}
-                                        {{--        });--}}
-                                        {{--    },--}}
-                                        {{--    error: function () {--}}
-                                        {{--        console.log('Error retrieving survey questions.');--}}
-                                        {{--    }--}}
-                                        {{--});--}}
                                     </script>
                                     </tbody>
 
