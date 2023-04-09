@@ -7,7 +7,6 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
-    {{--    <script src="{{ asset('js/jquery.js') }}"></script>--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
@@ -81,20 +80,14 @@
                                     <script>
                                         // Retrieve the JSON representation of the saved survey from the database
                                         var elements_{{$editedTopicId}} = {!! json_encode($value2['elements']) !!};
-                                        var surveyElements = {
-                                            pages: [{
-                                                elements: elements_{{$editedTopicId}}
-                                            }]
-                                        };
-                                        // Create a new survey object with the saved data
-                                        var survey = new Survey.Model(surveyElements);
-
-                                        // Load the survey data into the survey container
-                                        $("#surveyContainer").Survey({
-                                            model: survey
-                                        });
                                         if (elements_{{$editedTopicId}}) {
-
+                                            var surveyElements = {
+                                                pages: [{
+                                                    elements: elements_{{$editedTopicId}}
+                                                }]
+                                            };
+                                            // Create a new survey object with the saved data
+                                            var survey = new Survey.Model(surveyElements);
                                             var $j = jQuery.noConflict();
                                             $j("#editedsurveyContainer{{$editedTopicId}}").Survey({model: survey});
                                         } else {
@@ -120,6 +113,7 @@
                                 <?php $editedTopicId++; ?>
                         @endforeach
                     @endforeach
+
 
                     <!-- Modal -->
                     <div class="modal fade" tabindex="-1" role="dialog" id="addQuestionModal"
@@ -237,7 +231,7 @@
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + topicId + ' data-topic-name="' + topicName + '" id="topic[' + topicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + topicId + '"></tbody></table></div>');
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + topicId + ' data-topic-name="' + topicName + '" id="topic[' + topicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + topicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
             }
 
             surveyModels[topicId] = {
