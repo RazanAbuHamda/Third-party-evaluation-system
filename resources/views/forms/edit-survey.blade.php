@@ -7,7 +7,7 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
-{{--    <script src="{{ asset('js/jquery.js') }}"></script>--}}
+    {{--    <script src="{{ asset('js/jquery.js') }}"></script>--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
@@ -75,7 +75,8 @@
 
                                     <tbody id="editedsurveyContainer{{$editedTopicId}}">
                                     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-                                    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
+                                    <script type="text/javascript"
+                                            src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
 
                                     <script>
                                         // Retrieve the JSON representation of the saved survey from the database
@@ -236,7 +237,7 @@
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + topicId + ' data-topic-name="' + topicName + '" id="topic[' + topicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + topicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + topicId + ' data-topic-name="' + topicName + '" id="topic[' + topicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + topicId + '"></tbody></table></div>');
             }
 
             surveyModels[topicId] = {
