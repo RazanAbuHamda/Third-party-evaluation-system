@@ -220,13 +220,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-
+        var formData = {!! json_encode($formData) !!};
+        prompt(formData); // print formData to console
+        var topicId = formData.length - 1;
+        var surveyModels = formData;
         /**
          * Action of add topic
          */
-        var formData = $('#dynamic-form').serializeArray();
-        var topicId = formData.length - 1;
-        var surveyModels = formData;
         $('#dynamic-add-topic').on('click', function () {
             var topicName = prompt("Please enter topic name");
 

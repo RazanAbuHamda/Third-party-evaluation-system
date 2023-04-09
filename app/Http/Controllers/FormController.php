@@ -47,13 +47,13 @@ class FormController extends Controller
     public function survey($id)
     {
         $formData = Form::find($id)->form_data;
-//        $surveyQuestions = new SurveyQuestion();
-//        $surveyQuestions->getSurveyQuestions($id);
         if (!$formData) {
             return view('forms.survey')->with('id', $id);
 
         } else {
-//            dd($formData);
+//            dd(json_encode($formData));
+//            $array = json_decode($formData, true);
+//            $formData = json_encode($array);
             return view('forms.edit-survey')->with('formData', $formData, true)->with('id', $id);
 
         }
