@@ -13,6 +13,11 @@
             max-width: 600px;
         }
     </style>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
 </head>
 <body>
 
@@ -58,28 +63,30 @@
                 <br>
 
                 <div class="row" id="topics-container">
-                    <!-- <div class="col-12">
-                       <table class="table table-bordered" data-topic=0 data-topic-name="topicName" id="topic[0]" class="dynamic-topic">
-                          <thead>
-                             <tr>
-                                <th colspan="2" style="text-align: center;">topicName</th>
-                             </tr>
-                          </thead>
+                    @foreach ($formData as $surveyModel)
+                        <div class="col-12">
+                            <table class="table table-bordered" data-topic="{{ $loop->index }}" data-topic-name="{{ $surveyModel['pages'][0]['name'] }}" id="{{ $loop->index }}" class="dynamic-topic">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" style="text-align: center;">{{ $surveyModel['pages'][0]['name'] }}</th>
+                                    </tr>
+                                </thead>
 
-                          <tbody id="surveyContainer0">
+                                <tbody id="surveyContainer{{ $loop->index }}">
 
-                          </tbody>
+                                </tbody>
 
-                          <tfoot>
-                             <tr>
-                                <td colspan="2">
-                                    <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button>
-                                    <button type="button" class="btn btn-outline-danger">Delete Topic</button>
-                                </td>
-                             </tr>
-                          </tfoot>
-                       </table>
-                    </div> -->
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2">
+                                            <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> 
+                                            <button type="button" class="btn btn-outline-danger">Delete Topic</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    @endforeach
                 </div>
             </form>
         </div>
@@ -174,10 +181,7 @@
     </div>
 </div>
 </body>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="https://unpkg.com/survey-jquery@1.9.77/survey.jquery.js"></script>
+
 
 
 <!-- JavaScript -->
@@ -186,17 +190,29 @@
 
     $(document).ready(function () {
         /**
+        * list current questions
+        */
+
+        var surveyModels = {!! json_encode($formData) !!}
+        var newTopicId = surveyModels.length;
+
+        for (i = 0 ; i < newTopicId ; i++) {
+            var survey = new Survey.Model(surveyModels[i]);
+            // $(function () {
+                $("#surveyContainer" + i).Survey({model: survey});
+            // });
+        }
+
+
+        /**
          * Action of add topic
          */
-
-        var newTopicId = 0;
-        var surveyModels = [];
 
         $('#dynamic-add-topic').on('click', function () {
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr></thead><tbody id="surveyContainer' + newTopicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
             }
 
             surveyModels[newTopicId] = {
@@ -271,7 +287,7 @@
             surveyJsonElements.push(newQuestionJson);
             surveyModels[topicId].pages[0].elements = surveyJsonElements;
 
-            const survey = new Survey.Model(surveyModels[topicId]);
+            var survey = new Survey.Model(surveyModels[topicId]);
             $(function () {
                 $("#surveyContainer" + topicId).Survey({model: survey});
             });

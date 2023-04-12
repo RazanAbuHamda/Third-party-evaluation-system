@@ -54,7 +54,7 @@ class FormController extends Controller
 //            dd(json_encode($formData));
 //            $array = json_decode($formData, true);
 //            $formData = json_encode($array);
-            return view('forms.edit-survey')->with('formData', $formData, true)->with('id', $id);
+            return view('forms.edit-survey-new')->with('formData', $formData, true)->with('id', $id);
 
         }
     }
