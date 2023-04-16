@@ -49,32 +49,11 @@ class FormController extends Controller
         $formData = Form::find($id)->form_data;
         if (!$formData) {
             return view('forms.survey')->with('id', $id);
-
         } else {
-//            dd(json_encode($formData));
-//            $array = json_decode($formData, true);
-//            $formData = json_encode($array);
             return view('forms.edit-survey-new')->with('formData', $formData, true)->with('id', $id);
 
         }
     }
-
-//    public function getSurveyQuestions($id)
-//    {
-//        // Retrieve survey questions for the specified topic ID from the database or wherever they are stored
-//        $formData = Form::find($id)->form_data;
-//        $dataArray = json_decode($formData, true);
-//
-//        // Get the elements array for all pages
-//        $surveyQuestions = array();
-//        foreach ($dataArray['pages'] as $page) {
-//            $surveyQuestions = array_merge($surveyQuestions, $page['elements']);
-//        }
-//
-//        return response()->json($surveyQuestions);
-//    }
-
-
     public function update($id)
     {
         // Retrieve the formJson data from the request
@@ -87,6 +66,11 @@ class FormController extends Controller
         $form->save();
 
         return response()->json(['message' => 'Form received successfully!']);
+    }
+
+    public function createCoordinatorForm($id){
+        $formData = Form::find($id)->form_data;
+            return view('forms.coordinator-page')->with('formData', $formData, true)->with('id', $id);
     }
 
 

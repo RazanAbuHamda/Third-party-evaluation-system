@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 8 Add/Remove Multiple Input Fields Example</title>
+    <title>Edit Form Page</title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
@@ -79,7 +79,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="2">
-                                            <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> 
+                                            <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button>
                                             <button type="button" class="btn btn-outline-danger">Delete Topic</button>
                                         </td>
                                     </tr>
@@ -193,7 +193,7 @@
         * list current questions
         */
 
-        var surveyModels = {!! json_encode($formData) !!}
+        var surveyModels = {!! json_encode($formData) !!};
         var newTopicId = surveyModels.length;
 
         for (i = 0 ; i < newTopicId ; i++) {
