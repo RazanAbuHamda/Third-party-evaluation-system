@@ -19,35 +19,50 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        body{
-            background-color:#eef3f4;
+        body {
+            background-color: #eef3f4;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        #dynamic-form{
-            background-color:#FFFFFF;
+
+        #dynamic-form {
+            background-color: #FFFFFF;
             border-style: solid;
             border-color: #0000;
         }
 
-        .thName{
-            background-color:#eef3f4;
+        .thName {
+            background-color: #eef3f4;
             border-style: solid;
             border-color: #0c0c0c;
         }
 
 
-        .ratings i{
+        .ratings i {
 
-            color:#cecece;
-            font-size:32px;
+            color: #cecece;
+            font-size: 32px;
         }
 
-        .rating-color{
-            color:#fbc634 !important;
+        .rating-color {
+            color: #fbc634 !important;
         }
 
-        .small-ratings i{
-            color:#cecece;
+        .small-ratings i {
+            color: #cecece;
         }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th, tr {
+            border: none;
+        }
+
     </style>
 </head>
 <body>
@@ -76,17 +91,22 @@
                            data-topic-name="{{ $surveyModel['pages'][0]['name'] }}" id="{{ $loop->index }}">
                         <thead>
                         <tr class="thName">
-                            <th colspan="2" style="text-align: center;" >{{ $surveyModel['pages'][0]['name'] }}</th>
+                            <th colspan="2" style="font-size: 20px;text-align: center;">{{ $surveyModel['pages'][0]['name'] }}</th>
                         </tr>
                         </thead>
 
                         <tbody id="surveyContainer{{ $loop->index }}">
+                        @php
+                            $counter = 1;
+                        @endphp
                         @foreach($surveyModel['pages'][0]['elements'] as $questions)
+
                             <tr>
-                                <td>
-                                    {{ $questions['name'] }}
-                                </td>
+                                <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
                             </tr>
+                            @php
+                                $counter++;
+                            @endphp
                             <tr>
                                 <td>
                                     @if($questions['type'] == 'radiogroup')
@@ -96,6 +116,7 @@
                                             {{ $choice }}
                                             <br>
                                         @endforeach
+                                        <hr>
                                     @elseif($questions['type'] == 'checkbox')
                                         {{-- if question type is checkbox --}}
                                         @foreach($questions['choices'] as $choice)
@@ -104,19 +125,21 @@
                                             {{ $choice }}
                                             <br>
                                         @endforeach
-                                    @elseif($questions['type'] == 'rating') {{-- if question type is rating --}}
-                                    <div class="mt-5 d-flex justify-content-between align-items-center">
-                                        <div class="small-ratings">
-                                            <i class="fa fa-star rating-color"></i>
-                                            <i class="fa fa-star rating-color"></i>
-                                            <i class="fa fa-star rating-color"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
+                                        <hr>
+                                    @elseif($questions['type'] == 'rating')
+                                        {{-- if question type is rating --}}
+                                            <div class="small-ratings">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        <hr>
                                     @else
                                         {{-- if question type is text input --}}
                                         <input type="text" name="{{ $questions['name'] }}">
+                                        <hr>
                                     @endif
                                 </td>
                             </tr>
@@ -130,7 +153,7 @@
     </form>
 </div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         const stars = document.querySelectorAll('.small-ratings i');
 
         function fillStars(index) {
@@ -155,7 +178,7 @@
             });
 
             star.addEventListener('click', () => {
-                alert(`You rated this ${index+1} stars!`);
+                alert(`You rated this ${index + 1} stars!`);
             });
         });
     });
