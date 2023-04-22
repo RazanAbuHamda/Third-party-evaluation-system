@@ -82,9 +82,9 @@ class FormController extends Controller
         $formEvaluation->user_id = $user->id;
         // Retrieve the formJson data from the request
         $results = request('reultsJson');
-
         // Decode the JSON string into a PHP array or object
         $result = json_decode($results, true);
+
         $formEvaluation->result_json = $result;
         $formEvaluation->save();
 

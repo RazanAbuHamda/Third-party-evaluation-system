@@ -88,28 +88,29 @@
             <script>
                 var topicId = 0;
                 var results = [];
+                var total = 0;
             </script>
             @foreach ($formData as $surveyModel)
                 <script>
                     results[topicId] = {
-                        pages: [
+                        topics: [
                             {
                                 name: "{{ $surveyModel['pages'][0]['name'] }}",
                                 // elements:[],
                                 elementsScore: [],
-                                topicTotalScore:0
+                                topicTotalScore: 0
                             }
                         ]
                     };
 
-                    ++topicId;
                 </script>
                 <div class="col-12">
                     <table class="table table-bordered dynamic-topic" data-topic="{{ $loop->index }}"
                            data-topic-name="{{ $surveyModel['pages'][0]['name'] }}" id="{{ $loop->index }}">
                         <thead>
                         <tr class="thName">
-                            <th colspan="2" style="font-size: 20px;text-align: center;">{{ $surveyModel['pages'][0]['name'] }}</th>
+                            <th colspan="2"
+                                style="font-size: 20px;text-align: center;">{{ $surveyModel['pages'][0]['name'] }}</th>
                         </tr>
                         </thead>
 
@@ -117,8 +118,8 @@
                         @php
                             $counter = 1;
                         @endphp
-                        @foreach($surveyModel['pages'][0]['elements'] as $questions)
 
+                        @foreach($surveyModel['pages'][0]['elements'] as $questions)
                             <tr>
                                 <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
                             </tr>
@@ -130,10 +131,27 @@
                                     @if($questions['type'] == 'radiogroup')
                                         {{-- if question type is radio group --}}
                                         @foreach($questions['choices'] as $choice)
-                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}">
+                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}"
+                                                   class="radio-choice">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
+                                        @if (isset($_POST["{$questions['name']}"]))
+                                            @php
+                                                $selected_choice = $_POST["{$questions['name']}"];
+                                            @endphp
+                                            @if ($selected_choice == $questions['correctAnswer'])
+                                                <script>
+                                                    results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
+                                                    total+={{ $questions['weight'] }};
+                                                </script>
+                                            @else
+                                                <script>
+                                                    results[topicId].topics[0].elementsScore.push(0);
+                                                </script>
+                                            @endif
+                                        @endif
+
                                         <hr>
                                     @elseif($questions['type'] == 'checkbox')
                                         {{-- if question type is checkbox --}}
@@ -146,39 +164,36 @@
                                         <hr>
                                     @elseif($questions['type'] == 'rating')
                                         {{-- if question type is rating stars--}}
-                                            <div class="small-ratings">
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                        <div class="small-ratings">
+                                            <i class="fa fa-star rating-color"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
                                         <hr>
                                     @else
-                                        <script>
-                                            if (typeof results[topicId] === 'undefined') {
-                                                results[topicId] = {
-                                                    pages: [
-                                                        {
-                                                            name: "{{ $surveyModel['pages'][0]['name'] }}",
-                                                            elementsScore: [],
-                                                            topicTotalScore: 0
-                                                        }
-                                                    ]
-                                                };
-                                            }
-                                            results[topicId].pages[0].elementsScore.push("{{ $questions['weight'] }}");
-                                        </script>
                                         {{-- if question type is short text --}}
                                         <input type="text" name="{{ $questions['name'] }}">
+                                        <script>
+                                            results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
+                                            total+={{ $questions['weight'] }};
+                                        </script>
                                         <hr>
                                     @endif
                                 </td>
                             </tr>
                         @endforeach
+                        <script>
+                            results[topicId].topics[0].topicTotalScore = total;
+                        </script>
                         </tbody>
                     </table>
                 </div>
+                <script>
+
+                    ++topicId;
+                </script>
             @endforeach
         </div>
         <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
@@ -222,7 +237,7 @@
 
         // Send the AJAX request with the reultsJson data
         $.ajax({
-            url: '/evaluation/store/'+"{{$id}}",
+            url: '/evaluation/store/' + "{{$id}}",
             type: 'POST',
             data: {reultsJson: reultsJson, _token: "{{ csrf_token() }}"},
             dataType: 'json',
