@@ -58,28 +58,6 @@
                 <br>
 
                 <div class="row" id="topics-container">
-                    <!-- <div class="col-12">
-                       <table class="table table-bordered" data-topic=0 data-topic-name="topicName" id="topic[0]" class="dynamic-topic">
-                          <thead>
-                             <tr>
-                                <th colspan="2" style="text-align: center;">topicName</th>
-                             </tr>
-                          </thead>
-
-                          <tbody id="surveyContainer0">
-
-                          </tbody>
-
-                          <tfoot>
-                             <tr>
-                                <td colspan="2">
-                                    <button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button>
-                                    <button type="button" class="btn btn-outline-danger">Delete Topic</button>
-                                </td>
-                             </tr>
-                          </tfoot>
-                       </table>
-                    </div> -->
                 </div>
             </form>
         </div>
@@ -148,10 +126,6 @@
                             </div>
                             <br>
                             <div id="checkboxOptions">
-                                <!-- <div class="form-group">
-                                    <input type="text" name="checkboxOption[]" class="form-control" style="display: inline-block; max-width: 70%;" placeholder="Option">
-                                    <input type="number" name="checkboxWeight[]" class="form-control" style="display: inline-block; max-width: 25%;" placeholder="Weight">
-                                </div> -->
                             </div>
                         </div>
 

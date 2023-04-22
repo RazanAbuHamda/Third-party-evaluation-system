@@ -68,7 +68,7 @@
 <body>
 
 <div class="container">
-    <form action="{{ url('store-input-fields') }}" id="dynamic-form" method="POST">
+    <form action="{{ url('evaluation/store/'.$id) }}" id="dynamic-form" method="POST">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
@@ -85,7 +85,25 @@
             </div>
         @endif
         <div class="row" id="topics-container">
+            <script>
+                var topicId = 0;
+                var results = [];
+            </script>
             @foreach ($formData as $surveyModel)
+                <script>
+                    results[topicId] = {
+                        pages: [
+                            {
+                                name: "{{ $surveyModel['pages'][0]['name'] }}",
+                                // elements:[],
+                                elementsScore: [],
+                                topicTotalScore:0
+                            }
+                        ]
+                    };
+
+                    ++topicId;
+                </script>
                 <div class="col-12">
                     <table class="table table-bordered dynamic-topic" data-topic="{{ $loop->index }}"
                            data-topic-name="{{ $surveyModel['pages'][0]['name'] }}" id="{{ $loop->index }}">
@@ -127,7 +145,7 @@
                                         @endforeach
                                         <hr>
                                     @elseif($questions['type'] == 'rating')
-                                        {{-- if question type is rating --}}
+                                        {{-- if question type is rating stars--}}
                                             <div class="small-ratings">
                                                 <i class="fa fa-star rating-color"></i>
                                                 <i class="fa fa-star"></i>
@@ -137,7 +155,21 @@
                                             </div>
                                         <hr>
                                     @else
-                                        {{-- if question type is text input --}}
+                                        <script>
+                                            if (typeof results[topicId] === 'undefined') {
+                                                results[topicId] = {
+                                                    pages: [
+                                                        {
+                                                            name: "{{ $surveyModel['pages'][0]['name'] }}",
+                                                            elementsScore: [],
+                                                            topicTotalScore: 0
+                                                        }
+                                                    ]
+                                                };
+                                            }
+                                            results[topicId].pages[0].elementsScore.push("{{ $questions['weight'] }}");
+                                        </script>
+                                        {{-- if question type is short text --}}
                                         <input type="text" name="{{ $questions['name'] }}">
                                         <hr>
                                     @endif
@@ -149,22 +181,23 @@
                 </div>
             @endforeach
         </div>
-        <button type="submit" class="btn btn-outline-success btn-block">Save</button>
+        <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
     </form>
 </div>
 <script>
     $(document).ready(function () {
         const stars = document.querySelectorAll('.small-ratings i');
+        const ratingColor = 'gold';
 
         function fillStars(index) {
             for (let i = 0; i <= index; i++) {
-                stars[i].classList.add('rating-color');
+                stars[i].style.color = ratingColor;
             }
         }
 
         function emptyStars() {
             for (let i = 0; i < stars.length; i++) {
-                stars[i].classList.remove('rating-color');
+                stars[i].style.color = '';
             }
         }
 
@@ -178,8 +211,24 @@
             });
 
             star.addEventListener('click', () => {
+                var stars = index;
                 alert(`You rated this ${index + 1} stars!`);
+                fillStars(stars);
             });
+        });
+    });
+    $('#save-button').on('click', function () {
+        var reultsJson = JSON.stringify(results);
+
+        // Send the AJAX request with the reultsJson data
+        $.ajax({
+            url: '/evaluation/store/'+"{{$id}}",
+            type: 'POST',
+            data: {reultsJson: reultsJson, _token: "{{ csrf_token() }}"},
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+            }
         });
     });
 
