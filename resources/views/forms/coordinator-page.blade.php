@@ -91,7 +91,9 @@
                 var total = 0;
             </script>
             @foreach ($formData as $surveyModel)
+
                 <script>
+                    ++topicId;
                     results[topicId] = {
                         topics: [
                             {
@@ -136,21 +138,24 @@
                                             {{ $choice }}
                                             <br>
                                         @endforeach
-                                        @if (isset($_POST["{$questions['name']}"]))
-                                            @php
-                                                $selected_choice = $_POST["{$questions['name']}"];
-                                            @endphp
-                                            @if ($selected_choice == $questions['correctAnswer'])
-                                                <script>
-                                                    results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
-                                                    total+={{ $questions['weight'] }};
-                                                </script>
-                                            @else
-                                                <script>
-                                                    results[topicId].topics[0].elementsScore.push(0);
-                                                </script>
-                                            @endif
-                                        @endif
+                                        <script>
+                                            var radioButtons = document.getElementsByName("{{ $questions['name'] }}");
+                                            var selectedValue = null;
+
+                                            for (var i = 0; i < radioButtons.length; i++) {
+                                                radioButtons[i].addEventListener('click', function () {
+                                                    selectedValue = this.value;
+                                                    console.log(selectedValue !== null ? selectedValue : "No option selected");
+
+                                                    if (selectedValue === "{{$questions['correctAnswer']}}") {
+                                                        results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
+                                                        total += {{ $questions['weight'] }};
+                                                    } else {
+                                                        results[topicId].topics[0].elementsScore.push(0);
+                                                    }
+                                                });
+                                            }
+                                        </script>
 
                                         <hr>
                                     @elseif($questions['type'] == 'checkbox')
@@ -177,23 +182,21 @@
                                         <input type="text" name="{{ $questions['name'] }}">
                                         <script>
                                             results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
-                                            total+={{ $questions['weight'] }};
+                                            total += {{ $questions['weight'] }};
                                         </script>
                                         <hr>
                                     @endif
                                 </td>
                             </tr>
                         @endforeach
-                        <script>
-                            results[topicId].topics[0].topicTotalScore = total;
-                        </script>
                         </tbody>
                     </table>
-                </div>
-                <script>
+                    <script>
+                        results[topicId].topics[0].topicTotalScore = total;
 
-                    ++topicId;
-                </script>
+                    </script>
+                </div>
+
             @endforeach
         </div>
         <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
