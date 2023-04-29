@@ -91,7 +91,6 @@
                 @php $questionId = 0; @endphp
 
                 <script>
-                    // initialize topicId if it's not already set
                     if (typeof results === "undefined") {
                         var results = {};
                         topicId = 0;
@@ -103,8 +102,7 @@
                         topics: [
                             {
                                 name: "{{ $surveyModel['pages'][0]['name'] }}",
-                                elements: {}, // initialize the elements property as an empty object
-                                elementsScore: [],
+                                elements: {},
                                 topicTotalScore: 0
                             }
                         ]
@@ -112,6 +110,7 @@
                     results[topicId].topics[0].elements[{{$questionId}}] = {
                         questionText: " ",
                         questionAnswers: [],
+                        elementsScore: [],
                     };
                 </script>
                 <div class="col-12">
@@ -129,13 +128,14 @@
                             $counter = 1;
                         @endphp
 
-                        @foreach($surveyModel['pages'][0]['elements'] as $questions)
+                        @foreach($surveyModel['pages'][0]['elements'] as $questionIndex => $questions)
                             <tr>
                                 <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
                                 <script>
-
-                                    results[topicId].topics[0].elements[{{$questionId}}] = results[topicId].topics[0].elements[{{$questionId}}] || {};
-                                    results[topicId].topics[0].elements[{{$questionId}}].questionText = "{{ $questions['name'] }}";
+                                    results[topicId].topics[0].elements[{{$questionIndex}}] = {
+                                        questionText: "{{ $questions['name'] }}",
+                                        questionAnswers: []
+                                    };
                                 </script>
                             </tr>
 
@@ -144,8 +144,7 @@
                                     @if($questions['type'] == 'radiogroup')
                                         {{-- if question type is radio group --}}
                                         @foreach($questions['choices'] as $choice)
-                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}"
-                                                   class="radio-choice">
+                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}" class="radio-choice">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
@@ -158,11 +157,9 @@
                                                     console.log(selectedValue !== null ? selectedValue : "No option selected");
                                                     if (selectedValue === "{{$questions['correctAnswer']}}") {
                                                         results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
-                                                        results[topicId].topics[0].elementsScore = results[topicId].topics[0].elementsScore || [];
-                                                        results[topicId].topics[0].elementsScore.push({{ $questions['weight'] }});
-                                                        results[topicId].topics[0].elements[{{$questionId}}] = results[topicId].topics[0].elements[0] || {};
-                                                        results[topicId].topics[0].elements[{{$questionId}}].questionAnswers = results[topicId].topics[0].elements[0].questionAnswers || [];
-                                                        results[topicId].topics[0].elements[{{$questionId}}].questionAnswers.push(selectedValue);
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers.push(selectedValue);
                                                     }
                                                 });
 
