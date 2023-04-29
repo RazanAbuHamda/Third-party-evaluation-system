@@ -51,5 +51,4 @@ Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->m
 Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy')->middleware('auth');
 Route::get('forms/coordinator/{id}','App\Http\Controllers\FormController@createCoordinatorForm')->middleware('auth');
 Route::post('evaluation/store/{id}', 'App\Http\Controllers\FormController@storeEvaluationResults')->middleware('auth');
-//Route::post('/evaluation/store/{id}', [FormController::class, 'storeEvaluationResults'])->name('evaluation.store');
 

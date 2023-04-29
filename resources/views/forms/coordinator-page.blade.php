@@ -88,18 +88,30 @@
                 var total = 0;
             </script>
             @foreach ($formData as $surveyModel)
-                <script>
-                    ++topicId;//هان اسألي بتطلعلك بالأول null
+                @php $questionId = 0; @endphp
 
+                <script>
+                    // initialize topicId if it's not already set
+                    if (typeof results === "undefined") {
+                        var results = {};
+                        topicId = 0;
+                    } else {
+                        topicId = Object.keys(results).length;
+                    }
+                    ++topicId;//هان اسألي بتطلعلك بالأول null
                     results[topicId] = {
                         topics: [
                             {
                                 name: "{{ $surveyModel['pages'][0]['name'] }}",
-                                // elements:[],
+                                elements: {}, // initialize the elements property as an empty object
                                 elementsScore: [],
                                 topicTotalScore: 0
                             }
                         ]
+                    };
+                    results[topicId].topics[0].elements[{{$questionId}}] = {
+                        questionText: " ",
+                        questionAnswers: [],
                     };
                 </script>
                 <div class="col-12">
@@ -120,10 +132,13 @@
                         @foreach($surveyModel['pages'][0]['elements'] as $questions)
                             <tr>
                                 <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
+                                <script>
+
+                                    results[topicId].topics[0].elements[{{$questionId}}] = results[topicId].topics[0].elements[{{$questionId}}] || {};
+                                    results[topicId].topics[0].elements[{{$questionId}}].questionText = "{{ $questions['name'] }}";
+                                </script>
                             </tr>
-                            @php
-                                $counter++;
-                            @endphp
+
                             <tr>
                                 <td>
                                     @if($questions['type'] == 'radiogroup')
@@ -135,78 +150,120 @@
                                             <br>
                                         @endforeach
                                         <script>
-                                            var radioButtons = document.getElementsByName("{{ $questions['name'] }}");
                                             var selectedValue = null;
+                                            var radioButtons = document.getElementsByName("{{ $questions['name'] }}");
                                             for (var i = 0; i < radioButtons.length; i++) {
                                                 radioButtons[i].addEventListener('click', function () {
                                                     selectedValue = this.value;
                                                     console.log(selectedValue !== null ? selectedValue : "No option selected");
                                                     if (selectedValue === "{{$questions['correctAnswer']}}") {
-                                                        results[topicId].topics[0].topicTotalScore +=  {{ $questions['weight'] }};
-                                                        //هان بيربط بين النصوص لما بدي أحط السكور تبع الاسئلة شوفيه قصته
-                                                        results[topicId].topics[0].elementsScore +=  {{ $questions['weight'] }};
-                                                    } else {
-                                                        results[topicId].topics[0].elementsScore = 0;
+                                                        results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
+                                                        results[topicId].topics[0].elementsScore = results[topicId].topics[0].elementsScore || [];
+                                                        results[topicId].topics[0].elementsScore.push({{ $questions['weight'] }});
+                                                        results[topicId].topics[0].elements[{{$questionId}}] = results[topicId].topics[0].elements[0] || {};
+                                                        results[topicId].topics[0].elements[{{$questionId}}].questionAnswers = results[topicId].topics[0].elements[0].questionAnswers || [];
+                                                        results[topicId].topics[0].elements[{{$questionId}}].questionAnswers.push(selectedValue);
                                                     }
                                                 });
+
                                             }
                                         </script>
-
                                         <hr>
                                     @elseif($questions['type'] == 'checkbox')
                                         {{-- if question type is checkbox --}}
-                                        @foreach($questions['choices'] as $choice)
-                                            <input type="checkbox" name="{{ $questions['name'] }}"
-                                                   value="{{ $choice }}">
+                                        @php
+                                            $selectedCheckboxValues = 0;
+                                            $totalCheckboxValues = array_sum($questions['choicesWeights']);
+                                        @endphp
+                                        @foreach($questions['choices'] as $index => $choice)
+                                            <input type="checkbox" name="{{ $questions['name'] }}[]"
+                                                   value="{{ $questions['choicesWeights'][$index] }}">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
                                         <script>
-                                            var checkboxes = document.getElementsByName("{{ $questions['name'] }}");
+                                            var checkboxes = document.getElementsByName("{{ $questions['name'] }}[]");
                                             var choicesWeights = {!! json_encode($questions['choicesWeights']) !!}.map(function (x) {
-                                                return parseInt(x);
+                                                return parseFloat(x);
                                             });
-
+                                            var selectedCheckboxValues = 0;
                                             for (var i = 0; i < checkboxes.length; i++) {
-                                                var selectedValuesScore = 0;
-                                                var totalCheckboxValues = 0;
-                                                totalCheckboxValues += choicesWeights[i];
                                                 checkboxes[i].addEventListener('click', function () {
-                                                    selectedValuesScore = 0;
-
+                                                    selectedCheckboxValues = 0;
                                                     for (var j = 0; j < checkboxes.length; j++) {
                                                         if (checkboxes[j].checked) {
-                                                            selectedValuesScore += choicesWeights[j];
+                                                            selectedCheckboxValues += parseFloat(checkboxes[j].value);
                                                         }
                                                     }
-                                                    console.log(totalCheckboxValues);
-                                                    console.log(selectedValuesScore > 0 ? selectedValuesScore : "No option selected");
+                                                    console.log(selectedCheckboxValues > 0 ? selectedCheckboxValues : "No option selected");
 
-                                                    if (selectedValuesScore > 0) {
-                                                        var ans =(selectedValuesScore * {{ $questions['weight'] }}) / totalCheckboxValues;
-                                                        results[topicId].topics[0].elementsScore = ans;
+                                                    if (selectedCheckboxValues > 0) {
+                                                        var ans = (selectedCheckboxValues * {{ $questions['weight'] }}) / {{ $totalCheckboxValues }};
+                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
+                                                        results[topicId].topics[0].elementsScore = results[topicId].topics[0].elementsScore || [];
+                                                        results[topicId].topics[0].elementsScore.push(ans);
                                                         results[topicId].topics[0].topicTotalScore += ans;
                                                     } else {
+                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
                                                         results[topicId].topics[0].elementsScore = 0;
+                                                        results[topicId].topics[0].topicTotalScore = 0;
                                                     }
                                                 });
-
                                             }
-
-                                            console.log("total = " + total);
-
                                         </script>
                                         <hr>
+
                                     @elseif($questions['type'] == 'rating')
                                         {{-- if question type is rating stars--}}
                                         <div class="small-ratings">
-                                            <i class="fa fa-star rating-color"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star rating-color" name="{{ $questions['name'] }}-1"></i>
+                                            <i class="fa fa-star" name="{{ $questions['name'] }}-2"></i>
+                                            <i class="fa fa-star" name="{{ $questions['name'] }}-3"></i>
+                                            <i class="fa fa-star" name="{{ $questions['name'] }}-4"></i>
+                                            <i class="fa fa-star" name="{{ $questions['name'] }}-5"></i>
                                         </div>
                                         <hr>
+                                        <script>
+                                            $(document).ready(function () {
+                                                const ratingStars = document.querySelectorAll('.small-ratings i');
+                                                const ratingColor = 'gold';
+
+                                                function fillStars(index) {
+                                                    for (let i = 0; i <= index; i++) {
+                                                        ratingStars[i].style.color = ratingColor;
+                                                    }
+                                                }
+
+                                                function emptyStars() {
+                                                    for (let i = 0; i < ratingStars.length; i++) {
+                                                        ratingStars[i].style.color = '';
+                                                    }
+                                                }
+
+                                                ratingStars.forEach((star) => {
+                                                    star.addEventListener('mouseenter', () => {
+                                                        fillStars(Array.prototype.indexOf.call(ratingStars, star));
+                                                    });
+                                                    star.addEventListener('mouseleave', () => {
+                                                        emptyStars();
+                                                    });
+                                                    star.addEventListener('click', () => {
+                                                        var stars = Array.prototype.indexOf.call(ratingStars, star) + 1;
+                                                        var questionName = star.getAttribute('name');
+                                                        var questionId = questionName.substring(0, questionName.lastIndexOf('-'));
+
+                                                        alert(`You rated question ${questionId} ${stars} stars!`);
+                                                        fillStars(stars - 1);
+
+                                                        // set the user's rating for the corresponding question
+                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
+                                                        results[topicId].topics[0].elementsScore = stars;
+                                                        results[topicId].topics[0].topicTotalScore += stars;
+                                                    });
+                                                });
+                                            });
+                                        </script>
+
                                     @else
                                         {{-- if question type is short text --}}
                                         <input type="text" name="{{ $questions['name'] }} required">
@@ -217,6 +274,10 @@
                                         </script>
                                         <hr>
                                     @endif
+                                        @php
+                                            $counter++;
+                                            $questionId++;
+                                        @endphp
                                 </td>
                             </tr>
                         @endforeach
@@ -225,43 +286,13 @@
                     </table>
                 </div>
             @endforeach
-            <script>
-            </script>
         </div>
         <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
     </form>
 </div>
 <script>
-    $(document).ready(function () {
-        const stars = document.querySelectorAll('.small-ratings i');
-        const ratingColor = 'gold';
 
-        function fillStars(index) {
-            for (let i = 0; i <= index; i++) {
-                stars[i].style.color = ratingColor;
-            }
-        }
 
-        function emptyStars() {
-            for (let i = 0; i < stars.length; i++) {
-                stars[i].style.color = '';
-            }
-        }
-
-        stars.forEach((star, index) => {
-            star.addEventListener('mouseenter', () => {
-                fillStars(index);
-            });
-            star.addEventListener('mouseleave', () => {
-                emptyStars();
-            });
-            star.addEventListener('click', () => {
-                var stars = index;
-                alert(`You rated this ${index + 1} stars!`);
-                fillStars(stars);
-            });
-        });
-    });
     $('#save-button').on('click', function () {
         var reultsJson = JSON.stringify(results);
         // Send the AJAX request with the reultsJson data
