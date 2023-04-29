@@ -131,6 +131,9 @@
                         @foreach($surveyModel['pages'][0]['elements'] as $questionIndex => $questions)
                             <tr>
                                 <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
+                                @php
+                                    $counter++;
+                                @endphp
                                 <script>
                                     results[topicId].topics[0].elements[{{$questionIndex}}] = {
                                         questionText: "{{ $questions['name'] }}",
@@ -140,11 +143,14 @@
                             </tr>
 
                             <tr>
+
                                 <td>
+
                                     @if($questions['type'] == 'radiogroup')
                                         {{-- if question type is radio group --}}
                                         @foreach($questions['choices'] as $choice)
-                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}" class="radio-choice">
+                                            <input type="radio" name="{{ $questions['name'] }}" value="{{ $choice }}"
+                                                   class="radio-choice">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
@@ -173,37 +179,35 @@
                                             $totalCheckboxValues = array_sum($questions['choicesWeights']);
                                         @endphp
                                         @foreach($questions['choices'] as $index => $choice)
-                                            <input type="checkbox" name="{{ $questions['name'] }}[]"
-                                                   value="{{ $questions['choicesWeights'][$index] }}">
+                                            <input type="checkbox" name="{{ $questions['name'] }}@if($loop->last)[]@endif" value="{{ $questions['choicesWeights'][$index] }}">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
+
                                         <script>
                                             var checkboxes = document.getElementsByName("{{ $questions['name'] }}[]");
                                             var choicesWeights = {!! json_encode($questions['choicesWeights']) !!}.map(function (x) {
                                                 return parseFloat(x);
                                             });
-                                            var selectedCheckboxValues = 0;
                                             for (var i = 0; i < checkboxes.length; i++) {
                                                 checkboxes[i].addEventListener('click', function () {
-                                                    selectedCheckboxValues = 0;
+                                                    var selectedCheckboxValues = [];
                                                     for (var j = 0; j < checkboxes.length; j++) {
                                                         if (checkboxes[j].checked) {
-                                                            selectedCheckboxValues += parseFloat(checkboxes[j].value);
+                                                            selectedCheckboxValues.push(parseFloat(checkboxes[j].value));
                                                         }
                                                     }
-                                                    console.log(selectedCheckboxValues > 0 ? selectedCheckboxValues : "No option selected");
+                                                    console.log(selectedCheckboxValues.length > 0 ? selectedCheckboxValues : "No option selected");
 
-                                                    if (selectedCheckboxValues > 0) {
-                                                        var ans = (selectedCheckboxValues * {{ $questions['weight'] }}) / {{ $totalCheckboxValues }};
+                                                    if (selectedCheckboxValues.length > 0) {
+                                                        var ans = (selectedCheckboxValues.reduce(function(a, b) { return a + b; }) * {{ $questions['weight'] }}) / {{ $totalCheckboxValues }};
                                                         results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
-                                                        results[topicId].topics[0].elementsScore = results[topicId].topics[0].elementsScore || [];
-                                                        results[topicId].topics[0].elementsScore.push(ans);
                                                         results[topicId].topics[0].topicTotalScore += ans;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = ans;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = selectedCheckboxValues;
                                                     } else {
-                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
-                                                        results[topicId].topics[0].elementsScore = 0;
-                                                        results[topicId].topics[0].topicTotalScore = 0;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = 0;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = [];
                                                     }
                                                 });
                                             }
@@ -263,18 +267,19 @@
 
                                     @else
                                         {{-- if question type is short text --}}
-                                        <input type="text" name="{{ $questions['name'] }} required">
-                                        <script>//هان لازم تاكدي انه ما يعيطيه درجة الا لما يكون كاتب اشي اوك
-                                            var shortText = document.getElementsByName("{{ $questions['name'] }}");
-                                            results[topicId].topics[0].elementsScore.push("{{ $questions['weight'] }}");
-                                            total += {{ $questions['weight'] }};
+                                        <input type="text" name="{{ $questions['name'] }}" id="my-input">
+                                        <script>
+                                            var shortText = document.getElementsByName("{{ $questions['name'] }}")[0];
+                                                    results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                    results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
+                                                    //انتبهي هان ما بحفظ الفاليو تعت الانبوت
+                                                    results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
+                                                    results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
+
+
                                         </script>
                                         <hr>
                                     @endif
-                                        @php
-                                            $counter++;
-                                            $questionId++;
-                                        @endphp
                                 </td>
                             </tr>
                         @endforeach
