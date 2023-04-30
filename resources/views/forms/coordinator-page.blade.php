@@ -277,11 +277,11 @@
                                                         starClicked = true;
                                                         var questionCredit = ({{ $questions['weight'] }} * rating) / 5;
                                                         results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push(questionCredit);
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore=questionCredit;
+                                                        //اتأكذي من النتيحة الي بيحفظها هان
                                                         results[topicId].topics[0].topicTotalScore += questionCredit;
 
                                                         console.log(questionCredit);
-
                                                         // Save selected rating to data attribute
                                                         stars.forEach((star, index) => {
                                                             if (index < rating) {
