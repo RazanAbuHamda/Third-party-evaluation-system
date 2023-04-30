@@ -179,7 +179,7 @@
                                             $choicesWeights = json_encode($questions['choicesWeights']);
                                         @endphp
                                         @foreach($questions['choices'] as $index => $choice)
-                                            <input type="checkbox" name="{{ $questionName }}[]" value="{{ $choice }}">
+                                            <input type="checkbox" name="{{ $questionName }}@if($loop->last)[]@endif" value="{{ $choice }}">
                                             {{ $choice }}
                                             <br>
                                         @endforeach

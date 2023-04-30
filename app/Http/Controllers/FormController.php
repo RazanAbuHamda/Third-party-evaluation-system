@@ -18,14 +18,30 @@ class FormController extends Controller
         $active = 'formAct';
         $user = Auth::user();
         $forms = Form::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(5);
-        return view('forms.index', compact('forms'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active', $active);
+
+        $formEvaluationsCount = [];
+        foreach ($forms as $form) {
+            $formEvaluationsCount[$form->id] = EvaluationResult::where('form_id', $form->id)->count();
+        }
+
+        return view('forms.index', compact('forms', 'formEvaluationsCount'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active', $active);
     }
+
 
     public function create(Request $request)
     {
         $active = 'formAct';
-        return view('forms.create')->with('active', $active);;
+        return view('forms.create')->with('active', $active);
     }
+
+    public function show($id,Request $request){
+        $active = 'formAct';
+//        $evaluationResults = EvaluationResult::where('form_id', $id)->limit(1)->paginate(5);
+        $evaluationResults = EvaluationResult::with('form')->where('form_id', 'form.id')->limit(1)->paginate(5);
+//        dd($evaluationResults);
+        return view('forms.evaluation-results')->with('active', $active)->with('i', ($request->input('page', 1) - 1) * 5)->with('id',$id)->with('evaluationResults',$evaluationResults);
+    }
+
 
     public function store(Request $request)
     {

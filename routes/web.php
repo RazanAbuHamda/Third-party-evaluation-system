@@ -30,8 +30,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-//    Route::resource('forms', FormController::class);
-//    Route::resource('enterprises', EnterpriseController::class);
 });
 Route::get('enterprises/index','App\Http\Controllers\EnterpriseController@index')->middleware('auth');
 Route::get('enterprises/create','App\Http\Controllers\EnterpriseController@create')->middleware('auth');
@@ -51,4 +49,5 @@ Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->m
 Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy')->middleware('auth');
 Route::get('forms/coordinator/{id}','App\Http\Controllers\FormController@createCoordinatorForm')->middleware('auth');
 Route::post('evaluation/store/{id}', 'App\Http\Controllers\FormController@storeEvaluationResults')->middleware('auth');
+Route::get('forms/show/{id}','App\Http\Controllers\FormController@show')->middleware('auth');
 

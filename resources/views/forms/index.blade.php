@@ -23,6 +23,7 @@
         <tr>
             <th>No</th>
             <th>Name</th>
+            <th>No. of Forms</th>
             <th></th>
         </tr>
         @foreach ($forms as $key => $form)
@@ -30,6 +31,7 @@
             <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $form->name }}</td>
+                <td>{{ $formEvaluationsCount[$form->id] }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ url('forms/show',$form->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ url('forms/edit',$form->id) }}">Edit</a>
