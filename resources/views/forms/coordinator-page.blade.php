@@ -168,39 +168,45 @@
                                                         results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers.push(selectedValue);
                                                     }
                                                 });
-
                                             }
                                         </script>
                                         <hr>
                                     @elseif($questions['type'] == 'checkbox')
                                         {{-- if question type is checkbox --}}
                                         @php
-                                            $selectedCheckboxValues = 0;
                                             $totalCheckboxValues = array_sum($questions['choicesWeights']);
+                                            $questionName = $questions['name'];
+                                            $choicesWeights = json_encode($questions['choicesWeights']);
                                         @endphp
                                         @foreach($questions['choices'] as $index => $choice)
-                                            <input type="checkbox" name="{{ $questions['name'] }}@if($loop->last)[]@endif" value="{{ $questions['choicesWeights'][$index] }}">
+                                            <input type="checkbox" name="{{ $questionName }}[]" value="{{ $choice }}">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
-
                                         <script>
-                                            var checkboxes = document.getElementsByName("{{ $questions['name'] }}[]");
-                                            var choicesWeights = {!! json_encode($questions['choicesWeights']) !!}.map(function (x) {
-                                                return parseFloat(x);
-                                            });
+                                            var questionName = "{{ $questionName }}";
+                                            var checkboxes = document.getElementsByName(questionName + "[]");
+                                            var choicesWeights = {!! $choicesWeights !!}.map(parseFloat);
+
                                             for (var i = 0; i < checkboxes.length; i++) {
                                                 checkboxes[i].addEventListener('click', function () {
+                                                    var selectedValuesScore = 0;
+                                                    var totalCheckboxValues = 0;
                                                     var selectedCheckboxValues = [];
+
                                                     for (var j = 0; j < checkboxes.length; j++) {
                                                         if (checkboxes[j].checked) {
-                                                            selectedCheckboxValues.push(parseFloat(checkboxes[j].value));
+                                                            selectedValuesScore += choicesWeights[j];
+                                                            selectedCheckboxValues.push(checkboxes[j].value);
                                                         }
+                                                        totalCheckboxValues += choicesWeights[j];
                                                     }
-                                                    console.log(selectedCheckboxValues.length > 0 ? selectedCheckboxValues : "No option selected");
 
-                                                    if (selectedCheckboxValues.length > 0) {
-                                                        var ans = (selectedCheckboxValues.reduce(function(a, b) { return a + b; }) * {{ $questions['weight'] }}) / {{ $totalCheckboxValues }};
+                                                    console.log(totalCheckboxValues);
+                                                    console.log(selectedValuesScore > 0 ? selectedValuesScore : "No option selected");
+
+                                                    if (selectedValuesScore > 0) {
+                                                        var ans = (selectedValuesScore * {{ $questions['weight'] }}) / totalCheckboxValues;
                                                         results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
                                                         results[topicId].topics[0].topicTotalScore += ans;
                                                         results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = ans;
@@ -212,71 +218,117 @@
                                                 });
                                             }
                                         </script>
-                                        <hr>
-
+                                        <hr
                                     @elseif($questions['type'] == 'rating')
                                         {{-- if question type is rating stars--}}
-                                        <div class="small-ratings">
-                                            <i class="fa fa-star rating-color" name="{{ $questions['name'] }}-1"></i>
-                                            <i class="fa fa-star" name="{{ $questions['name'] }}-2"></i>
-                                            <i class="fa fa-star" name="{{ $questions['name'] }}-3"></i>
-                                            <i class="fa fa-star" name="{{ $questions['name'] }}-4"></i>
-                                            <i class="fa fa-star" name="{{ $questions['name'] }}-5"></i>
+                                        <div class="rating-question">
+                                            <div class="stars">
+                                                <i class="fa fa-star" data-rating="{{$questions['name']}}-1"></i>
+                                                <i class="fa fa-star" data-rating="{{$questions['name']}}-2"></i>
+                                                <i class="fa fa-star" data-rating="{{$questions['name']}}-3"></i>
+                                                <i class="fa fa-star" data-rating="{{$questions['name']}}-4"></i>
+                                                <i class="fa fa-star" data-rating="{{$questions['name']}}-5"></i>
+                                            </div>
                                         </div>
                                         <hr>
                                         <script>
-                                            $(document).ready(function () {
-                                                const ratingStars = document.querySelectorAll('.small-ratings i');
-                                                const ratingColor = 'gold';
+                                            // Set rating questions and color
+                                            var ratingQuestions = document.querySelectorAll('.rating-question');
+                                            var ratingColor = 'gold';
 
-                                                function fillStars(index) {
-                                                    for (let i = 0; i <= index; i++) {
-                                                        ratingStars[i].style.color = ratingColor;
+                                            // Fill stars function
+                                            function fillStars(stars, index) {
+                                                rating = index + 1;
+                                                for (let i = 0; i < stars.length; i++) {
+                                                    if (i <= index) {
+                                                        stars[i].style.color = ratingColor;
+                                                    } else {
+                                                        stars[i].style.color = '';
                                                     }
                                                 }
+                                            }
 
-                                                function emptyStars() {
-                                                    for (let i = 0; i < ratingStars.length; i++) {
-                                                        ratingStars[i].style.color = '';
+                                            function emptyStars(stars) {
+                                                for (let i = 0; i < stars.length; i++) {
+                                                    if (stars[i].getAttribute('data-selected') === 'true') {
+                                                        stars[i].style.color = ratingColor;
+                                                    } else {
+                                                        stars[i].style.color = '';
                                                     }
                                                 }
+                                            }
 
-                                                ratingStars.forEach((star) => {
+
+                                            // Initialize rating system
+                                            function initRatingSystem(ratingQuestion) {
+                                                var stars = ratingQuestion.querySelectorAll('.stars i');
+                                                let starClicked = false;
+                                                let rating = 0;
+
+                                                stars.forEach((star, index) => {
                                                     star.addEventListener('mouseenter', () => {
-                                                        fillStars(Array.prototype.indexOf.call(ratingStars, star));
+                                                        fillStars(stars, index);
                                                     });
                                                     star.addEventListener('mouseleave', () => {
-                                                        emptyStars();
+                                                        emptyStars(stars);
                                                     });
                                                     star.addEventListener('click', () => {
-                                                        var stars = Array.prototype.indexOf.call(ratingStars, star) + 1;
-                                                        var questionName = star.getAttribute('name');
-                                                        var questionId = questionName.substring(0, questionName.lastIndexOf('-'));
+                                                        rating = index + 1;
+                                                        starClicked = true;
+                                                        var questionCredit = ({{ $questions['weight'] }} * rating) / 5;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push(questionCredit);
+                                                        results[topicId].topics[0].topicTotalScore += questionCredit;
 
-                                                        alert(`You rated question ${questionId} ${stars} stars!`);
-                                                        fillStars(stars - 1);
+                                                        console.log(questionCredit);
 
-                                                        // set the user's rating for the corresponding question
-                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
-                                                        results[topicId].topics[0].elementsScore = stars;
-                                                        results[topicId].topics[0].topicTotalScore += stars;
+                                                        // Save selected rating to data attribute
+                                                        stars.forEach((star, index) => {
+                                                            if (index < rating) {
+                                                                star.setAttribute('data-selected', 'true');
+                                                            } else {
+                                                                star.setAttribute('data-selected', 'false');
+                                                            }
+                                                        });
                                                     });
                                                 });
+
+                                                // Reset stars on mouseleave of the question container
+                                                ratingQuestion.addEventListener('mouseleave', () => {
+                                                    emptyStars(stars);
+                                                    rating = 0;
+                                                    starClicked = false;
+                                                });
+                                            }
+                                            // Fill stars with selected rating on page load
+                                            function fillStarsOnLoad(ratingQuestion) {
+                                                const stars = ratingQuestion.querySelectorAll('.stars i');
+                                                const rating = parseFloat(ratingQuestion.dataset.rating);
+
+                                                if (!isNaN(rating) && rating > 0 && rating <= 5) {
+                                                    fillStars(stars, rating - 1);
+                                                }
+                                            }
+
+                                            // Initialize rating systems and fill stars on page load for all rating questions
+                                            ratingQuestions.forEach((ratingQuestion) => {
+                                                initRatingSystem(ratingQuestion);
+                                                fillStarsOnLoad(ratingQuestion);
                                             });
+
                                         </script>
+                                        </hr>
 
                                     @else
                                         {{-- if question type is short text --}}
                                         <input type="text" name="{{ $questions['name'] }}" id="my-input">
                                         <script>
                                             var shortText = document.getElementsByName("{{ $questions['name'] }}")[0];
-                                                    results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                                    results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
-                                                    //انتبهي هان ما بحفظ الفاليو تعت الانبوت
-                                                    results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
-                                                    results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
-
-
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
+                                            //انتبهي هان ما بحفظ الفاليو تعت الانبوت
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
+                                            results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
                                         </script>
                                         <hr>
                                     @endif
