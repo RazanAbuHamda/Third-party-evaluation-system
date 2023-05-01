@@ -97,7 +97,6 @@
                     } else {
                         topicId = Object.keys(results).length;
                     }
-                    ++topicId;//هان اسألي بتطلعلك بالأول null
                     results[topicId] = {
                         topics: [
                             {
@@ -339,6 +338,7 @@
                         </tbody>
                     </table>
                 </div>
+               <script> ++topicId;</script>
             @endforeach
         </div>
         <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>

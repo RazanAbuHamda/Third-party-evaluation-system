@@ -11,6 +11,10 @@ class Form extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function evaluationResults()
+    {
+        return $this->belongsTo(EvaluationResult::class);
+    }
     protected $fillable = [
         'name',
         'user_id',

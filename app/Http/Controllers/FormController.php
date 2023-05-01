@@ -12,7 +12,6 @@ use Illuminate\Http\Response;
 
 class FormController extends Controller
 {
-//    use SurveyQuestionTrait;
     public function index(Request $request)
     {
         $active = 'formAct';
@@ -36,10 +35,11 @@ class FormController extends Controller
 
     public function show($id,Request $request){
         $active = 'formAct';
-//        $evaluationResults = EvaluationResult::where('form_id', $id)->limit(1)->paginate(5);
-        $evaluationResults = EvaluationResult::with('form')->where('form_id', 'form.id')->limit(1)->paginate(5);
+//        $evaluationResults = EvaluationResult::with('form')->where('form_id', $id)->paginate(5);
+        $evaluationResults = EvaluationResult::where('form_id', $id)->paginate(5);
+        $formName = Form::find($id)->name;
 //        dd($evaluationResults);
-        return view('forms.evaluation-results')->with('active', $active)->with('i', ($request->input('page', 1) - 1) * 5)->with('id',$id)->with('evaluationResults',$evaluationResults);
+        return view('forms.evaluation-results')->with('active', $active)->with('i', ($request->input('page', 1) - 1) * 5)->with('id',$id)->with('evaluationResults',$evaluationResults)->with('formName',$formName);
     }
 
 

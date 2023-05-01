@@ -19,7 +19,7 @@ class EvaluationResult extends Model
     ];
     public function form()
     {
-        return $this->belongsTo(EvaluationForm::class);
+        return $this->belongsTo(Form::class);
     }
 
     public function user()
