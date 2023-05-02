@@ -40,7 +40,7 @@
                   }
                 }
 
-                $topics = $resultJson[0]['topics'];
+                $topics = $resultJson['topics'];
                 $topicName = '';
                 $topicTotalScore = 0;
                 $questionScores = [];
