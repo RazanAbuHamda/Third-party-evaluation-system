@@ -84,21 +84,22 @@
         <div class="row" id="topics-container">
             <script>
                 var topicId = 0;
-                var results = {};
+                var results= {};
                 var total = 0;
             </script>
             @foreach ($formData as $surveyModel)
                 @php $questionId = 0; @endphp
 
                 <script>
-                    if (typeof results === "undefined") {
+                    total = 0;
+                    if (typeof results[topicId] === "undefined") {
                         var results = {};
                         topicId = 0;
                     } else {
-                        topicId = Object.keys(results).length;
+                        topicId = Object.keys(results[topicId]).length;
                     }
                     topicId++;//هان اسألي بتطلعلك بالأول null
-                    results = {
+                    results[topicId] = {
                         topics: [
                             {
                                 name: "{{ $surveyModel['pages'][0]['name'] }}",
@@ -107,7 +108,7 @@
                             }
                         ]
                     };
-                    results.topics[0].elements[{{$questionId}}] = {
+                    results[topicId].topics[0].elements[{{$questionId}}] = {
                         questionText: " ",
                         questionAnswers: [],
                         elementsScore: [],
@@ -133,9 +134,9 @@
                                 <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
                                 @php
                                     $counter++;
-                                @endphp
+//                                @endphp
                                 <script>
-                                    results.topics[0].elements[{{$questionIndex}}] = {
+                                    results[topicId].topics[0].elements[{{$questionIndex}}] = {
                                         questionText: "{{ $questions['name'] }}",
                                         questionAnswers: []
                                     };
@@ -162,11 +163,12 @@
                                                     selectedValue = this.value;
                                                     console.log(selectedValue !== null ? selectedValue : "No option selected");
                                                     if (selectedValue === "{{$questions['correctAnswer']}}") {
-                                                        results.topics[0].topicTotalScore += {{ $questions['weight'] }};
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore = results.topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
-                                                        results.topics[0].elements[{{$questionIndex}}].questionAnswers.push(selectedValue);
+                                                        //results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
+                                                        total+={{ $questions['weight'] }};
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
                                                     }
+                                                    results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers.push(selectedValue);
                                                 });
                                             }
                                         </script>
@@ -207,13 +209,14 @@
 
                                                     if (selectedValuesScore > 0) {
                                                         var ans = (selectedValuesScore * {{ $questions['weight'] }}) / totalCheckboxValues;
-                                                        results = results || {topics: [{topicTotalScore: 0}]};
-                                                        results.topics[0].topicTotalScore += ans;
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore = ans;
-                                                        results.topics[0].elements[{{$questionIndex}}].questionAnswers = selectedCheckboxValues;
+                                                        results[topicId] = results[topicId] || {topics: [{topicTotalScore: 0}]};
+                                                        // results[topicId].topics[0].topicTotalScore += ans;
+                                                        total+=ans;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = ans;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = selectedCheckboxValues;
                                                     } else {
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore = 0;
-                                                        results.topics[0].elements[{{$questionIndex}}].questionAnswers = [];
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = 0;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = [];
                                                     }
                                                 });
                                             }
@@ -276,10 +279,11 @@
                                                         rating = index + 1;
                                                         starClicked = true;
                                                         var questionCredit = ({{ $questions['weight'] }} * rating) / 5;
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore = results.topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                                        results.topics[0].elements[{{$questionIndex}}].elementsScore=questionCredit;
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                        results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore=questionCredit;
                                                         //اتأكذي من النتيحة الي بيحفظها هان
-                                                        results.topics[0].topicTotalScore += questionCredit;
+                                                        //results[topicId].topics[0].topicTotalScore += questionCredit;
+                                                        total+=questionCredit;
 
                                                         console.log(questionCredit);
                                                         // Save selected rating to data attribute
@@ -324,18 +328,21 @@
                                         <input type="text" name="{{ $questions['name'] }}" id="my-input">
                                         <script>
                                             var shortText = document.getElementsByName("{{ $questions['name'] }}")[0];
-                                            results.topics[0].elements[{{$questionIndex}}].elementsScore = results.topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                            results.topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
                                             //انتبهي هان ما بحفظ الفاليو تعت الانبوت
-                                            results.topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
-                                            results.topics[0].topicTotalScore += {{ $questions['weight'] }};
+                                            results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
+                                            //results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
+                                            total+= {{ $questions['weight'] }};
                                         </script>
                                         <hr>
                                     @endif
                                 </td>
                             </tr>
                         @endforeach
-                        </tbody>
+                        <script>
+                            results[topicId].topics[0].topicTotalScore += total;
+                        </script>
                         </tbody>
                     </table>
                 </div>
@@ -348,7 +355,7 @@
 
 
     $('#save-button').on('click', function () {
-        var reultsJson = JSON.stringify(results);
+        var reultsJson = JSON.stringify(results[topicId]);
         // Send the AJAX request with the reultsJson data
         $.ajax({
             url: '/evaluation/store/' + "{{$id}}",
