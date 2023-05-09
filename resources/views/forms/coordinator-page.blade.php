@@ -131,13 +131,14 @@
 
                         @foreach($surveyModel['pages'][0]['elements'] as $questionIndex => $questions)
                             <tr>
-                                <td style="font-weight: bold">{{ $counter }}. {{ $questions['name'] }}</td>
+                                <td style="font-weight: bold">{{ $counter }}. {{ $questions['title'] }}</td>
                                 @php
                                     $counter++;
 //                                @endphp
                                 <script>
                                     results[topicId].topics[0].elements[{{$questionIndex}}] = {
-                                        questionText: "{{ $questions['name'] }}",
+                                        questionText: "{{ $questions['title'] }}",
+                                        questionName: "{{ $questions['name'] }}",
                                         questionAnswers: []
                                     };
                                 </script>
@@ -327,13 +328,20 @@
                                         {{-- if question type is short text --}}
                                         <input type="text" name="{{ $questions['name'] }}" id="my-input">
                                         <script>
-                                            var shortText = document.getElementsByName("{{ $questions['name'] }}")[0];
-                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
-                                            results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
-                                            //انتبهي هان ما بحفظ الفاليو تعت الانبوت
-                                            results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText;
-                                            //results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
-                                            total+= {{ $questions['weight'] }};
+                                            var shortText = document.getElementsByName("{{ $questions['name'] }}");
+                                            var isShortTextFilled = false;
+                                            shortText.addEventListener('keypress', function (e) => {
+                                                results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore = results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore || [];
+                                                results[topicId].topics[0].elements[{{$questionIndex}}].elementsScore.push({{ $questions['weight'] }});
+                                                //انتبهي هان ما بحفظ الفاليو تعت الانبوت
+                                                results[topicId].topics[0].elements[{{$questionIndex}}].questionAnswers = shortText.value;
+                                                //results[topicId].topics[0].topicTotalScore += {{ $questions['weight'] }};
+
+                                                if (!isShortTextFilled) {
+                                                    total+= {{ $questions['weight'] }};
+                                                    isShortTextFilled = true;
+                                                }
+                                            })
                                         </script>
                                         <hr>
                                     @endif
@@ -355,12 +363,12 @@
 
 
     $('#save-button').on('click', function () {
-        var reultsJson = JSON.stringify(results[topicId]);
-        // Send the AJAX request with the reultsJson data
+        var resultsJson = JSON.stringify(results[topicId]);
+        // Send the AJAX request with the resultsJson data
         $.ajax({
             url: '/evaluation/store/' + "{{$id}}",
             type: 'POST',
-            data: {reultsJson: reultsJson, _token: "{{ csrf_token() }}"},
+            data: {resultsJson: resultsJson, _token: "{{ csrf_token() }}"},
             dataType: 'json',
             success: function (response) {
                 console.log(response);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\EvaluationResultCalculator;
 use App\Http\Traits\SurveyQuestion;
 use App\Models\Form;
 use Illuminate\Support\Facades\Auth;
@@ -87,7 +88,7 @@ class FormController extends Controller
 
     public function createCoordinatorForm($id){
         $formData = Form::find($id)->form_data;
-            return view('forms.coordinator-page')->with('formData', $formData, true)->with('id', $id);
+            return view('forms.coordinator-survey')->with('formData', $formData, true)->with('id', $id);
     }
 
     public function storeEvaluationResults(Request $request, $id)
@@ -97,14 +98,12 @@ class FormController extends Controller
         $formEvaluation->form_id = $id;
         $formEvaluation->user_id = $user->id;
         // Retrieve the formJson data from the request
-        $results = request('reultsJson');
-        // Decode the JSON string into a PHP array or object
-        $result = json_decode($results, true);
+        $results = json_decode(request('resultsJson'), true);
 
-        $formEvaluation->result_json = $result;
+        $formEvaluation->result_json = EvaluationResultCalculator::calculateEvaluationResultCredit($results);
         $formEvaluation->save();
 
-        return view('forms.evaluation-results');
+        return redirect()->back();
     }
 
 
