@@ -34,13 +34,18 @@ class FormController extends Controller
         return view('forms.create')->with('active', $active);
     }
 
-    public function show($id,Request $request){
+    public function show($id, Request $request)
+    {
         $active = 'formAct';
-//        $evaluationResults = EvaluationResult::with('form')->where('form_id', $id)->paginate(5);
-        $evaluationResults = EvaluationResult::where('form_id', $id)->paginate(5);
+        $evaluationResults = EvaluationResult::where('form_id', $id)->paginate(10);
         $formName = Form::find($id)->name;
-//        dd($evaluationResults);
-        return view('forms.evaluation-results')->with('active', $active)->with('i', ($request->input('page', 1) - 1) * 5)->with('id',$id)->with('evaluationResults',$evaluationResults)->with('formName',$formName);
+
+        return view('forms.evaluation-results')
+            ->with('active', $active)
+            ->with('i', ($request->input('page', 1) - 1) * 5)
+            ->with('id', $id)
+            ->with('evaluationResults', $evaluationResults)
+            ->with('formName', $formName);
     }
 
 

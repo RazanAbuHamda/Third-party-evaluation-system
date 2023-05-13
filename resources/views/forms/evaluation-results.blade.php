@@ -1,12 +1,13 @@
 @extends('layouts.system-layout')
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>{{ $formName }} Form</h2>
+                <h2>Form Results</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ url('forms/index') }}"> Browse Forms </a>
+                <a class="btn btn-success" href="{{ url('forms/index') }}">Browse Forms</a>
             </div>
         </div>
     </div>
@@ -17,66 +18,65 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>User_id</th>
-            <th>Topic Name</th>
-            <th>Topic's Questions text & it's Score</th>
-            <th>Topic's Total Score</th>
-        </tr>
+    @if ($evaluationResults && !$evaluationResults->isEmpty())
+        @foreach ($evaluationResults as $result)
+            <div class="card mb-4">
+                <br><br>
+                <div class="card-header">
+                    <h3 class="mb-0">{{ $result->form->name }}</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Topic Name</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Score</th>
+                        </tr>
+                        @foreach ($result->result_json['form'] as $section)
+                            <tr>
+                                <td rowspan="{{ count($section['questions']) + 1 }}">{{ $section['name'] }}</td>
+                            </tr><br>
+                            @foreach ($section['questions'] as $question)
+                                <tr>
+                                    <td>{{ $question['title'] }}</td>
+                                    <td>
+                                        @if (is_array($question['answer']))
+                                            @foreach ($question['answer'] as $answer)
+                                                {{ $answer }}<br>
+                                            @endforeach
+                                        @else
+                                            {{ $question['answer'] }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $question['credit'] }}</td>
+                                </tr>
 
-        @foreach ($evaluationResults as $key => $evaluationResult)
-            @php
-                $resultJson = $evaluationResult->result_json;
-
-                if (is_array($resultJson)) {
-                } else {
-                  $resultJson = json_decode($resultJson, true);
-                  if ($resultJson === null) {
-                    continue;
-                  }
-                }
-
-                $topics = $resultJson['topics'];
-            @endphp
-
-            @foreach ($topics as $topic)
-                @php
-                    $topicName = $topic['name'];
-                    $topicTotalScore = $topic['topicTotalScore'];
-                    $elements = $topic['elements'];
-                    $questionScores = [];
-                @endphp
-
-                @foreach ($elements as $element)
-                    @php
-                        $questionText = $element['questionText'];
-                        $scores = isset($element['elementsScore']) ? $element['elementsScore'] : [];
-                        $questionScore = is_array($scores) ? array_sum($scores) : $scores;
-                        $questionAnswers = implode(', ', $element['questionAnswers']);
-
-                        $questionScores[] = [
-                            'text' => $questionText,
-                            'score' => $questionScore,
-                            'answers' => $questionAnswers,
-                             ];
-                    @endphp
-                @endforeach
-
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $evaluationResult->user_id }}</td>
-                    <td>{{ $topicName }}</td>
-                    <td>
-                        @foreach ($questionScores as $questionScore)
-                            {{ $questionScore['text'] }}:<br> answers: {{ $questionScore['answers'] }} <br>
-                            Score: {{ $questionScore['score'] }}<br><hr>
+                            @endforeach
+                            <tr>
+                                <td colspan="3" align="right"><strong>Total Credit:</strong></td>
+                                <td>{{ $section['credit'] }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right"><strong>Total Weight:</strong></td>
+                                <td>{{ $section['weight'] }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right"><strong>Result Grade:</strong></td>
+                                <td>{{ $result->result_json['result_grade'] }}</td>
+                            </tr>
+                            <tr style="height: 40px;"></tr>
+                            <tr style="height: 20px;"></tr>
                         @endforeach
-                    </td>
-                    <td>{{ $topicTotalScore }}</td>
-                </tr>
-            @endforeach
+
+                        <tr style="height: 40px;"></tr>
+                    </table>
+                    <hr>
+                </div>
+            </div>
         @endforeach
-    </table>
+
+    @else
+        <p>No evaluation results found.</p>
+    @endif
 @endsection
