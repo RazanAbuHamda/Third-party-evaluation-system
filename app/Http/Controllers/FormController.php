@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\EvaluationResultCalculator;
 use App\Http\Traits\SurveyQuestion;
+use App\Models\Enterprise;
 use App\Models\Form;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EvaluationResult;
@@ -35,7 +36,8 @@ class FormController extends Controller
     public function create(Request $request)
     {
         $active = 'formAct';
-        return view('forms.create')->with('active', $active);
+        $enterprises = Enterprise::pluck('enterprise_name','id')->all();
+        return view('forms.create',compact('enterprises'))->with('active', $active);
     }
 
     public function show($id, Request $request)
@@ -63,6 +65,7 @@ class FormController extends Controller
 
         $form = new Form;
         $form->name = $request['form_name'];
+        $form->enterprise_id =$request->input("enterprise_id");
         $form->user_id = $user->id;
         $form->save();
 

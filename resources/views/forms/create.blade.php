@@ -32,6 +32,13 @@
                 {!! Form::text('form_name', null, array('placeholder' => 'Form Name','class' => 'form-control')) !!}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Enterprise Name:</strong>
+                {!! Form::select('enterprise_id', $enterprises, [],['class' => 'form-control']) !!}
+
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
