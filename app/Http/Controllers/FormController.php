@@ -13,6 +13,10 @@ use Illuminate\Http\Response;
 
 class FormController extends Controller
 {
+    protected $fillable = [
+        'name',
+        'enterprise_id',
+    ];
     public function index(Request $request)
     {
         $active = 'formAct';

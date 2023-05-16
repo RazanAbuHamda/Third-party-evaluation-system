@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('enterprise_id');
             $table->json('form_data')->nullable()->default(null);
             $table->timestamps();
         });
