@@ -18,26 +18,39 @@ class FormController extends Controller
         'name',
         'enterprise_id',
     ];
+
     public function index(Request $request)
     {
         $active = 'formAct';
         $user = Auth::user();
-        $forms = Form::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(5);
 
-        $formEvaluationsCount = [];
-        foreach ($forms as $form) {
-            $formEvaluationsCount[$form->id] = EvaluationResult::where('form_id', $form->id)->count();
+        $forms = Form::orderBy('id', 'DESC')
+            ->with('enterprise')
+            ->where('user_id', $user->id);
+
+        // Apply filter by enterprise name if provided
+        if ($request->has('enterprise_name')) {
+            $forms->whereHas('enterprise', function ($query) use ($request) {
+                $query->where('enterprise_name', 'LIKE', '%' . $request->input('enterprise_name') . '%');
+            });
         }
 
-        return view('forms.index', compact('forms', 'formEvaluationsCount'))->with('i', ($request->input('page', 1) - 1) * 5)->with('active', $active);
-    }
+        // Retrieve the count of forms for each enterprise
+        $enterpriseFormsCount = Enterprise::withCount('forms')->get();
+        $enterprises = Enterprise::pluck('enterprise_name', 'id'); // Retrieve the list of enterprise names
 
+        $forms = $forms->paginate(5);
+
+        return view('forms.index', compact('forms', 'enterpriseFormsCount', 'enterprises'))
+            ->with('i', ($request->input('page', 1) - 1) * 5)
+            ->with('active', $active);
+    }
 
     public function create(Request $request)
     {
         $active = 'formAct';
-        $enterprises = Enterprise::pluck('enterprise_name','id')->all();
-        return view('forms.create',compact('enterprises'))->with('active', $active);
+        $enterprises = Enterprise::pluck('enterprise_name', 'id')->all();
+        return view('forms.create', compact('enterprises'))->with('active', $active);
     }
 
     public function show($id, Request $request)
@@ -65,7 +78,7 @@ class FormController extends Controller
 
         $form = new Form;
         $form->name = $request['form_name'];
-        $form->enterprise_id =$request->input("enterprise_id");
+        $form->enterprise_id = $request->input("enterprise_id");
         $form->user_id = $user->id;
         $form->save();
 
@@ -84,6 +97,7 @@ class FormController extends Controller
 
         }
     }
+
     public function update($id)
     {
         // Retrieve the formJson data from the request
@@ -98,9 +112,10 @@ class FormController extends Controller
         return response()->json(['message' => 'Form received successfully!']);
     }
 
-    public function createCoordinatorForm($id){
+    public function createCoordinatorForm($id)
+    {
         $formData = Form::find($id)->form_data;
-            return view('forms.coordinator-survey')->with('formData', $formData, true)->with('id', $id);
+        return view('forms.coordinator-survey')->with('formData', $formData, true)->with('id', $id);
     }
 
     public function storeEvaluationResults(Request $request, $id)
@@ -117,7 +132,6 @@ class FormController extends Controller
 
         return redirect()->back();
     }
-
 
 
 }

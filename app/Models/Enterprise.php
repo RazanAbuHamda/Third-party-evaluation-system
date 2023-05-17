@@ -17,4 +17,10 @@ class Enterprise extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function forms()
+    {
+        return $this->hasMany(Form::class);
+    }
+
 }

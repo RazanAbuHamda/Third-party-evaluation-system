@@ -61,9 +61,9 @@
                                     <td>{{ $question['credit'] }}</td>
                                 </tr>
                             @endforeach
-                            <tr>
-                                <td colspan="6"><strong>Topic report</strong></td>
-                            </tr>
+{{--                            <tr>--}}
+{{--                                <td colspan="6"><strong>Topic report</strong></td>--}}
+{{--                            </tr>--}}
 {{--                            <tr>--}}
 {{--                                <td></td>--}}
 {{--                                <td colspan="3" align="right" style="border: 1px solid grey;"><strong>Topic Total--}}
@@ -84,7 +84,7 @@
                             <td></td>
                             <td colspan="3" align="right" style="border: 1px solid black;"><strong>Form Result
                                     Grade:</strong></td>
-                            <td style="border: 1px solid black;">{{ $result->result_json['result_grade'] }}</td>
+                            <td style="border: 1px solid black;">{{ $result->result_json['result_grade'] }}%</td>
                         </tr>
                         <tr style="height: 40px;"></tr>
                     </table>

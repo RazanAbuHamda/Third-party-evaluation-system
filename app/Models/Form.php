@@ -15,6 +15,12 @@ class Form extends Authenticatable
     {
         return $this->belongsTo(EvaluationResult::class);
     }
+
+    public function enterprise()
+    {
+        return $this->belongsTo(Enterprise::class);
+    }
+
     protected $fillable = [
         'name',
         'user_id',
