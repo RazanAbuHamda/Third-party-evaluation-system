@@ -109,7 +109,7 @@
                     </li>
                 </ul>
                 <div class="tab-content custom-menu-content">
-                    <div id="Users" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Users" class="tab-pane notika-tab-menu-bg animated flipInX users">
                         <ul class="notika-main-menu-dropdown">
                             @can('Show users')
                                 <li><a href="{{Url('users')}}">Show users</a>
@@ -121,7 +121,7 @@
                             @endcan
                         </ul>
                     </div>
-                    <div id="Enterprises" class="tab-pane notika-tab-menu-bg animated flipInX">
+                    <div id="Enterprises" class="tab-pane notika-tab-menu-bg animated flipInX enterprises">
                         <ul class="notika-main-menu-dropdown">
                             @can('Show enterprises')
                                 <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
@@ -135,7 +135,7 @@
                         </ul>
                     </div>
                     <div id="Forms" class="tab-pane notika-tab-menu-bg
-                    animated flipInX">
+                    animated flipInX forms">
                         <ul class="notika-main-menu-dropdown">
                             <li ><a href="{{ url('forms/index')}}">Show Forms</a>
                             </li>
