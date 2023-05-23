@@ -22,6 +22,9 @@
 {{--    </div>--}}
     <div class="mb-3 pull-right">
         <form action="{{ url('forms/index') }}" method="GET">
+            <div class="pull-right input-group-append">
+                <button class="btn btn-success" type="submit"> Filter </button>
+            </div>
             <div class="input-group">
                 <select class="form-control" name="enterprise_name">
                     <option value="">All Enterprises</option>
@@ -31,9 +34,6 @@
                         </option>
                     @endforeach
                 </select>
-                <div class="input-group-append">
-                    <button class="btn btn-success" type="submit">Filter</button>
-                </div>
             </div>
         </form>
     </div>

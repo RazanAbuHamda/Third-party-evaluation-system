@@ -43,7 +43,7 @@ Route::post('enterprises/update/{id}','App\Http\Controllers\EnterpriseController
 
 Route::get('forms/create','App\Http\Controllers\FormController@create')->middleware('auth');
 Route::post('forms/store','App\Http\Controllers\FormController@store')->middleware('auth');
-Route::get('forms/index','App\Http\Controllers\FormController@index')->name('forms.index')->middleware('auth');
+Route::get('forms/index', 'App\Http\Controllers\FormController@index')->name('forms.index')->middleware('auth');
 Route::get('forms/edit/{id}', 'App\Http\Controllers\FormController@survey')->name('forms.edit')->middleware('auth');
 Route::post('forms/update/{id}','App\Http\Controllers\FormController@update')->middleware('auth');
 Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy')->middleware('auth');
