@@ -103,7 +103,8 @@
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                     <li class="users"><a data-toggle="tab" href="#Users"><i class="user"></i> Users</a>
                     </li>
-                    <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i class="enterprise"></i> Enterprises</a>
+                    <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i class="enterprise"></i>
+                            Enterprises</a>
                     </li>
                     <li class="forms"><a data-toggle="tab" href="#Forms"><i class="form"></i> Forms</a>
                     </li>
@@ -131,13 +132,12 @@
                                 <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
                                 </li>
                                 @endcan
-                                </li>
                         </ul>
                     </div>
                     <div id="Forms" class="tab-pane notika-tab-menu-bg
                     animated flipInX forms">
                         <ul class="notika-main-menu-dropdown">
-                            <li ><a href="{{ url('forms/index')}}">Show Forms</a>
+                            <li><a href="{{ url('forms/index')}}">Show Forms</a>
                             </li>
                             <li><a href="{{url('forms/create')}}">Add Form</a>
                             </li>

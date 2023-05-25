@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('enterprise_id');
             $table->json('form_data')->nullable()->default(null);
             $table->timestamps();
+            $table->foreign('enterprise_id')->references('id')->on('enterprises');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

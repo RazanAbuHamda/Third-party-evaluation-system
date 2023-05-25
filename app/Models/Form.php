@@ -24,7 +24,8 @@ class Form extends Authenticatable
     protected $fillable = [
         'name',
         'user_id',
-        'form_data'
+        'form_data',
+        'enterprise_id'
     ];
 
     protected $hidden = [
