@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049  "
-                    href="{{ url('enterprises/index') }}">
+                <a style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049  "
+                   href="{{ url('enterprises/index') }}">
                     <i class="fas fa-angle-left"></i>
                 </a>
                 <h3>enterprises/Edit Enterprise</h3>

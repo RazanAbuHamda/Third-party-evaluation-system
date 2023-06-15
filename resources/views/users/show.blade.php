@@ -3,16 +3,15 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Show User</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049" href="{{ route('users.index') }}">
-                    <i class="fas fa-arrow-left" style="margin-right: 5px"></i> Back
+                <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049  "
+                    href="{{ route('users.index') }}">
+                    <i class="fas fa-angle-left"></i>
                 </a>
+                <h3>users/Show User</h3>
             </div>
         </div>
     </div>
-
+<br><br>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
