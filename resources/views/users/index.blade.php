@@ -38,14 +38,14 @@
             <tr>
                 <td>
                     <a class="btn btn-info"
-                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 50px"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 10px"
                        href="{{ route('users.show', $user->id) }}">
                     {{ ++$i }}
                     </a>
                 </td>
                 <td>
                     <a class="btn btn-info"
-                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 150px"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 100px"
                        href="{{ route('users.show', $user->id) }}">
                         {{ $user->name }}
                     </a>
