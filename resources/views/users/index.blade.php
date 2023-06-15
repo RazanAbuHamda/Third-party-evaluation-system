@@ -72,7 +72,6 @@
                    href="{{ route('users.show', $user->id) }}">
                     <td>{{ $user->status }}</td>
                 </a>
-                <a class="btn btn-info" style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 150px" href="{{ route('users.show', $user->id) }}">
                 <td>
                     {{ $user->enterprise_id }}
                     @if(empty($user->enterprise_id))

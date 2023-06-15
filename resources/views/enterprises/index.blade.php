@@ -11,11 +11,8 @@
                 </a>
             </div>
         </div>
-
-
     </div>
-
-
+    <br><br>
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -36,14 +33,14 @@
             <tr>
                 <td>
                     <a class="btn btn-info"
-                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 20px"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 10px"
                        href="{{ url('enterprises/show/'.$enterprise->id) }} }}">
                     {{ ++$i }}
                     </a>
                 </td>
                 <td>
                     <a class="btn btn-info"
-                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 50px"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 150px"
                        href="{{ url('enterprises/show/'.$enterprise->id) }} }}">
                     {{ $enterprise->enterprise_name }}
                     </a>

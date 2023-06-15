@@ -13,6 +13,7 @@
             <h3>enterprises/Add Enterprise</h3>
         </div>
     </div>
+    <br><br>
 
 
     @if (count($errors) > 0)
