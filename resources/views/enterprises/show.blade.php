@@ -6,7 +6,9 @@
                 <h2> Show Enterprise</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ url('enterprises/index') }}"> Back </a>
+                <a class="btn btn-primary" style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049" href="{{ url('enterprises/index') }}">
+                    <i class="fas fa-arrow-left" style="margin-right: 5px"></i> Back
+                </a>
             </div>
         </div>
     </div>

@@ -4,12 +4,35 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Area Charts | Notika - Notika Admin Template</title>
+    <title>Rate Mentor System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .logo-img {
+            max-width: 200px; /* Adjust the width as needed */
+            height: 100px; /* Maintain the aspect ratio */
+             /* Optional: Add some right margin */
+        }
+        .delete-button {
+            background-color: #FFFFFF;
+            color: red;
+        }
+        .pull-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .pull-left i {
+            margin-right: 35px; /* Adjust the spacing between the icon and the text */
+        }
+        .fa-angle-left {
+            font-size: 24px; /* تعديل حجم السهم حسب الحجم المطلوب */
+        }
+
+    </style>
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('dashboardPublic/img/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('dashboardPublic/img/favicon.png')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -51,101 +74,75 @@
     <link rel="stylesheet" href={{asset('style.css')}}>
     <!-- responsive CSS
 		============================================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
     <link rel="stylesheet" href={{asset('dashboardPublic/assets/css/responsive.css')}}>
     <!-- modernizr JS
+
 		============================================ -->
     <script src={{asset('dashboardPublic/assets/js/vendor/modernizr-2.8.3.min.js')}}></script>
 
 </head>
-
 <body>
+
 <!-- Start Header Top Area -->
-<div class="header-top-area">
+<div class="header-top-area" style="background-color: #F4F4F4">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="logo-area">
-                    <a href="#"><img src="" alt=""/></a>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-right: -60px">
+                <div class="logo-area" style="margin-left: 0px;">
+                    <a href="#"><img src="{{ asset('dashboardPublic/img/logo.png') }}" alt="Logo" class="logo-img"></a>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="padding-top: 15px;">
-                <div class="header-top-menu" style="float: left;">
-                    <ul class="nav navbar-nav notika-top-nav">
-                        <h1 style="font-size: 24px; font-weight: bold; color: white;">Third party evaluation system</h1>
-                    </ul>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-left: -60px">
+                            <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                                <li class="users"><a data-toggle="tab" href="#Users"><i class="user"></i> Users</a>
+                                </li>
+                                <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i
+                                            class="enterprise"></i>
+                                        Enterprises</a>
+                                </li>
+                                <li class="forms"><a data-toggle="tab" href="#Forms"><i class="form"></i> Forms</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content custom-menu-content">
+                                <div id="Users" class="tab-pane notika-tab-menu-bg animated flipInX users">
+                                    <ul class="notika-main-menu-dropdown">
+                                        @can('Show users')
+                                            <li><a href="{{Url('users')}}">Show users</a>
+                                            </li>
+                                        @endcan
+                                        @can('Add user')
+                                            <li><a href="{{Url('users/create')}}">Add user</a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </div>
+                                <div id="Enterprises" class="tab-pane notika-tab-menu-bg animated flipInX enterprises">
+                                    <ul class="notika-main-menu-dropdown">
+                                        @can('Show enterprises')
+                                            <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
+                                            </li>
+                                        @endcan
+                                        @can('Add Enterprise')
+                                            <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </div>
+                                <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX forms">
+                                    <ul class="notika-main-menu-dropdown">
+                                        <li><a href="{{ url('forms/index')}}">Show Forms</a>
+                                        </li>
+                                        <li><a href="{{url('forms/create')}}">Add Form</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+<br><br><br>
 
-        </div>
-    </div>
-</div>
-<!-- End Header Top Area -->
-<!-- Mobile Menu start -->
-<div class="mobile-menu-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="mobile-menu">
-                    <nav id="dropdown">
-
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Mobile Menu end -->
-<!-- Main Menu area start-->
-<div class="main-menu-area mg-tb-40">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li class="users"><a data-toggle="tab" href="#Users"><i class="user"></i> Users</a>
-                    </li>
-                    <li class="enterprises"><a data-toggle="tab" href="#Enterprises"><i class="enterprise"></i>
-                            Enterprises</a>
-                    </li>
-                    <li class="forms"><a data-toggle="tab" href="#Forms"><i class="form"></i> Forms</a>
-                    </li>
-                </ul>
-                <div class="tab-content custom-menu-content">
-                    <div id="Users" class="tab-pane notika-tab-menu-bg animated flipInX users">
-                        <ul class="notika-main-menu-dropdown">
-                            @can('Show users')
-                                <li><a href="{{Url('users')}}">Show users</a>
-                                </li>
-                            @endcan
-                            @can('Add user')
-                                <li><a href="{{Url('users/create')}}">Add user</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
-                    <div id="Enterprises" class="tab-pane notika-tab-menu-bg animated flipInX enterprises">
-                        <ul class="notika-main-menu-dropdown">
-                            @can('Show enterprises')
-                                <li><a href="{{ url('enterprises/index') }}">Show Enterprises</a>
-                                </li>
-                            @endcan
-                            @can('Add Enterprise')
-                                <li><a href="{{ url('enterprises/create') }}">Add Enterprise</a>
-                                </li>
-                                @endcan
-                        </ul>
-                    </div>
-                    <div id="Forms" class="tab-pane notika-tab-menu-bg
-                    animated flipInX forms">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="{{ url('forms/index')}}">Show Forms</a>
-                            </li>
-                            <li><a href="{{url('forms/create')}}">Add Form</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Main Menu area End-->

@@ -54,8 +54,21 @@
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/
-html, body {font-family: 'Roboto', sans-serif;font-weight:400;}
-body {background:#F6F8FA;}
+html, body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 80px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background: #FFFFFF;
+}
+i.fas.fa-angle-left:hover {
+    color: #F7C049;
+}
+
 .floatleft {float:left}
 .floatright {float:right}
 .alignleft {float:left;margin-right:15px;margin-bottom: 15px}
@@ -183,11 +196,29 @@ body {}
 /*----------------------------------------*/
 /*  2.  Header Top CSS
 /*----------------------------------------*/
-.header-top-area, .footer-copyright-area{
-	background:#00c292;
+.footer-copyright-area{
+    background: #F4F4F4;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    width: 100%;
 }
 .logo-area{
 	padding:14px 0px;
+}
+.header-top-area{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 9999; /* Set a high value to ensure it appears on top */
+
 }
 .nav.navbar-nav.notika-top-nav{
 	float: right;

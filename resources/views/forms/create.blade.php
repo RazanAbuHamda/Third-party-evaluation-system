@@ -3,10 +3,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Create New Form</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ url('forms/index') }}"> Back </a>
+                <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049  "
+                    href="{{ url('forms/index') }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                <h3>forms/Add New Form</h3>
             </div>
         </div>
     </div>
@@ -40,7 +41,10 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary"
+                    style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049; width: 180px;height: 40px; font-weight: bold;font-size: 20px">
+                <i class="fas fa-check" style="margin-right: 5px"></i> Save
+            </button>
         </div>
     </div>
     {!! Form::close() !!}

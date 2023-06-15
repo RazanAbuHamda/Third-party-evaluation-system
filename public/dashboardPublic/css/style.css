@@ -82,11 +82,13 @@ a:focus {
 }
 
 .left-content ul li.active {
-    background-color: #00c292;
+    color: #F7C049;
+    border-bottom: 2px solid #F7C049;
 }
 
 .left-content ul li.active a span {
-    border-color: #ffffff;
+    color: #F7C049;
+    border-bottom: 2px solid #F7C049;
 }
 
 .left-content ul li a {

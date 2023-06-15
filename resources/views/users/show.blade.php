@@ -6,7 +6,9 @@
                 <h2> Show User</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back </a>
+                <a class="btn btn-primary" style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049" href="{{ route('users.index') }}">
+                    <i class="fas fa-arrow-left" style="margin-right: 5px"></i> Back
+                </a>
             </div>
         </div>
     </div>

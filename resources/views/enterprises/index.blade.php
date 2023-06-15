@@ -3,12 +3,16 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Enterprises Management</h2>
+                <h2>Enterprises List</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ url('enterprises/create') }}"> Create New Enterprise </a>
+                <a class="btn btn-success rounded-pill" href="{{  url('enterprises/create') }}" style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049 ">
+                    <i class="fa fa-plus" style="margin-right: 5px"></i>  Add Enterprise
+                </a>
             </div>
         </div>
+
+
     </div>
 
 
@@ -30,15 +34,29 @@
         @foreach ($data as $key => $enterprise)
             {{--is a key of array from compact php function used in controller--}}
             <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $enterprise->enterprise_name }}</td>
+                <td>
+                    <a class="btn btn-info"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 20px"
+                       href="{{ url('enterprises/show/'.$enterprise->id) }} }}">
+                    {{ ++$i }}
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-info"
+                       style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 50px"
+                       href="{{ url('enterprises/show/'.$enterprise->id) }} }}">
+                    {{ $enterprise->enterprise_name }}
+                    </a>
+                </td>
                 <td>{{ $enterprise->email }}</td>
                 <td>{{$enterprise->status}}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ url('enterprises/show/'.$enterprise->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ url('enterprises/edit/'.$enterprise->id) }}">Edit</a>
-                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline','id'=>'delete-entr-form']) !!}
-                    {!! Form::button('Delete', ['class' => 'btn btn-danger','id'=>'delete-entr-btn']) !!}
+                    <a class="btn btn-primary" style="background-color: #FFFFFF;color: #0c0c0c"  href="{{ url('enterprises/edit/'.$enterprise->id) }}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+
+                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
+                    {!! Form::button('<i class="fas fa-trash"></i> Delete', ['class' => 'btn btn-danger delete-button','id'=>'delete-entr-btn']) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>
