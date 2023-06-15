@@ -2,7 +2,7 @@
 
 @section('auth-body')
     <body style=" background-color: #F7C049;">
-    <div class="login-content" style="background-color: #F7C049; display: flex; flex-direction: column;margin: -180px">
+    <div class="login-content" style="background-color: #F7C049; display: flex; flex-direction: column;margin-top: -180px">
         <!-- Logo -->
         <div class="logo-area" style="">
             <a href="#"><img src="{{ asset('dashboardPublic/img/logoAuth.jpeg') }}" alt="Logo" class="logo-img"></a>
