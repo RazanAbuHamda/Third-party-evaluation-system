@@ -12,7 +12,7 @@
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <style>
+    <style>
         .container {
             max-width: 600px;
         }
@@ -60,7 +60,8 @@
                 @csrf
                 <div class="row" style="padding-left: 270px">
                     <div class="col-12">
-                        <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary btn-color-ch"
+                        <button type="button" name="add" id="dynamic-add-topic"
+                                class="btn btn-outline-primary btn-color-ch"
                                 style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049;color: black ">
                             <i class="fa fa-plus" style="margin-right: 5px"></i> Add Topic
                         </button>
@@ -73,7 +74,8 @@
                 </div>
                 <br>
 
-                <div class="row" id="topics-container" style="padding: 270px; padding-top: 10px;background-color: #FFFFFF;border: none;">
+                <div class="row" id="topics-container"
+                     style="padding: 270px; padding-top: 10px;background-color: #FFFFFF;border: none;">
                 </div>
             </form>
         </div>
@@ -186,7 +188,8 @@
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"><i class="fas fa-square" style="margin-right: 5px"></i><button type="button" class="btn btn-outline-danger btn-color-ch delete-topic-btn"style="border: none;color: gray;float: right" ;> <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic </button> <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"data-bs-toggle="modal" data-bs-target="#addQuestionModal"style="border: none;color: gray;float: right" ;> <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question </button>' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody></table></div>');}
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"><i class="fas fa-square" style="margin-right: 5px"></i><button type="button" class="btn btn-outline-danger btn-color-ch delete-topic-btn"style="border: none;color: gray;float: right" ;> <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic </button> <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"data-bs-toggle="modal" data-bs-target="#addQuestionModal"style="border: none;color: gray;float: right" ;> <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question </button>' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody></table></div>');
+            }
 
             surveyModels[newTopicId] = {
                 pages: [
@@ -313,7 +316,7 @@
 
             // Send the AJAX request with the formJson data
             $.ajax({
-                url: '/forms/update/'+"{{$id}}",
+                url: '/forms/update/' + "{{$id}}",
                 type: 'POST',
                 data: {formJson: formJson, _token: "{{ csrf_token() }}"},
                 dataType: 'json',
@@ -324,16 +327,24 @@
         });
 
         // Action to delete a topic
-        $('#topics-container').on('click', '.delete-topic-btn', function() {
+        $('#topics-container').on('click', '.delete-topic-btn', function () {
             var topicId = $(this).data('topic-id');
             var confirmation = confirm('Are you sure you want to delete this topic?');
 
             if (confirmation) {
-                $('#topic\\[' + topicId + '\\]').parent().remove();
-                delete surveyModels[topicId];
+                $(this).parents('table').remove();
+                // Send an AJAX request to update the server
+                $.ajax({
+                    url: '/forms/delete-topic/' + topicId,
+                    type: 'POST',
+                    data: {topicId: topicId, _token: "{{ csrf_token() }}"},
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                })
             }
         });
-
     });
 
 
@@ -342,18 +353,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-    $( function() {
+    $(function () {
 
-        $( "#topics-container" ).sortable({
-            stop: function(event, ui) {
+        $("#topics-container").sortable({
+            stop: function (event, ui) {
 
 
-                $("#topics-container .item").each(function(){
-                  // write code here
+                $("#topics-container .item").each(function () {
+                    // write code here
                 });
 
             }
         }).disableSelection();
 
-    } );
+    });
 </script>

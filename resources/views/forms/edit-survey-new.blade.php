@@ -65,7 +65,8 @@
 
                 <div class="row" style="padding-left: 270px">
                     <div class="col-12">
-                        <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary btn-color-ch"
+                        <button type="button" name="add" id="dynamic-add-topic"
+                                class="btn btn-outline-primary btn-color-ch"
                                 style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049;color: black ">
                             <i class="fa fa-plus" style="margin-right: 5px"></i> Add Topic
                         </button>
@@ -89,13 +90,16 @@
                                 <tr>
                                     <th colspan="2"
                                         style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"
-                                        ;><i class="fas fa-square" style="margin-right: 5px"></i> {{ $surveyModel['pages'][0]['name'] }}
+                                        ;><i class="fas fa-square"
+                                             style="margin-right: 5px"></i> {{ $surveyModel['pages'][0]['name'] }}
 
-                                        <button type="button" class="btn btn-outline-danger btn-color-ch delete-topic-btn"
+                                        <button type="button"
+                                                class="btn btn-outline-danger btn-color-ch delete-topic-btn"
                                                 style="border: none;color: gray;float: right" ;>
                                             <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic
                                         </button>
-                                        <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"
+                                        <button type="button"
+                                                class="btn btn-outline-primary dynamic-question btn-color-ch"
                                                 data-bs-toggle="modal" data-bs-target="#addQuestionModal"
                                                 style="border: none;color: gray;float: right" ;>
                                             <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question
@@ -370,19 +374,33 @@
                 }
             });
         });
+        var deletedTopics = []; // Use an array to store topic names
 
-        // Action to delete a topic
-        $(document).on('click', '.delete-topic-btn', function () {
-            var topicId = $(this).data('topic-id');
-            var confirmation = confirm('Are you sure you want to delete this topic?');
+// Action to delete a topic
+        $('#topics-container').on('click', '.delete-topic-btn', function () {
+            var topicId = $(this).parents('table').data('data-topic');
+            var topicName = $(this).parents('table').data('topic-name'); // Get the topic name
+
+            var confirmation = confirm('Are you sure you want to delete the topic: ' + topicName + '?');
+
             if (confirmation) {
-                $('#topic\\[' + topicId + '\\]').parent().remove();
-                delete surveyModels[topicId];
+                deletedTopics.push(topicName); // Add topic name to the array
+                $(this).parents('table').remove();
+
+                // Send an AJAX request to update the server
+                $.ajax({
+                    url: '/forms/delete-topic/' + "{{$id}}",
+                    type: 'POST',
+                    data: {deletedTopics: JSON.stringify(deletedTopics), _token: "{{ csrf_token() }}"},
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
             }
+            console.log(deletedTopics);
         });
-
     });
-
 
 </script>
 

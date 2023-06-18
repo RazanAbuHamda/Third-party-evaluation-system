@@ -102,7 +102,6 @@ class FormController extends Controller
     {
         // Retrieve the formJson data from the request
         $formJson = request('formJson');
-
         // Decode the JSON string into a PHP array or object
         $formData = json_decode($formJson, true);
         $form = Form::find($id);
@@ -133,5 +132,26 @@ class FormController extends Controller
         return redirect()->back();
     }
 
+    public function deleteTopic($id)
+    {
+        $topicsName = json_decode(request('deletedTopics'), true);
+        $form = Form::find($id);
+        $formData = json_decode($form->form_data, true);
+
+        // Perform the necessary actions to delete the topic from the database or storage
+        foreach ($topicsName as $topicName) {
+            foreach ($formData as $index => $surveyModel) {
+                if ($surveyModel['name'] === $topicName) {
+                    unset($formData[$index]);
+                }
+            }
+        }
+
+        $formData = array_values($formData); // Reindex the array
+        $form->form_data = json_encode($formData);
+        $form->save();
+
+        return response()->json(['success' => true]);
+    }
 
 }

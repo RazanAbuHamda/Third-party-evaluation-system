@@ -50,4 +50,5 @@ Route::delete('forms/destroy/{id}','App\Http\Controllers\FormController@destroy'
 Route::get('forms/coordinator/{id}','App\Http\Controllers\FormController@createCoordinatorForm')->middleware('auth');
 Route::post('evaluation/store/{id}', 'App\Http\Controllers\FormController@storeEvaluationResults')->middleware('auth');
 Route::get('forms/show/{id}','App\Http\Controllers\FormController@show')->middleware('auth');
+Route::post('forms/delete-topic/{id}','App\Http\Controllers\FormController@deleteTopic')->middleware('auth');
 
