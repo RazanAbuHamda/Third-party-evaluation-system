@@ -3,15 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Form Page</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('dashboardPublic/img/favicon.png')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <title>Rate Mentor System/ Edit Enterprise Form</title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
 
-    <style>
+        <style>
         .container {
             max-width: 600px;
         }
+
+        .btn-color-ch:hover {
+            color: black;
+            background-color: #F7C049;
+            border-radius: 50px;
+            border-color: #F7C049;
+            font-weight: bold;
+        }
+    </style>
     </style>
 </head>
 <body>
@@ -45,19 +57,22 @@
         <div class="col-12">
             <form action="{{ url('forms/update/'.$id) }}" id="dynamic-form" method="POST">
                 @csrf
-
-                <div class="row">
+                <div class="row" style="padding-left: 270px">
                     <div class="col-12">
-                        <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary">Add
-                            Topic
+                        <button type="button" name="add" id="dynamic-add-topic" class="btn btn-outline-primary btn-color-ch"
+                                style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049;color: black ">
+                            <i class="fa fa-plus" style="margin-right: 5px"></i> Add Topic
                         </button>
 
-                        <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
+                        <button type="button" class="btn btn-outline-success btn-block btn-color-ch" id="save-button"
+                                style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049;color: black">
+                            <i class="fas fa-check" style="margin-right: 5px"></i>Save
+                        </button>
                     </div>
                 </div>
                 <br>
 
-                <div class="row" id="topics-container">
+                <div class="row" id="topics-container" style="padding: 270px; padding-top: 10px;background-color: #FFFFFF;border: none;">
                 </div>
             </form>
         </div>
@@ -170,8 +185,7 @@
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="text-align: center;">' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody><tfoot><tr><td colspan="2"><button type="button" class="btn btn-outline-primary dynamic-question" data-bs-toggle="modal" data-bs-target="#addQuestionModal">Add Question</button> <button type="button" class="btn btn-outline-danger">Delete Topic</button></td></tr></tfoot></table></div>');
-            }
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"><i class="fas fa-square" style="margin-right: 5px"></i><button type="button" class="btn btn-outline-danger btn-color-ch"style="border: none;color: gray;float: right" ;> <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic </button> <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"data-bs-toggle="modal" data-bs-target="#addQuestionModal"style="border: none;color: gray;float: right" ;> <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question </button>' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody></table></div>');}
 
             surveyModels[newTopicId] = {
                 pages: [
