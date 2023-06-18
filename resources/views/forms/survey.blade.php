@@ -10,6 +10,7 @@
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/survey-jquery/modern.min.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <style>
         .container {
@@ -320,6 +321,17 @@
                     console.log(response);
                 }
             });
+        });
+
+        // Action to delete a topic
+        $('#topics-container').on('click', '.delete-topic-btn', function() {
+            var topicId = $(this).data('topic-id');
+            var confirmation = confirm('Are you sure you want to delete this topic?');
+
+            if (confirmation) {
+                $('#topic\\[' + topicId + '\\]').parent().remove();
+                delete surveyModels[topicId];
+            }
         });
 
     });
