@@ -91,7 +91,7 @@
                                         style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"
                                         ;><i class="fas fa-square" style="margin-right: 5px"></i> {{ $surveyModel['pages'][0]['name'] }}
 
-                                        <button type="button" class="btn btn-outline-danger btn-color-ch"
+                                        <button type="button" class="btn btn-outline-danger btn-color-ch delete-topic-btn"
                                                 style="border: none;color: gray;float: right" ;>
                                             <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic
                                         </button>
@@ -234,7 +234,7 @@
             var topicName = prompt("Please enter topic name");
 
             if (topicName) {
-                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"><i class="fas fa-square" style="margin-right: 5px"></i><button type="button" class="btn btn-outline-danger btn-color-ch"style="border: none;color: gray;float: right" ;> <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic </button> <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"data-bs-toggle="modal" data-bs-target="#addQuestionModal"style="border: none;color: gray;float: right" ;> <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question </button>' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody></table></div>');
+                $('#topics-container').append('<div class="col-12"><table class="table table-bordered" data-topic=' + newTopicId + ' data-topic-name="' + topicName + '" id="topic[' + newTopicId + ']" class="dynamic-topic"><thead><tr><th colspan="2" style="border:none;text-align: left;color: #F7C049;font-size: 22px; padding-left: 10px"><i class="fas fa-square" style="margin-right: 5px"></i><button type="button" class="btn btn-outline-danger btn-color-ch delete-topic-btn"style="border: none;color: gray;float: right" ;> <i class="fas fa-minus" style="margin-right: 10px"></i>Delete Topic </button> <button type="button" class="btn btn-outline-primary dynamic-question btn-color-ch"data-bs-toggle="modal" data-bs-target="#addQuestionModal"style="border: none;color: gray;float: right" ;> <i class="fa fa-plus" style="margin-right: 10px"></i>Add Question </button>' + topicName + '</th></tr</thead><tbody id="surveyContainer' + newTopicId + '"></tbody></table></div>');
             }
             surveyModels[newTopicId] = {
                 pages: [
@@ -372,10 +372,9 @@
         });
 
         // Action to delete a topic
-        $('#topics-container').on('click', '.delete-topic-btn', function() {
+        $(document).on('click', '.delete-topic-btn', function () {
             var topicId = $(this).data('topic-id');
             var confirmation = confirm('Are you sure you want to delete this topic?');
-
             if (confirmation) {
                 $('#topic\\[' + topicId + '\\]').parent().remove();
                 delete surveyModels[topicId];
