@@ -8,7 +8,7 @@
                    href="{{ url('forms/index') }}">
                     <i class="fas fa-angle-left"></i>
                 </a>
-                <h3>Form Results</h3>
+                <h3>forms/Form Results</h3>
             </div>
         </div>
     </div>

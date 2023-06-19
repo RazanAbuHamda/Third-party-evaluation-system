@@ -25,6 +25,7 @@
             font-weight: bold;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -34,8 +35,19 @@
 <body>
 
 <br>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049  "
+                href="{{ url('forms/index') }}">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            <h3>forms/Add New Form</h3>
+        </div>
+    </div>
+</div>
+<br><br>
 <div class="container-fluid">
-
     <!-- status -->
     <div class="row">
         <div class="col-12">
