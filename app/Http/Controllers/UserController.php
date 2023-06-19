@@ -70,8 +70,6 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
         $user->status = $request->input('status');
         $user->enterprise_id = $request->input("enterprise_id");
-        dd($request->input("enterprise_id"));
-
         return redirect()->route('users.index')
             ->with('success','User created successfully')->with('active',$active);
 
