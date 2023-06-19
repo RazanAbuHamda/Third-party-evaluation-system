@@ -95,7 +95,7 @@
                        href="{{ route('users.edit', $user->id) }}">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
+                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline','class'=>'delete-form-form']) !!}
                     {!! Form::button('<i class="fas fa-trash"></i> Delete', ['class' => 'btn btn-danger delete-button','id'=>'delete-user-btn']) !!}
                     {!! Form::close() !!}
                 </td>
@@ -107,6 +107,25 @@
 
 
     {!! $data->render() !!}
+    <script>
+        // Get all the delete buttons on the page
+        var deleteButtons = document.getElementsByClassName('delete-button');
 
+        // Attach event handlers to each delete button
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Get the parent form element of the clicked delete button
+                var parentForm = this.closest('.delete-form-form');
+
+                // Confirm the deletion with the user
+                if (confirm('Are you sure you want to delete this user?')) {
+                    // Submit the form
+                    parentForm.submit();
+                }
+            });
+        }
+    </script>
 @endsection
 

@@ -148,6 +148,11 @@ class FormController extends Controller
 
         return response()->json(['success' => true]);
     }
-
+    public function destroy($id)
+    {
+        Form::find($id)->delete();
+        return redirect('forms/index')
+            ->with('success','Form deleted successfully');
+    }
 
 }

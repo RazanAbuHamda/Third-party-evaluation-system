@@ -2,23 +2,6 @@
 @yield('content')
 @include('sub-views.footer')
 <script type="text/javascript">
-        $('#delete-entr-btn').click(function (e){
-        e.preventDefault();
-        var submitConfirm = confirm('Are you sure?');
-        if(submitConfirm){
-        $('#delete-entr-form').submit();
-    }
-    })
-
-        $('#delete-user-btn').click(function (e){
-        e.preventDefault();
-        var submitConfirm = confirm('Are you sure?');
-        if(submitConfirm){
-        $('#delete-user-form').submit();
-    }
-    })
-
-
     $(function() {
         if( '{{$active}}' == 'enterAc'){
             // remove classes from all

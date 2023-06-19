@@ -52,7 +52,7 @@
                         <i class="fas fa-edit"></i> Edit
                     </a>
 
-                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline','id'=>'delete-user-form']) !!}
+                    {!! Form::open(['method' => 'DELETE','url' => ['enterprises/destroy/'. $enterprise->id],'style'=>'display:inline','class'=>'delete-entr-form']) !!}
                     {!! Form::button('<i class="fas fa-trash"></i> Delete', ['class' => 'btn btn-danger delete-button','id'=>'delete-entr-btn']) !!}
                     {!! Form::close() !!}
                 </td>
@@ -61,5 +61,25 @@
     </table>
 
     {!! $data->render() !!}
+    <script>
+        // Get all the delete buttons on the page
+        var deleteButtons = document.getElementsByClassName('delete-button');
+
+        // Attach event handlers to each delete button
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Get the parent form element of the clicked delete button
+                var parentForm = this.closest('.delete-entr-form');
+
+                // Confirm the deletion with the user
+                if (confirm('Are you sure you want to delete this enterprise?')) {
+                    // Submit the form
+                    parentForm.submit();
+                }
+            });
+        }
+    </script>
 
 @endsection
