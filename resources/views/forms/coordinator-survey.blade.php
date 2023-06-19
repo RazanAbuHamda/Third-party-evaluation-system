@@ -3,7 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coordinator Form Page</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('dashboardPublic/img/favicon.png')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <title>Rate Mentor System/Coordinator Page</title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -20,7 +24,7 @@
 
     <style>
         body {
-            background-color: #eef3f4;
+            /*background-color: #F4F4F4;*/
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -35,9 +39,10 @@
         }
 
         .thName {
-            background-color: #eef3f4;
+            background-color: #0000;
             border-style: solid;
-            border-color: #0c0c0c;
+            border-top-color: lightgrey;
+            border-bottom-color: #0000;
         }
 
         .ratings i {
@@ -60,10 +65,72 @@
         td, th, tr {
             border: none;
         }
+
+        .btn-color-ch:hover {
+            color: black;
+            background-color: #F7C049;
+            border-radius: 50px;
+            border-color: #F7C049;
+            font-weight: bold;
+        }
+        .fa-angle-left:hover{
+            color: #F7C049;
+            font-weight: bold;
+        }
+        .pull-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .pull-left a {
+            text-decoration: none;
+            color: black;
+            border-radius: 50px;
+            bs-link-hover-color: #F7C049;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+
+        .pull-left h3 {
+            margin: 0;
+        }
+
+        .dynamic-topic {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        td {
+            padding-left: 10px;
+            font-size: 18px;
+        }
+        .border-bottom-input {
+            border: none;
+            border-bottom: 1px solid #000;
+            transition: border-bottom-color 0.3s;
+            width: 90%;
+        }
+
+        .border-bottom-input:focus {
+            outline: none;
+            border-bottom-color: #F7C049;
+            border-width: 1px;
+        }
+
     </style>
 </head>
 <body>
-
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="d-flex align-items-center" style="margin-left: -200px;margin-top:20px;margin-bottom: -20px">
+            <a style="border-radius: 50px; color: black; bs-link-hover-color: #F7C049" href="{{ url('forms/index') }}">
+                <i class="fas fa-angle-left" style="margin-right: 20px"></i>
+            </a>
+            <h2 class="ml-3">{{$formName}} Form</h2>
+        </div>
+    </div>
+</div>
+<br><br>
 <div class="container">
     <form action="{{ url('evaluation/store/'.$id) }}" id="dynamic-form" method="POST">
         @csrf
@@ -86,20 +153,21 @@
                 <div class="col-12">
                     <table class="table table-bordered dynamic-topic">
                         <thead>
-                            <tr class="thName">
-                                <th colspan="2"
-                                    style="font-size: 20px;text-align: center;">{{ $surveyModel['pages'][0]['name'] }}</th>
-                            </tr>
+                        <tr class="thName">
+                            <th style="border:none;text-align: left;color: #F7C049;font-size: 24px; padding-left: 10px"
+                                ;><i class="fas fa-square"
+                                     style="margin-right: 5px"></i> {{ $surveyModel['pages'][0]['name'] }}</th>
+                        </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody style="margin-left: 20px">
                         @php
                             $counter = 1;
                         @endphp
 
                         @foreach($surveyModel['pages'][0]['elements'] as $questionIndex => $question)
                             <tr>
-                                <td style="font-weight: bold">{{ $questionIndex + 1 }}. {{ $question['title'] }}</td>
+                                <td style="font-weight: bold"><span style="color: #f1a417">{{ $questionIndex + 1 }}. </span> {{ $question['title'] }}</td>
                             </tr>
 
                             <tr>
@@ -111,14 +179,12 @@
                                             {{ $choice }}
                                             <br>
                                         @endforeach
-                                        <hr>
                                     @elseif($question['type'] == 'checkbox')
                                         @foreach($question['choices'] as $choice)
                                             <input type="checkbox" name="{{ $question['name'] }}" value="{{ $choice }}">
                                             {{ $choice }}
                                             <br>
                                         @endforeach
-                                        <hr>
                                     @elseif($question['type'] == 'rating')
                                         <div class="rating-question">
                                             <input type="hidden" name="{{ $question['name'] }}" value="0">
@@ -131,20 +197,23 @@
                                                 <i class="fa fa-star" data-rating="{{$question['name']}}-5"></i>
                                             </div>
                                         </div>
-                                        <hr>
                                     @else
-                                        <input type="text" name="{{ $question['name'] }}">
-                                        <hr>
+                                        <input type="text" name="{{ $question['name'] }}" class="border-bottom-input">
                                     @endif
+                                    <br><br> <!-- Add a line break after each question -->
                                 </td>
                             </tr>
                         @endforeach
-                        </tbody>
                     </table>
+                    <br><br>
                 </div>
-            @endforeach
+                @endforeach
+                </tbody>
         </div>
-        <button type="button" class="btn btn-outline-success btn-block" id="save-button">Save</button>
+        <button type="button" class="btn btn-outline-success btn-block btn-color-ch" id="save-button"
+                style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049;color: black">
+            <i class="fas fa-check" style="margin-right: 5px"></i>Save
+        </button>
     </form>
 </div>
 <script>
@@ -155,7 +224,7 @@
          * rating styling and value
          */
 
-        // Set rating questions and color
+            // Set rating questions and color
         var ratingQuestions = document.querySelectorAll('.rating-question');
         var ratingColor = 'gold';
 
@@ -220,6 +289,7 @@
                 starClicked = false;
             });
         }
+
         // Fill stars with selected rating on page load
         function fillStarsOnLoad(ratingQuestion) {
             const stars = ratingQuestion.querySelectorAll('.stars i');
@@ -252,7 +322,7 @@
                 var topicName = surveyModel.pages[0].name;
                 var questions = surveyModel.pages[0].elements;
 
-                for (var i = 0 ; i < questions.length ; i++) {
+                for (var i = 0; i < questions.length; i++) {
                     var question = questions[i];
                     var answer = null;
 
@@ -266,7 +336,7 @@
                         answer = $(`#dynamic-form input[name="${question.name}"]:checked`).val();
                         if (!answer) answer = null;
                     } else if (question.type == 'checkbox') {
-                        answer = $(`#dynamic-form input[name="${question.name}"]:checked`).map(function() {
+                        answer = $(`#dynamic-form input[name="${question.name}"]:checked`).map(function () {
                             return $(this).val();
                         }).get();
                         if (!answer) answer = [];

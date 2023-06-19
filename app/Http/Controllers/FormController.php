@@ -114,7 +114,8 @@ class FormController extends Controller
     public function createCoordinatorForm($id)
     {
         $formData = Form::find($id)->form_data;
-        return view('forms.coordinator-survey')->with('formData', $formData, true)->with('id', $id);
+        $formName = Form::find($id)->name;
+        return view('forms.coordinator-survey')->with('formData', $formData, true)->with('id', $id)->with('formName',$formName);
     }
 
     public function storeEvaluationResults(Request $request, $id)
@@ -129,8 +130,9 @@ class FormController extends Controller
         $formEvaluation->result_json = EvaluationResultCalculator::calculateEvaluationResultCredit($results);
         $formEvaluation->save();
 
-        return redirect()->back();
+        return redirect()->route('forms.index')->with('success', 'Evaluation results stored successfully');
     }
+
 
     public function deleteTopic($id)
     {
