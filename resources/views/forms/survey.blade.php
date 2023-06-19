@@ -24,12 +24,44 @@
             border-color: #F7C049;
             font-weight: bold;
         }
+        .fa-angle-left:hover{
+            color: #F7C049;
+            font-weight: bold;
+        }
+        .pull-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .pull-left a {
+            text-decoration: none;
+            color: black;
+            border-radius: 50px;
+            bs-link-hover-color: #F7C049;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+
+        .pull-left h3 {
+            margin: 0;
+        }
     </style>
     </style>
 </head>
 <body>
 
 <br>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left" style="margin-left: 50px">
+            <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049;  "
+                href="{{ url('forms/index') }}">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            <h3>forms/Edit Form</h3>
+        </div>
+    </div>
+</div>
+<br><br>
 <div class="container-fluid">
 
     <!-- status -->
