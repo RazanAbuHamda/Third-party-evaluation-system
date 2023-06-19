@@ -359,7 +359,7 @@
                 $('#checkboxOptions').append('<div class="form-group"><input type="text" name="checkboxOption[]" class="form-control" style="display: inline-block; max-width: 70%;" placeholder="Option"><input type="number" name="checkboxWeight[]" class="form-control" style="display: inline-block; max-width: 25%;" placeholder="Weight %"></div>');
             }
         });
-
+        var deletedTopics = []; // Use an array to store topic names
         $('#save-button').on('click', function () {
             var formJson = JSON.stringify(surveyModels);
 
@@ -373,8 +373,19 @@
                     console.log(response);
                 }
             });
+
+            // Send an AJAX request to update the server
+            $.ajax({
+                url: '/forms/delete-topic/' + "{{$id}}",
+                type: 'POST',
+                data: {deletedTopics: JSON.stringify(deletedTopics), _token: "{{ csrf_token() }}"},
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                }
+            });
         });
-        var deletedTopics = []; // Use an array to store topic names
+
 
 // Action to delete a topic
         $('#topics-container').on('click', '.delete-topic-btn', function () {
@@ -387,16 +398,7 @@
                 deletedTopics.push(topicName); // Add topic name to the array
                 $(this).parents('table').remove();
 
-                // Send an AJAX request to update the server
-                $.ajax({
-                    url: '/forms/delete-topic/' + "{{$id}}",
-                    type: 'POST',
-                    data: {deletedTopics: JSON.stringify(deletedTopics), _token: "{{ csrf_token() }}"},
-                    dataType: 'json',
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
+
             }
             console.log(deletedTopics);
         });

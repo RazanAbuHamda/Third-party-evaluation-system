@@ -136,22 +136,18 @@ class FormController extends Controller
     {
         $topicsName = json_decode(request('deletedTopics'), true);
         $form = Form::find($id);
-        $formData = json_decode($form->form_data, true);
+        $formData = $form->form_data;
 
-        // Perform the necessary actions to delete the topic from the database or storage
-        foreach ($topicsName as $topicName) {
-            foreach ($formData as $index => $surveyModel) {
-                if ($surveyModel['name'] === $topicName) {
-                    unset($formData[$index]);
-                }
-            }
-        }
+        // Filter the form_data array based on the topic name
+        $formData = array_filter($formData, function ($topic) use ($topicsName) {
+            return !in_array($topic['pages'][0]['name'], $topicsName);
+        });
 
-        $formData = array_values($formData); // Reindex the array
-        $form->form_data = json_encode($formData);
+        $form->form_data = $formData;
         $form->save();
 
         return response()->json(['success' => true]);
     }
+
 
 }
