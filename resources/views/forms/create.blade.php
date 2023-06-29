@@ -34,6 +34,7 @@
                 {!! Form::text('form_name', null, array('placeholder' => 'Form Name','class' => 'form-control')) !!}
             </div>
         </div>
+        @can('Show enterprises')
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Enterprise Name:</strong>
@@ -41,6 +42,7 @@
 
             </div>
         </div>
+        @endcan
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary"
                     style="background-color: #F7C049; border-radius: 50px;border-color:#F7C049; width: 180px;height: 40px; font-weight: bold;font-size: 20px">

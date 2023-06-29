@@ -20,8 +20,14 @@ class PermissionTableSeeder extends Seeder
             'Edit users',
             'Show users',
             'Delete user',
-            'Add Enterprise',
-            'Show enterprises'
+            'Add enterprise',
+            'Edit enterprises',
+            'Show enterprises',
+            'Show enterprise forms',
+            'Add form',
+            'Show forms',
+            'Delete form',
+            'Edit forms'
         ];
 
         foreach ($permissions as $permission) {

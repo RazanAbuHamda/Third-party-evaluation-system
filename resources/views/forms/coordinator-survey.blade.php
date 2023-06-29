@@ -123,9 +123,11 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="d-flex align-items-center" style="margin-left: -200px;margin-top:20px;margin-bottom: -20px">
+            @canany(['Show forms','Show enterprise forms'])
             <a style="border-radius: 50px; color: black; bs-link-hover-color: #F7C049" href="{{ url('forms/index') }}">
                 <i class="fas fa-angle-left" style="margin-right: 20px"></i>
             </a>
+            @endcan
             <h2 class="ml-3">{{$formName}} Form</h2>
         </div>
     </div>

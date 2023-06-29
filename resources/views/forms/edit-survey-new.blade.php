@@ -24,10 +24,12 @@
             border-color: #F7C049;
             font-weight: bold;
         }
-        .fa-angle-left:hover{
+
+        .fa-angle-left:hover {
             color: #F7C049;
             font-weight: bold;
         }
+
         .pull-left {
             display: flex;
             align-items: center;
@@ -44,6 +46,7 @@
         .pull-left h3 {
             margin: 0;
         }
+
         .dynamic-topic {
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -52,7 +55,7 @@
         }
 
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -62,17 +65,33 @@
 <body>
 
 <br>
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left" style="margin-left: 50px">
-            <a  style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049;  "
-                href="{{ url('forms/index') }}">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            <h3>forms/Edit Form</h3>
+@can('Show enterprises')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left" style="margin-left: 50px">
+                <a style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049;  "
+                   href="{{ url('forms/index') }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                <h3>forms/Edit Form</h3>
+            </div>
         </div>
     </div>
-</div>
+@else
+    @can('Show enterprise forms')
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <div class="pull-left" style="margin-left: 50px">
+                    <a style=" border-radius: 50px;color:black; bs-link-hover-color: #F7C049;  "
+                       href="{{ url('forms/showEnterpriseForms') }}">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                    <h3>forms/Edit Form</h3>
+                </div>
+            </div>
+        </div>
+    @endcan
+@endcan
 <br><br>
 <div class="container-fluid">
     <!-- status -->

@@ -14,6 +14,12 @@ use Illuminate\Http\Response;
 
 class FormController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:Show forms|Add form|Edit users|Delete form|Show enterprise forms', ['only' => ['index','store','edit','destroy','showEnterpriseForms']]);
+    }
+
+
     protected $fillable = [
         'name',
         'enterprise_id',
@@ -25,8 +31,8 @@ class FormController extends Controller
         $user = Auth::user();
 
         $forms = Form::orderBy('id', 'DESC')
-            ->with('enterprise')
-            ->where('user_id', $user->id);
+            ->with('enterprise');
+
 
         // Apply filter by enterprise name if provided
         if ($request->has('enterprise_name')) {
@@ -49,6 +55,7 @@ class FormController extends Controller
     public function create(Request $request)
     {
         $active = 'formAct';
+
         $enterprises = Enterprise::pluck('enterprise_name', 'id')->all();
         return view('forms.create', compact('enterprises'))->with('active', $active);
     }
@@ -56,6 +63,8 @@ class FormController extends Controller
     public function show($id, Request $request)
     {
         $active = 'formAct';
+        $user = Auth::user();
+
         $evaluationResults = EvaluationResult::where('form_id', $id)->paginate(10);
         $formName = Form::find($id)->name;
 
@@ -78,7 +87,11 @@ class FormController extends Controller
 
         $form = new Form;
         $form->name = $request['form_name'];
-        $form->enterprise_id = $request->input("enterprise_id");
+        if($request->input("enterprise_id")){
+            $form->enterprise_id = $request->input("enterprise_id");
+        }else{
+            $form->enterprise_id =$user->enterprise_id;
+        }
         $form->user_id = $user->id;
         $form->save();
 
@@ -150,6 +163,25 @@ class FormController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function showEnterpriseForms()
+    {
+        $active = 'formAct';
+        $user = Auth::user();
+
+        $enterpriseForms = Form::orderBy('id', 'DESC')
+            ->with('enterprise')
+            ->where('user_id', $user->id)
+            ->paginate(5);
+
+        $enterpriseFormsCount = Enterprise::withCount('forms')->get();
+        $enterprises = Enterprise::pluck('enterprise_name', 'id');
+
+        return view('forms.index', compact('enterpriseForms', 'enterpriseFormsCount', 'enterprises'))
+            ->with('i', request()->input('page', 1) - 1)
+            ->with('active', $active);
+    }
+
     public function destroy($id)
     {
         Form::find($id)->delete();

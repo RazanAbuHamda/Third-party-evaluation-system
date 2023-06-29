@@ -26,7 +26,7 @@ class CreateEnterpriseUserSeeder extends Seeder
         ]);
 
         $role = Role::create(['name' => 'enterprise-user']);
-        $role->syncPermissions(['Show users']);
+        $role->syncPermissions(['Show enterprise forms', 'Add form', 'Delete form', 'Edit forms']);
         $user->assignRole([$role->id]);
 
 

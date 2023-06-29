@@ -14,9 +14,9 @@ class EnterpriseController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:Add user|Edit users|Show users|Delete user|Add Enterprise', ['only' => ['index','store','edit','update','destroy']]);
-        $this->middleware('permission:Edit users', ['only' => ['index','show']]);
-        $this->middleware('permission:Delete user', ['only' => ['store']]);
+        $this->middleware('permission:Show enterprises|Add enterprise|Edit enterprises|Delete enterprise', ['only' => ['index','store','edit','destroy']]);
+//        $this->middleware('permission:Edit users', ['only' => ['index','show']]);
+//        $this->middleware('permission:Delete user', ['only' => ['store']]);
     }
     /**
      * Display a listing of the resource.
