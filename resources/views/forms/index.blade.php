@@ -4,7 +4,13 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Forms List</h2>
+                @can('Show enterprises')
+                    <h2>Forms List</h2>
+                @else
+                    @can('Show enterprise forms')
+                        <h2>" {{$enterpriseName->enterprise_name}} " Enterprise Forms List</h2>
+                    @endcan
+                @endcan
             </div>
             <div class="pull-right">
                 @can('Add form')
@@ -90,51 +96,52 @@
         </table>
     @else
 
-    @can('Show enterprise forms')
-        <table class="table table-bordered">
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-            </tr>
-            @foreach ($enterpriseForms as $key => $form)
+        @can('Show enterprise forms')
+            <table class="table table-bordered">
                 <tr>
-                    <td>
-                        <a class="btn btn-info"
-                           style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 50px"
-                           href="{{ url('forms/show',$form->id) }}">
-                            {{ ++$i }}
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn btn-info"
-                           style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 150px"
-                           href="{{ url('forms/show',$form->id) }}">
-                            {{ $form->name }}
-                        </a>
-                    </td>
-                    <td>
-                        @can('Edit forms')
-                            <a class="btn btn-primary" style="background-color: #FFFFFF;color: #0c0c0c"
-                               href="{{ url('forms/edit', $form->id) }}">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                        @endcan
-                        @can('Delete form')
-                            <form method="POST" action="{{ url('forms/destroy', $form->id) }}" style="display:inline"
-                                  class="delete-form-form">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger delete-button" id="delete-form-btn">
-                                    <i class="fas fa-trash" style="margin-right: 5px"></i>Delete
-                                </button>
-                            </form>
-                        @endcan
-                    </td>
+                    <th>No</th>
+                    <th>Name</th>
                 </tr>
-            @endforeach
-        </table>
+                @foreach ($enterpriseForms as $key => $form)
+                    <tr>
+                        <td>
+                            <a class="btn btn-info"
+                               style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 50px"
+                               href="{{ url('forms/show',$form->id) }}">
+                                {{ ++$i }}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-info"
+                               style="background-color: #FFFFFF;color: #0c0c0c;border-color: white; width: 150px"
+                               href="{{ url('forms/show',$form->id) }}">
+                                {{ $form->name }}
+                            </a>
+                        </td>
+                        <td>
+                            @can('Edit forms')
+                                <a class="btn btn-primary" style="background-color: #FFFFFF;color: #0c0c0c"
+                                   href="{{ url('forms/edit', $form->id) }}">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            @endcan
+                            @can('Delete form')
+                                <form method="POST" action="{{ url('forms/destroy', $form->id) }}"
+                                      style="display:inline"
+                                      class="delete-form-form">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger delete-button" id="delete-form-btn">
+                                        <i class="fas fa-trash" style="margin-right: 5px"></i>Delete
+                                    </button>
+                                </form>
+                            @endcan
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+        @endcan
     @endcan
-@endcan
     <script>
         // Get all the delete buttons on the page
         var deleteButtons = document.getElementsByClassName('delete-button');
@@ -155,5 +162,5 @@
             });
         }
     </script>
-{{--    {!! $forms->appends(['enterprise_name' => request('enterprise_name')])->render() !!}--}}
+    {{--    {!! $forms->appends(['enterprise_name' => request('enterprise_name')])->render() !!}--}}
 @endsection

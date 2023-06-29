@@ -28,8 +28,6 @@ class FormController extends Controller
     public function index(Request $request)
     {
         $active = 'formAct';
-        $user = Auth::user();
-
         $forms = Form::orderBy('id', 'DESC')
             ->with('enterprise');
 
@@ -168,6 +166,9 @@ class FormController extends Controller
     {
         $active = 'formAct';
         $user = Auth::user();
+        $enterpriseName = Enterprise::with('forms')
+        ->where('id',$user->enterprise_id)->first();
+
 
         $enterpriseForms = Form::orderBy('id', 'DESC')
             ->with('enterprise')
@@ -179,6 +180,7 @@ class FormController extends Controller
 
         return view('forms.index', compact('enterpriseForms', 'enterpriseFormsCount', 'enterprises'))
             ->with('i', request()->input('page', 1) - 1)
+            ->with('enterpriseName',$enterpriseName)
             ->with('active', $active);
     }
 

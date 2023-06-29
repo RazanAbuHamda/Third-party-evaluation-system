@@ -44,6 +44,7 @@
         .nav-tabs {
             background-color: #F4F4F4;
             border: none;
+            
         }
 
         .nav-tabs > li {
